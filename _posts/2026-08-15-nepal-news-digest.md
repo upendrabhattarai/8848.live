@@ -5,53 +5,105 @@ date: 2026-08-15 07:00:00 +0545
 categories: digest
 wordcloud:
   - word: "समूहको"
-    size: 6
+    count: 4
   - word: "इन्डोनेसियामा"
-    size: 4
+    count: 3
   - word: "म्याग्निच्युडको"
-    size: 4
+    count: 3
   - word: "भूकम्प"
-    size: 4
+    count: 3
   - word: "मृत्यु"
-    size: 4
+    count: 3
   - word: "राष्ट्रिय"
-    size: 4
+    count: 3
   - word: "कांग्रेस"
-    size: 4
+    count: 3
   - word: "सुविधा"
-    size: 3
+    count: 2
   - word: "पहिरो"
-    size: 3
+    count: 2
   - word: "घाइते"
-    size: 3
+    count: 2
   - word: "नेपालीलाई"
-    size: 3
+    count: 2
   - word: "शव"
-    size: 3
+    count: 2
   - word: "देउवा"
-    size: 3
+    count: 2
   - word: "भेला"
-    size: 3
+    count: 2
   - word: "US"
-    size: 1
+    count: 1
   - word: "ends"
-    size: 1
+    count: 1
   - word: "TPS"
-    size: 1
+    count: 1
   - word: "protection"
-    size: 1
+    count: 1
   - word: "Nepali"
-    size: 1
+    count: 1
   - word: "immigrants"
-    size: 1
+    count: 1
   - word: "What"
-    size: 1
+    count: 1
   - word: "Kathmandu"
-    size: 1
+    count: 1
   - word: "Valley"
-    size: 1
+    count: 1
   - word: "week"
-    size: 1
+    count: 1
+  - word: "Nepal"
+    count: 1
+  - word: "diplomatic"
+    count: 1
+  - word: "reach"
+    count: 1
+  - word: "narrows"
+    count: 1
+  - word: "envoy"
+    count: 1
+  - word: "vacancies"
+    count: 1
+  - word: "drag"
+    count: 1
+  - word: "Monsoon"
+    count: 1
+  - word: "disasters"
+    count: 1
+  - word: "leave"
+    count: 1
+  - word: "dead"
+    count: 1
+  - word: "rains"
+    count: 1
+  - word: "continue"
+    count: 1
+  - word: "Indian"
+    count: 1
+  - word: "Army"
+    count: 1
+  - word: "chief"
+    count: 1
+  - word: "Seth"
+    count: 1
+  - word: "arriving"
+    count: 1
+  - word: "Sunday"
+    count: 1
+  - word: "uncertainty"
+    count: 1
+  - word: "meeting"
+    count: 1
+  - word: "PM"
+    count: 1
+  - word: "Shah"
+    count: 1
+  - word: "जनाको"
+    count: 1
+  - word: "बागमतीका"
+    count: 1
+  - word: "मुख्यमन्त्री"
+    count: 1
 ---
 
 The five most prominent headlines today from each of Nepal's major outlets, kept in their original language.
