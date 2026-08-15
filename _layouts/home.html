@@ -2,36 +2,12 @@
 layout: default
 ---
 {% assign latest = site.posts.first %}
-{% if latest.banner %}
-<div class="banner-slider" id="banner-slider">
-  {% for slide in latest.banner %}
-  <a class="banner-slide{% if forloop.first %} active{% endif %}" href="{{ slide.url }}" target="_blank" rel="noopener">
-    <span class="banner-tag"><span class="banner-dot-live"></span>{{ slide.source }}</span>
-    <span class="banner-headline">{{ slide.headline }}</span>
-  </a>
+{% if latest.wordcloud %}
+<div class="wordcloud">
+  {% for w in latest.wordcloud %}
+  <span class="wc-word wc-{{ w.size }}">{{ w.word }}</span>
   {% endfor %}
-  <div class="banner-dots">
-    {% for slide in latest.banner %}
-    <span class="dot{% if forloop.first %} active{% endif %}"></span>
-    {% endfor %}
-  </div>
 </div>
-<script>
-(function () {
-  var slides = document.querySelectorAll('#banner-slider .banner-slide');
-  var dots = document.querySelectorAll('#banner-slider .dot');
-  var i = 0;
-  if (slides.length > 1) {
-    setInterval(function () {
-      slides[i].classList.remove('active');
-      dots[i].classList.remove('active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('active');
-      dots[i].classList.add('active');
-    }, 4000);
-  }
-})();
-</script>
 {% endif %}
 
 {% if latest %}

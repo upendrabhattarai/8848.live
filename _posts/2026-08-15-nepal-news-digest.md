@@ -3,22 +3,55 @@ layout: post
 title: "Nepal News Digest: August 15, 2026"
 date: 2026-08-15 07:00:00 +0545
 categories: digest
-banner:
-  - source: "The Kathmandu Post"
-    headline: "US ends TPS protection for Nepali immigrants"
-    url: "https://kathmandupost.com/national/2026/08/15/us-ends-tps-protection-for-nepali-immigrants"
-  - source: "eKantipur"
-    headline: "इन्डोनेसियामा ७.७ म्याग्निच्युडको भूकम्प, ३८ जनाको मृत्यु"
-    url: "https://ekantipur.com/world/2026/08/15/77-magnitude-earthquake-hits-indonesia-38-dead-27-05.html"
-  - source: "Setopati"
-    headline: "पार्टी रूपान्तरणको बहसप्रति ओलीको रोष"
-    url: "https://www.setopati.com/politics/396005"
-  - source: "Online Khabar"
-    headline: "एनसेलको पक्षमा सर्वोच्चको आदेश, शर्माको प्रतिवेदन सार्वजनिक नगर्नू"
-    url: "https://www.onlinekhabar.com/2026/08/1996351/supreme-court-rules-in-favor-of-ncell-decision-to-make-sharmas-report-public-should-not-be-implemented"
-  - source: "Nagarik News"
-    headline: "रोल्पा पहिरोबाट थप एकको शव निकालियो, मृतकको सङ्ख्या १२ पुग्यो"
-    url: "https://nagariknews.nagariknetwork.com/social-affairs/one-more-body-recovered-from-rolpa-landslide-death-toll-reaches-12-36-42.html"
+wordcloud:
+  - word: "समूहको"
+    size: 6
+  - word: "इन्डोनेसियामा"
+    size: 4
+  - word: "म्याग्निच्युडको"
+    size: 4
+  - word: "भूकम्प"
+    size: 4
+  - word: "मृत्यु"
+    size: 4
+  - word: "राष्ट्रिय"
+    size: 4
+  - word: "कांग्रेस"
+    size: 4
+  - word: "सुविधा"
+    size: 3
+  - word: "पहिरो"
+    size: 3
+  - word: "घाइते"
+    size: 3
+  - word: "नेपालीलाई"
+    size: 3
+  - word: "शव"
+    size: 3
+  - word: "देउवा"
+    size: 3
+  - word: "भेला"
+    size: 3
+  - word: "US"
+    size: 1
+  - word: "ends"
+    size: 1
+  - word: "TPS"
+    size: 1
+  - word: "protection"
+    size: 1
+  - word: "Nepali"
+    size: 1
+  - word: "immigrants"
+    size: 1
+  - word: "What"
+    size: 1
+  - word: "Kathmandu"
+    size: 1
+  - word: "Valley"
+    size: 1
+  - word: "week"
+    size: 1
 ---
 
 The five most prominent headlines today from each of Nepal's major outlets, kept in their original language.
