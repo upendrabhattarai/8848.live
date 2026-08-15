@@ -14,7 +14,10 @@
 <body>
   <header class="site-header">
     <nav class="topnav wrap">
-      <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <a class="brand-block" href="{{ '/' | relative_url }}">
+        <span class="brand-logo-badge"><img src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848.live home"></span>
+        <span class="brand">{{ site.title }}</span>
+      </a>
       <div class="nav-links">
         <a href="{{ '/' | relative_url }}">Home</a>
         <a href="{{ '/contact/' | relative_url }}">Contact</a>
