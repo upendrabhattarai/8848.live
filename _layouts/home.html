@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<div class="card-grid">
+  {% for post in site.posts %}
+  <a class="card" style="animation-delay: {{ forloop.index0 | times: 0.08 }}s" href="{{ post.url | relative_url }}">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-date">{{ post.date | date: "%B %-d, %Y" }}</p>
+    <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
+    <span class="card-link">Read digest →</span>
+  </a>
+  {% endfor %}
+</div>
