@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<div class="archive-header">
+  <h1 class="page-title">Archive</h1>
+  <p class="archive-sub">Digests older than the last 10 days.</p>
+</div>
+{% assign archived = site.posts | slice: 11, 999999 %}
+{% if archived.size > 0 %}
+<div class="card-grid">
+  {% for post in archived %}
+  <a class="card" style="animation-delay: {{ forloop.index0 | times: 0.04 }}s" href="{{ post.url | relative_url }}">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-date">{{ post.date | date: "%B %-d, %Y" }}</p>
+    <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
+    <span class="card-link">Read digest →</span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="archive-empty">No older digests yet — check back after 10 days.</p>
+{% endif %}

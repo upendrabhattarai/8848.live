@@ -232,6 +232,50 @@ main.wrap { padding: 32px 24px 80px; }
 
 .card-link { color: var(--red); font-weight: 700; font-size: 0.88rem; }
 
+/* Featured (latest) card */
+.featured-card { padding: 40px 44px; min-height: 220px; margin-bottom: 4px; }
+.featured-card .card-title { font-size: 1.7rem; line-height: 1.25; margin-bottom: 10px; }
+.featured-card .card-date { font-size: 0.85rem; }
+.featured-card .card-excerpt { font-size: 1rem; }
+
+/* Section divider */
+.section-divider { display: flex; align-items: center; gap: 12px; margin: 32px 0 16px; }
+.section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-label {
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+/* Mini grid: last 10 days, 5 columns x 2 rows */
+.mini-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+.mini-card { padding: 14px; }
+.mini-card .card-date { font-size: 0.65rem; margin: 0 0 6px; }
+.mini-card .card-title {
+  font-size: 0.83rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.archive-link-row { text-align: center; margin-top: 30px; }
+.archive-link { color: var(--red); font-weight: 700; font-size: 0.92rem; }
+.archive-link:hover { color: var(--red-dark); }
+
+.archive-header { text-align: center; margin: 4px 0 28px; }
+.archive-sub { color: var(--text-3); font-size: 0.92rem; margin: 6px 0 0; }
+.archive-empty { color: var(--text-3); text-align: center; padding: 20px 0; }
+
+@media (max-width: 700px) {
+  .mini-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 .post-card, .page-card { animation-delay: 0s; }
 
 .post-eyebrow {

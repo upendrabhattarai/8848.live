@@ -34,13 +34,32 @@ layout: default
 </script>
 {% endif %}
 
-<div class="card-grid">
-  {% for post in site.posts %}
-  <a class="card" style="animation-delay: {{ forloop.index0 | times: 0.08 }}s" href="{{ post.url | relative_url }}">
-    <h2 class="card-title">{{ post.title }}</h2>
-    <p class="card-date">{{ post.date | date: "%B %-d, %Y" }}</p>
-    <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
-    <span class="card-link">Read digest →</span>
+{% if latest %}
+<span class="post-eyebrow"><span class="banner-dot-live"></span>Latest digest</span>
+<a class="card featured-card" href="{{ latest.url | relative_url }}">
+  <h2 class="card-title">{{ latest.title }}</h2>
+  <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>
+  <p class="card-excerpt">{{ latest.excerpt | strip_html | truncatewords: 55 }}</p>
+  <span class="card-link">Read full digest →</span>
+</a>
+{% endif %}
+
+{% assign grid_posts = site.posts | slice: 1, 10 %}
+{% if grid_posts.size > 0 %}
+<div class="section-divider"><span class="section-label">Past 10 days</span></div>
+<div class="mini-grid">
+  {% for post in grid_posts %}
+  <a class="card mini-card" style="animation-delay: {{ forloop.index0 | times: 0.05 }}s" href="{{ post.url | relative_url }}">
+    <p class="card-date">{{ post.date | date: "%b %-d" }}</p>
+    <h3 class="card-title">{{ post.title }}</h3>
   </a>
   {% endfor %}
 </div>
+{% endif %}
+
+{% assign total = site.posts.size %}
+{% if total > 11 %}
+<div class="archive-link-row">
+  <a class="archive-link" href="{{ '/archive/' | relative_url }}">View archive ({{ total | minus: 11 }} more digest{% if total > 12 %}s{% endif %}) →</a>
+</div>
+{% endif %}
