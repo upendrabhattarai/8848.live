@@ -5,13 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   {% feed_meta %}
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap">
-      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="topnav wrap">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <div class="nav-links">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <a href="{{ '/contact/' | relative_url }}">Contact</a>
+      </div>
+    </nav>
+    <div class="flag-stripe-row">
+      <span class="flag-bar red"></span>
+      <span class="flag-bar blue"></span>
+      <span class="flag-bar white"></span>
+    </div>
+    <div class="wrap header-hero">
       <p class="site-desc">{{ site.description }}</p>
     </div>
   </header>
@@ -19,8 +33,11 @@
     {{ content }}
   </main>
   <footer class="site-footer">
-    <div class="wrap">
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }} — auto-curated daily.</p>
+    <div class="wrap footer-inner">
+      <img class="footer-logo" src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848.live logo" onerror="this.style.display='none'">
+      <p class="footer-desc">8848.live automatically curates and publishes the most-read headlines from Nepal's major news outlets every day, in their original language.</p>
+      <p class="footer-contact">Contact: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
     </div>
   </footer>
 </body>
