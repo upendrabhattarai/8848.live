@@ -1,5 +1,5 @@
 title: 8848.live
-description: Daily digest of the most-read Nepali news headlines, auto-curated every day.
+description: Daily digest of the most-read Nepali news headlines.
 email: info.8848live@gmail.com
 plugins:
   - jekyll-feed
