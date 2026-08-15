@@ -1,0 +1,11 @@
+title: 8848.live
+description: Daily digest of the most notable Nepali news, auto-summarized every day.
+theme: minima
+plugins:
+  - jekyll-feed
+show_excerpts: true
+minima:
+  skin: classic
+  date_format: "%b %-d, %Y"
+permalink: /:year/:month/:day/:title/
+timezone: Asia/Kathmandu
