@@ -156,7 +156,7 @@ layout: default
   {% for post in grid_posts %}
   <a class="card mini-card" style="animation-delay: {{ forloop.index0 | times: 0.05 }}s" href="{{ post.url | relative_url }}">
     <p class="card-date">{{ post.date | date: "%b %-d" }}</p>
-    <h3 class="card-title">{{ post.title }}</h3>
+    <h3 class="card-title">{{ post.title | split: ": " | first }}</h3>
     {% if post.wordcloud %}
     <canvas class="mini-wc" id="mini-wc-{{ forloop.index0 }}"></canvas>
     {% endif %}
