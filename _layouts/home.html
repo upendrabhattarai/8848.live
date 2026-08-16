@@ -4,18 +4,35 @@ layout: default
 {% assign latest = site.posts.first %}
 <div class="hero-grid">
   <div class="hero-left">
-    <h1 class="hero-heading">Know what Nepal is reading today in less than 5 minutes.</h1>
-    <p class="hero-subheading">The top trending stories from 6 major outlets, analyzed and summarized.</p>
+    <h1 class="hero-heading">
+      <span data-lang-en>Know what Nepal is reading today in less than 5 minutes.</span>
+      <span data-lang-np>नेपालले आज के पढिरहेको छ, ५ मिनेटभन्दा कममा जान्नुहोस्।</span>
+    </h1>
+    <p class="hero-subheading">
+      <span data-lang-en>The top trending stories from 6 major outlets, analyzed and summarized.</span>
+      <span data-lang-np>६ प्रमुख सञ्चारमाध्यमका उत्कृष्ट समाचारहरू विश्लेषण गरी सारांशमा।</span>
+    </p>
     {% if latest %}
-    <span class="hero-badge"><span class="live-dot"></span>Updated {{ latest.date | date: "%B %-d, %Y" }}</span>
+    <span class="hero-badge">
+      <span class="live-dot"></span>
+      <span data-lang-en>Updated</span>
+      <span data-lang-np>अद्यावधिक</span>
+      {{ latest.date | date: "%B %-d, %Y" }}
+    </span>
     {% endif %}
   </div>
   <div class="hero-right">
     {% if latest.wordcloud %}
     <div class="pulse-card">
-      <span class="pulse-eyebrow">Today's Pulse</span>
+      <span class="pulse-eyebrow">
+        <span data-lang-en>Today's Pulse</span>
+        <span data-lang-np>आजको चर्चा</span>
+      </span>
       <canvas id="wordcloud-canvas"></canvas>
-      <p class="pulse-caption">Buzzwords dominating the headlines today</p>
+      <p class="pulse-caption">
+        <span data-lang-en>Buzzwords dominating the headlines today</span>
+        <span data-lang-np>आज सुर्खियामा रहेका शब्दहरू</span>
+      </p>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
     <script>
@@ -54,18 +71,21 @@ layout: default
 </div>
 
 {% if latest %}
-<div class="section-divider"><span class="section-label">Latest digest</span></div>
+<div class="section-divider"><span class="section-label"><span data-lang-en>Latest digest</span><span data-lang-np>पछिल्लो डाइजेस्ट</span></span></div>
 <a class="card featured-card" href="{{ latest.url | relative_url }}">
   <h2 class="card-title">{{ latest.title }}</h2>
   <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>
   <p class="card-excerpt">{{ latest.excerpt | strip_html | truncatewords: 55 }}</p>
-  <span class="card-link">Read full digest →</span>
+  <span class="card-link">
+    <span data-lang-en>Read full digest →</span>
+    <span data-lang-np>पूरा डाइजेस्ट पढ्नुहोस् →</span>
+  </span>
 </a>
 {% endif %}
 
 {% assign grid_posts = site.posts | slice: 1, 10 %}
 {% if grid_posts.size > 0 %}
-<div class="section-divider"><span class="section-label">Past 10 days</span></div>
+<div class="section-divider"><span class="section-label"><span data-lang-en>Past 10 days</span><span data-lang-np>विगत १० दिन</span></span></div>
 <div class="mini-grid">
   {% for post in grid_posts %}
   <a class="card mini-card" style="animation-delay: {{ forloop.index0 | times: 0.05 }}s" href="{{ post.url | relative_url }}">
@@ -79,6 +99,11 @@ layout: default
 {% assign total = site.posts.size %}
 {% if total > 11 %}
 <div class="archive-link-row">
-  <a class="archive-link" href="{{ '/archive/' | relative_url }}">View archive ({{ total | minus: 11 }} more digest{% if total > 12 %}s{% endif %}) →</a>
+  <a class="archive-link" href="{{ '/archive/' | relative_url }}">
+    <span data-lang-en>View archive</span><span data-lang-np>अभिलेख हेर्नुहोस्</span>
+    ({{ total | minus: 11 }}
+    <span data-lang-en>more digest{% if total > 12 %}s{% endif %}</span>
+    <span data-lang-np>थप डाइजेस्ट</span>) →
+  </a>
 </div>
 {% endif %}

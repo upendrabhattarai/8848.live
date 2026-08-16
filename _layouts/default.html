@@ -8,9 +8,11 @@
   <script>
     (function () {
       try {
-        var stored = localStorage.getItem('theme');
-        var theme = stored ? stored : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        var storedTheme = localStorage.getItem('theme');
+        var theme = storedTheme ? storedTheme : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
+        var storedLang = localStorage.getItem('lang');
+        document.documentElement.setAttribute('data-lang', storedLang === 'np' ? 'np' : 'en');
       } catch (e) {}
     })();
   </script>
@@ -29,10 +31,14 @@
       </a>
       <div class="nav-right">
         <div class="nav-links">
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/archive/' | relative_url }}">Archive</a>
-          <a href="{{ '/contact/' | relative_url }}">Contact</a>
+          <a href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
+          <a href="{{ '/archive/' | relative_url }}"><span data-lang-en>Archive</span><span data-lang-np>अभिलेख</span></a>
+          <a href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
         </div>
+        <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Toggle Nepali translation">
+          <span data-lang-en>नेपाली</span>
+          <span data-lang-np>English</span>
+        </button>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
           <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
@@ -47,9 +53,16 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <img class="footer-logo" src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848.live logo" onerror="this.style.display='none'">
-      <p class="footer-desc">8848.live automatically curates and publishes the most-read headlines from Nepal's major news outlets every day, in their original language.</p>
+      <p class="footer-desc">
+        <span data-lang-en>8848.live automatically curates and publishes the most-read headlines from Nepal's major news outlets every day, in their original language.</span>
+        <span data-lang-np>8848.live ले नेपालका प्रमुख सञ्चारमाध्यमहरूबाट दैनिक रूपमा सबैभन्दा धेरै पढिने शीर्षकहरू तिनको मौलिक भाषामा स्वचालित रूपमा संकलन र प्रकाशन गर्छ।</span>
+      </p>
       <div class="footer-sources">
-        <span class="footer-sources-label"><span class="live-dot"></span>Live tracking</span>
+        <span class="footer-sources-label">
+          <span class="live-dot"></span>
+          <span data-lang-en>Live tracking</span>
+          <span data-lang-np>प्रत्यक्ष अनुगमन</span>
+        </span>
         <span class="footer-source-item">The Kathmandu Post</span>
         <span class="footer-source-item">eKantipur</span>
         <span class="footer-source-item">Setopati</span>
@@ -57,21 +70,32 @@
         <span class="footer-source-item">Nagarik News</span>
         <span class="footer-source-item">Annapurna Post</span>
       </div>
-      <p class="footer-contact">Contact: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p class="footer-contact"><span data-lang-en>Contact:</span><span data-lang-np>सम्पर्क:</span> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
       <p class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
     </div>
   </footer>
   <script>
     (function () {
-      var btn = document.getElementById('theme-toggle');
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        var root = document.documentElement;
-        var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-        var next = current === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        try { localStorage.setItem('theme', next); } catch (e) {}
-      });
+      var themeBtn = document.getElementById('theme-toggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          var next = current === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) {}
+        });
+      }
+      var langBtn = document.getElementById('lang-toggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var current = root.getAttribute('data-lang') === 'np' ? 'np' : 'en';
+          var next = current === 'np' ? 'en' : 'np';
+          root.setAttribute('data-lang', next);
+          try { localStorage.setItem('lang', next); } catch (e) {}
+        });
+      }
     })();
   </script>
 </body>

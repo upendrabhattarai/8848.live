@@ -154,7 +154,28 @@ a { text-decoration: none; }
   letter-spacing: -0.02em;
 }
 
+/* Language toggle (English default, Nepali via data-lang="np") */
+html:not([data-lang="np"]) [data-lang-np] { display: none; }
+html[data-lang="np"] [data-lang-en] { display: none; }
+
 .nav-right { display: flex; align-items: center; gap: 6px; }
+
+.lang-toggle {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text-2);
+  font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.lang-toggle:hover { border-color: var(--red); color: var(--red); }
 
 .nav-links { display: flex; gap: 4px; }
 
