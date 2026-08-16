@@ -2,8 +2,14 @@
 layout: default
 ---
 <div class="archive-header">
-  <h1 class="page-title">Archive</h1>
-  <p class="archive-sub">Digests older than the last 10 days.</p>
+  <h1 class="page-title">
+    <span data-lang-en>Archive</span>
+    <span data-lang-np>अभिलेख</span>
+  </h1>
+  <p class="archive-sub">
+    <span data-lang-en>Digests older than the last 10 days.</span>
+    <span data-lang-np>विगत १० दिनभन्दा पुराना डाइजेस्टहरू।</span>
+  </p>
 </div>
 {% assign archived = site.posts | slice: 11, 999999 %}
 {% if archived.size > 0 %}
@@ -13,10 +19,16 @@ layout: default
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-date">{{ post.date | date: "%B %-d, %Y" }}</p>
     <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
-    <span class="card-link">Read digest →</span>
+    <span class="card-link">
+      <span data-lang-en>Read digest →</span>
+      <span data-lang-np>डाइजेस्ट पढ्नुहोस् →</span>
+    </span>
   </a>
   {% endfor %}
 </div>
 {% else %}
-<p class="archive-empty">No older digests yet — check back after 10 days.</p>
+<p class="archive-empty">
+  <span data-lang-en>No older digests yet — check back after 10 days.</span>
+  <span data-lang-np>अहिलेसम्म पुराना डाइजेस्ट छैनन् — १० दिनपछि फेरि हेर्नुहोस्।</span>
+</p>
 {% endif %}

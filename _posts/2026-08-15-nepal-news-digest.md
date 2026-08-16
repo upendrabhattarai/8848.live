@@ -108,19 +108,6 @@ wordcloud:
 
 Top stories spanning politics, business, sports, world and more from each of Nepal's major outlets today. The word cloud above is built from every headline published across all sections of these six outlets today, sized by frequency.
 
-## ![The Kathmandu Post](https://www.google.com/s2/favicons?sz=32&domain=kathmandupost.com) The Kathmandu Post
-
-1. `National` **US ends TPS protection for Nepali immigrants** — The move strips thousands of Nepalis of a decade-long legal safeguard that allowed them to live and work in the US. [Read →](https://kathmandupost.com/national/2026/08/15/us-ends-tps-protection-for-nepali-immigrants)
-2. `National` **Monsoon disasters leave 85 dead as rains continue** — Floods, landslides and lightning have killed 85 people since April, with fresh rain still causing deaths and displacement. [Read →](https://kathmandupost.com/national/2026/08/15/monsoon-disasters-leave-85-dead-as-rains-continue)
-3. `National` **Nepal's diplomatic reach narrows as key envoy vacancies drag on** — Ambassador posts sit empty in over a dozen countries as appointments stall. [Read →](https://kathmandupost.com/national/2026/08/15/nepal-s-diplomatic-reach-narrows-as-key-envoy-vacancies-drag-on)
-4. `Politics` **Back in Nepal, Deuba seeks to reclaim Congress leadership** — The former party president returns home to press his claim to the leadership amid an ongoing split. [Read →](https://kathmandupost.com/politics/2026/08/14/back-in-nepal-deuba-seeks-to-reclaim-congress-leadership)
-5. `Money` **Nepse struggles to gain momentum as investors lose Rs7 billion in wealth** — The market shed 6.26 points as turnover fell, with investors cautious despite improved earnings. [Read →](https://kathmandupost.com/money/2026/08/15/nepse-struggles-to-gain-momentum-as-investors-lose-rs7-billion-in-wealth)
-6. `World` **Twenty dead after Indonesia's magnitude-7.7 earthquake** — Rescue teams have yet to reach the region closest to the epicentre as communications remain affected. [Read →](https://kathmandupost.com/world/2026/08/15/twenty-dead-after-indonesia-s-magnitude-7-7-earthquake)
-7. `World` **Taliban mark five years in power as aid groups warn of crisis** — A parade outside the former US embassy in Kabul marked what the government called "victory day." [Read →](https://kathmandupost.com/world/2026/08/15/taliban-mark-five-years-in-power-as-aid-groups-warn-of-crisis)
-8. `Sports` **Nepal cricket team heads to India to prepare for ACC Premier Cup and packed Asian swing** — The squad begins training in India ahead of a busy stretch of regional cricket. [Read →](https://kathmandupost.com/cricket/2026/08/15/nepal-cricket-team-heads-to-india-to-prepare-for-acc-premier-cup-and-packed-asian-swing)
-9. `Culture` **From cinema halls to social media: How Nepali films are facing a new piracy threat** — As audiences record films in theatres and circulate them online, filmmakers navigate a growing piracy problem. [Read →](https://kathmandupost.com/art-culture/2026/08/15/from-cinema-halls-to-social-media-how-nepali-films-are-facing-a-new-piracy-threat)
-10. `Opinion` **Why Nepal's new political darling is losing its spark** — Democracy's goal is not to eliminate politics through expertise but to place expertise within political realms. [Read →](https://kathmandupost.com/columns/2026/08/13/why-nepal-s-new-political-darling-is-losing-its-spark)
-
 ## ![eKantipur](https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com) eKantipur
 
 1. `विश्व` **इन्डोनेसियामा ७.७ म्याग्निच्युडको भूकम्प, ३८ जनाको मृत्यु** — शक्तिशाली भूकम्प र दर्जनौं परकम्पका कारण थुप्रै भवन तथा संरचनामा ठूलो क्षति पुगेको छ। [पढ्नुहोस् →](https://ekantipur.com/world/2026/08/15/77-magnitude-earthquake-hits-indonesia-38-dead-27-05.html)
@@ -133,6 +120,19 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 8. `फिचर` **१८ वर्षमा १० हजार सर्प उद्धार गर्ने सागर** — १८ वर्षदेखि सर्प उद्धारमा सक्रिय अर्गलीका सागर पाण्डेयले ४० प्रजातिका १० हजारभन्दा बढी सर्प उद्धार गरेका छन्। [पढ्नुहोस् →](https://ekantipur.com/feature/2026/08/15/sagar-who-has-rescued-more-than-10000-snakes-in-18-years-22-12.html)
 9. `विचार` **देउवाका दायित्व र कर्तव्य** — यतिबेला नेपाली कांग्रेस संकटापन्न अवस्थामा छ, देशलाई गणतान्त्रिक बनाउने यो पार्टी विरुद्ध चौतर्फी आक्रमण भइरहेको छ। [पढ्नुहोस् →](https://ekantipur.com/opinion/2026/08/15/deubas-responsibilities-and-duties-31-25.html)
 10. `विज्ञान र प्रविधि` **१० वर्षपछि इन्स्टाग्रामको लोगोमा परिवर्तन** — मेटाको स्वामित्वमा रहेको इन्स्टाग्रामले नयाँ लोगोमा अक्षरको डिजाइनलाई परिमार्जन गरेको छ। [पढ्नुहोस् →](https://ekantipur.com/technology/2026/08/15/instagram-logo-changes-after-10-years-23-19.html)
+
+## ![The Kathmandu Post](https://www.google.com/s2/favicons?sz=32&domain=kathmandupost.com) The Kathmandu Post
+
+1. `National` **US ends TPS protection for Nepali immigrants** — The move strips thousands of Nepalis of a decade-long legal safeguard that allowed them to live and work in the US. [Read →](https://kathmandupost.com/national/2026/08/15/us-ends-tps-protection-for-nepali-immigrants)
+2. `National` **Monsoon disasters leave 85 dead as rains continue** — Floods, landslides and lightning have killed 85 people since April, with fresh rain still causing deaths and displacement. [Read →](https://kathmandupost.com/national/2026/08/15/monsoon-disasters-leave-85-dead-as-rains-continue)
+3. `National` **Nepal's diplomatic reach narrows as key envoy vacancies drag on** — Ambassador posts sit empty in over a dozen countries as appointments stall. [Read →](https://kathmandupost.com/national/2026/08/15/nepal-s-diplomatic-reach-narrows-as-key-envoy-vacancies-drag-on)
+4. `Politics` **Back in Nepal, Deuba seeks to reclaim Congress leadership** — The former party president returns home to press his claim to the leadership amid an ongoing split. [Read →](https://kathmandupost.com/politics/2026/08/14/back-in-nepal-deuba-seeks-to-reclaim-congress-leadership)
+5. `Money` **Nepse struggles to gain momentum as investors lose Rs7 billion in wealth** — The market shed 6.26 points as turnover fell, with investors cautious despite improved earnings. [Read →](https://kathmandupost.com/money/2026/08/15/nepse-struggles-to-gain-momentum-as-investors-lose-rs7-billion-in-wealth)
+6. `World` **Twenty dead after Indonesia's magnitude-7.7 earthquake** — Rescue teams have yet to reach the region closest to the epicentre as communications remain affected. [Read →](https://kathmandupost.com/world/2026/08/15/twenty-dead-after-indonesia-s-magnitude-7-7-earthquake)
+7. `World` **Taliban mark five years in power as aid groups warn of crisis** — A parade outside the former US embassy in Kabul marked what the government called "victory day." [Read →](https://kathmandupost.com/world/2026/08/15/taliban-mark-five-years-in-power-as-aid-groups-warn-of-crisis)
+8. `Sports` **Nepal cricket team heads to India to prepare for ACC Premier Cup and packed Asian swing** — The squad begins training in India ahead of a busy stretch of regional cricket. [Read →](https://kathmandupost.com/cricket/2026/08/15/nepal-cricket-team-heads-to-india-to-prepare-for-acc-premier-cup-and-packed-asian-swing)
+9. `Culture` **From cinema halls to social media: How Nepali films are facing a new piracy threat** — As audiences record films in theatres and circulate them online, filmmakers navigate a growing piracy problem. [Read →](https://kathmandupost.com/art-culture/2026/08/15/from-cinema-halls-to-social-media-how-nepali-films-are-facing-a-new-piracy-threat)
+10. `Opinion` **Why Nepal's new political darling is losing its spark** — Democracy's goal is not to eliminate politics through expertise but to place expertise within political realms. [Read →](https://kathmandupost.com/columns/2026/08/13/why-nepal-s-new-political-darling-is-losing-its-spark)
 
 ## ![Setopati](https://www.google.com/s2/favicons?sz=32&domain=setopati.com) Setopati
 
