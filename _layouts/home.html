@@ -75,7 +75,10 @@ layout: default
 <a class="card featured-card" href="{{ latest.url | relative_url }}">
   <h2 class="card-title">{{ latest.title }}</h2>
   <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>
-  <p class="card-excerpt">{{ latest.excerpt | strip_html | truncatewords: 55 }}</p>
+  <p class="card-excerpt">
+    <span data-lang-en>{{ latest.summary_en | default: latest.excerpt | strip_html }}</span>
+    <span data-lang-np>{{ latest.summary_np | default: latest.excerpt | strip_html }}</span>
+  </p>
   <span class="card-link">
     <span data-lang-en>Read full digest →</span>
     <span data-lang-np>पूरा डाइजेस्ट पढ्नुहोस् →</span>

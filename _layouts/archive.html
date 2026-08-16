@@ -18,7 +18,10 @@ layout: default
   <a class="card" style="animation-delay: {{ forloop.index0 | times: 0.04 }}s" href="{{ post.url | relative_url }}">
     <h2 class="card-title">{{ post.title }}</h2>
     <p class="card-date">{{ post.date | date: "%B %-d, %Y" }}</p>
-    <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords: 28 }}</p>
+    <p class="card-excerpt">
+      <span data-lang-en>{{ post.summary_en | default: post.excerpt | strip_html }}</span>
+      <span data-lang-np>{{ post.summary_np | default: post.excerpt | strip_html }}</span>
+    </p>
     <span class="card-link">
       <span data-lang-en>Read digest →</span>
       <span data-lang-np>डाइजेस्ट पढ्नुहोस् →</span>

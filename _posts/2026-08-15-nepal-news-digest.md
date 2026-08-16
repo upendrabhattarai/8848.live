@@ -104,9 +104,11 @@ wordcloud:
     count: 3
   - word: "दुर्घटना"
     count: 3
+summary_en: "Top stories spanning politics, business, sports, world and more from each of Nepal's major outlets today."
+summary_np: "आज नेपालका प्रमुख सञ्चारमाध्यमहरूबाट राजनीति, व्यापार, खेलकुद, विश्व लगायतका विषयमा प्रमुख समाचारहरू।"
 ---
 
-Top stories spanning politics, business, sports, world and more from each of Nepal's major outlets today. The word cloud above is built from every headline published across all sections of these six outlets today, sized by frequency.
+Top stories spanning politics, business, sports, world and more from each of Nepal's major outlets today.
 
 ## ![eKantipur](https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com) eKantipur
 
