@@ -157,9 +157,67 @@ layout: default
   <a class="card mini-card" style="animation-delay: {{ forloop.index0 | times: 0.05 }}s" href="{{ post.url | relative_url }}">
     <p class="card-date">{{ post.date | date: "%b %-d" }}</p>
     <h3 class="card-title">{{ post.title }}</h3>
+    {% if post.wordcloud %}
+    <canvas class="mini-wc" id="mini-wc-{{ forloop.index0 }}"></canvas>
+    {% endif %}
   </a>
   {% endfor %}
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
+<script>
+(function () {
+  function ready(fn) {
+    if (window.WordCloud) { fn(); return; }
+    setTimeout(function () { ready(fn); }, 60);
+  }
+  ready(function () {
+    var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
+    var clouds = [
+      {% for post in grid_posts %}
+      {% if post.wordcloud %}
+      {
+        id: 'mini-wc-{{ forloop.index0 }}',
+        words: [{% assign top_words = post.wordcloud | slice: 0, 20 %}{% for w in top_words %}[{{ w.word | jsonify }}, {{ w.count }}]{% unless forloop.last %}, {% endunless %}{% endfor %}]
+      }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+      {% endfor %}
+    ];
+
+    function renderMini(item) {
+      var canvas = document.getElementById(item.id);
+      if (!canvas || !item.words.length) return;
+      var rect = canvas.getBoundingClientRect();
+      var w = Math.round(rect.width);
+      var h = Math.round(rect.height);
+      if (w <= 0 || h <= 0) return;
+      canvas.width = w;
+      canvas.height = h;
+      WordCloud(canvas, {
+        list: item.words,
+        gridSize: Math.max(4, Math.round(canvas.width / 55)),
+        weightFactor: function (size) { return Math.pow(size, 0.85) * (canvas.width / 95); },
+        fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
+        fontWeight: '700',
+        color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
+        rotateRatio: 0.2,
+        rotationSteps: 2,
+        backgroundColor: 'transparent',
+        shape: 'square',
+        ellipticity: 0.85,
+        minSize: 6
+      });
+    }
+
+    function renderAll() { clouds.forEach(renderMini); }
+    renderAll();
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderAll, 200);
+    });
+  });
+})();
+</script>
 {% endif %}
 
 {% assign total = site.posts.size %}
