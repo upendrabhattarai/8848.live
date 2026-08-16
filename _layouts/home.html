@@ -2,50 +2,58 @@
 layout: default
 ---
 {% assign latest = site.posts.first %}
-{% if latest.wordcloud %}
-<div class="wordcloud-section">
-  <div class="wordcloud-label">
-    <p class="wordcloud-label-text">Buzzwords dominating the headlines today</p>
+<div class="hero-grid">
+  <div class="hero-left">
+    <h1 class="hero-heading">Know what Nepal is reading today in less than 5 minutes.</h1>
+    <p class="hero-subheading">The top trending stories from 6 major outlets, analyzed and summarized.</p>
+    {% if latest %}
+    <span class="hero-badge"><span class="live-dot"></span>Updated {{ latest.date | date: "%B %-d, %Y" }}</span>
+    {% endif %}
   </div>
-  <div class="wordcloud-box">
-    <canvas id="wordcloud-canvas"></canvas>
+  <div class="hero-right">
+    {% if latest.wordcloud %}
+    <div class="pulse-card">
+      <span class="pulse-eyebrow">Today's Pulse</span>
+      <canvas id="wordcloud-canvas"></canvas>
+      <p class="pulse-caption">Buzzwords dominating the headlines today</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
+    <script>
+    (function () {
+      var canvas = document.getElementById('wordcloud-canvas');
+      if (!canvas || !window.WordCloud) return;
+      var box = canvas.parentElement;
+      var list = [
+        {% for w in latest.wordcloud %}[{{ w.word | jsonify }}, {{ w.count }}]{% unless forloop.last %}, {% endunless %}{% endfor %}
+      ];
+      var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
+      function render() {
+        canvas.width = box.clientWidth;
+        canvas.height = 320;
+        WordCloud(canvas, {
+          list: list,
+          gridSize: Math.round(canvas.width / 90),
+          weightFactor: function (size) { return Math.pow(size, 0.85) * (canvas.width / 90); },
+          fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
+          fontWeight: '700',
+          color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
+          rotateRatio: 0.35,
+          rotationSteps: 2,
+          backgroundColor: 'transparent',
+          shape: 'circle',
+          ellipticity: 0.75
+        });
+      }
+      render();
+      window.addEventListener('resize', render);
+    })();
+    </script>
+    {% endif %}
   </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
-<script>
-(function () {
-  var canvas = document.getElementById('wordcloud-canvas');
-  if (!canvas || !window.WordCloud) return;
-  var box = canvas.parentElement;
-  var list = [
-    {% for w in latest.wordcloud %}["{{ w.word | escape }}", {{ w.count }}]{% unless forloop.last %}, {% endunless %}{% endfor %}
-  ];
-  var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
-  function render() {
-    canvas.width = box.clientWidth;
-    canvas.height = 380;
-    WordCloud(canvas, {
-      list: list,
-      gridSize: Math.round(canvas.width / 90),
-      weightFactor: function (size) { return Math.pow(size, 0.85) * (canvas.width / 90); },
-      fontFamily: "'Inter', sans-serif",
-      fontWeight: '700',
-      color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
-      rotateRatio: 0.35,
-      rotationSteps: 2,
-      backgroundColor: '#ffffff',
-      shape: 'circle',
-      ellipticity: 0.75
-    });
-  }
-  render();
-  window.addEventListener('resize', render);
-})();
-</script>
-{% endif %}
 
 {% if latest %}
-<span class="post-eyebrow"><span class="banner-dot-live"></span>Latest digest</span>
+<div class="section-divider"><span class="section-label">Latest digest</span></div>
 <a class="card featured-card" href="{{ latest.url | relative_url }}">
   <h2 class="card-title">{{ latest.title }}</h2>
   <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>

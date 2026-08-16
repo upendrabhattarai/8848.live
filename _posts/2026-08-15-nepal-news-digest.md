@@ -108,7 +108,7 @@ wordcloud:
 
 Top stories spanning politics, business, sports, world and more from each of Nepal's major outlets today. The word cloud above is built from every headline published across all sections of these six outlets today, sized by frequency.
 
-## The Kathmandu Post
+## ![The Kathmandu Post](https://www.google.com/s2/favicons?sz=32&domain=kathmandupost.com) The Kathmandu Post
 
 1. `National` **US ends TPS protection for Nepali immigrants** — The move strips thousands of Nepalis of a decade-long legal safeguard that allowed them to live and work in the US. [Read →](https://kathmandupost.com/national/2026/08/15/us-ends-tps-protection-for-nepali-immigrants)
 2. `National` **Monsoon disasters leave 85 dead as rains continue** — Floods, landslides and lightning have killed 85 people since April, with fresh rain still causing deaths and displacement. [Read →](https://kathmandupost.com/national/2026/08/15/monsoon-disasters-leave-85-dead-as-rains-continue)
@@ -121,7 +121,7 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 9. `Culture` **From cinema halls to social media: How Nepali films are facing a new piracy threat** — As audiences record films in theatres and circulate them online, filmmakers navigate a growing piracy problem. [Read →](https://kathmandupost.com/art-culture/2026/08/15/from-cinema-halls-to-social-media-how-nepali-films-are-facing-a-new-piracy-threat)
 10. `Opinion` **Why Nepal's new political darling is losing its spark** — Democracy's goal is not to eliminate politics through expertise but to place expertise within political realms. [Read →](https://kathmandupost.com/columns/2026/08/13/why-nepal-s-new-political-darling-is-losing-its-spark)
 
-## eKantipur
+## ![eKantipur](https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com) eKantipur
 
 1. `विश्व` **इन्डोनेसियामा ७.७ म्याग्निच्युडको भूकम्प, ३८ जनाको मृत्यु** — शक्तिशाली भूकम्प र दर्जनौं परकम्पका कारण थुप्रै भवन तथा संरचनामा ठूलो क्षति पुगेको छ। [पढ्नुहोस् →](https://ekantipur.com/world/2026/08/15/77-magnitude-earthquake-hits-indonesia-38-dead-27-05.html)
 2. `राजनीति` **बागमतीका मुख्यमन्त्री बानियाँ राजीनामा दिने तयारीमा** — एमालेले समर्थन फिर्ता लिएपछि अल्पमतमा परेका मुख्यमन्त्रीले विश्वासको मत नलिई राजीनामा दिने तयारी गरेको स्रोतको भनाइ। [पढ्नुहोस् →](https://ekantipur.com/bagmati-pradesh/2026/08/15/bagmati-chief-minister-baniya-prepares-to-resign-49-12.html)
@@ -134,7 +134,7 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 9. `विचार` **देउवाका दायित्व र कर्तव्य** — यतिबेला नेपाली कांग्रेस संकटापन्न अवस्थामा छ, देशलाई गणतान्त्रिक बनाउने यो पार्टी विरुद्ध चौतर्फी आक्रमण भइरहेको छ। [पढ्नुहोस् →](https://ekantipur.com/opinion/2026/08/15/deubas-responsibilities-and-duties-31-25.html)
 10. `विज्ञान र प्रविधि` **१० वर्षपछि इन्स्टाग्रामको लोगोमा परिवर्तन** — मेटाको स्वामित्वमा रहेको इन्स्टाग्रामले नयाँ लोगोमा अक्षरको डिजाइनलाई परिमार्जन गरेको छ। [पढ्नुहोस् →](https://ekantipur.com/technology/2026/08/15/instagram-logo-changes-after-10-years-23-19.html)
 
-## Setopati
+## ![Setopati](https://www.google.com/s2/favicons?sz=32&domain=setopati.com) Setopati
 
 1. `राजनीति` **पार्टी रूपान्तरणको बहसप्रति ओलीको रोष, दिए 'हुल्याहाहरूले गरेको हुलदंगा' को संज्ञा** — पार्टी रूपान्तरणसम्बन्धी बहसप्रति एमाले अध्यक्ष ओलीको तीव्र प्रतिक्रिया। [पढ्नुहोस् →](https://www.setopati.com/politics/396005)
 2. `समाज` **अमेरिकाले नेपालीलाई दिँदै आएको टिपिएस सुविधा खारेज** — दशकौंदेखि दिइँदै आएको कानुनी सुरक्षा खारेज भएसँगै हजारौं नेपाली प्रभावित। [पढ्नुहोस् →](https://www.setopati.com/social/395980)
@@ -147,7 +147,7 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 9. `राजनीति` **पार्टी विभाजनको पक्षमा म छैन− शंशाक कोइराला** — कांग्रेस नेता शंशाक कोइरालाले पार्टी विभाजनको विरोध जनाएका छन्। [पढ्नुहोस् →](https://www.setopati.com/politics/395997)
 10. `सम्पादकीय` **पत्रकार किशोर श्रेष्ठको गिरफ्तारीबारे हाम्रा ५ कुरा** — पत्रकारको गिरफ्तारीले उठाएका प्रश्नहरूमाथि सम्पादकीय टिप्पणी। [पढ्नुहोस् →](https://www.setopati.com/opinion/395938)
 
-## Online Khabar
+## ![Online Khabar](https://www.google.com/s2/favicons?sz=32&domain=onlinekhabar.com) Online Khabar
 
 1. `अन्तर्राष्ट्रिय समाचार` **इन्डोनेसियामा ७.७ म्याग्निच्युडको भूकम्प, सुनामीको चेतावनीसँगै बस्ती खाली गराइयो** — शक्तिशाली भूकम्पपछि सुनामी चेतावनी जारी गरी तटीय बस्ती खाली गराइयो। [पढ्नुहोस् →](https://www.onlinekhabar.com/2026/08/1996460/7-7-magnitude-earthquake-hits-indonesia-tsunami-warning-issued-settlements-evacuated)
 2. `प्रदेश समाचार` **दार्चुलामा पहिरो, ३ जना घाइते** — महाकाली नगरपालिकामा गएको पहिरोले सडक अवरुद्ध र क्षति पुर्‍याएको छ। [पढ्नुहोस् →](https://www.onlinekhabar.com/2026/08/1996464/3-injured-in-landslide-in-darchula)
@@ -160,7 +160,7 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 9. `अन्तर्वार्ता` **'केयूलाई दक्षिण एसियामै पहिचान बनाउन सक्ने विश्वविद्यालय बनाउने योजना छ'** — काठमाडौं विश्वविद्यालयको भविष्यको योजनाबारे अन्तर्वार्ता। [पढ्नुहोस् →](https://www.onlinekhabar.com/2026/08/1996086/there-is-a-plan-to-make-ku-a-university-that-can-make-a-name-for-itself-in-south-asia)
 10. `समाचार` **सरकारले तोक्यो संवैधानिक पदाधिकारीको तलब, प्रधानन्यायाधीशको १ लाख १२ हजार** — संवैधानिक निकायका पदाधिकारीहरूको नयाँ तलबमान सरकारले तोकेको छ। [पढ्नुहोस् →](https://www.onlinekhabar.com/2026/08/1996047/government-sets-salary-for-constitutional-officials-chief-justice-to-be-rs-112000)
 
-## Nagarik News
+## ![Nagarik News](https://www.google.com/s2/favicons?sz=32&domain=nagariknews.nagariknetwork.com) Nagarik News
 
 1. `राजनीति` **सरकारको ताल यस्तै रहे मुलुकमा मध्यावधि चुनाव हुन्छ : शशांक** — कांग्रेस नेता शशांक कोइरालाले सरकारको कार्यशैलीप्रति असन्तुष्टि जनाएका छन्। [पढ्नुहोस् →](https://nagariknews.nagariknetwork.com/politics/if-the-government-s-rhythm-continues-like-this-there-will-be-mid-term-elections-in-the-country-shashank-29-36.html)
 2. `समाज` **ताल्चा विमानस्थलमा खुला सेप्टिक ट्यांकीमा डुबेर ११ वर्षीय बालकको मृत्यु** — मुगुको छायाँनाथ रारा नगरपालिकास्थित विमानस्थलमा निर्माणाधीन टर्मिनल भवनको खुला सेप्टिक ट्यांकीमा डुबेर बालकको मृत्यु भएको छ। [पढ्नुहोस् →](https://nagariknews.nagariknetwork.com/social-affairs/11-year-old-boy-dies-after-drowning-in-open-septic-tank-at-talcha-airport-42-43.html)
@@ -173,7 +173,7 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 9. `राजनीति` **अप्ठ्यारो बेला नेतृत्व छाडेर हिँड्दिनँ, अर्को महाधिवेशनसम्म अध्यक्ष म नै हो : केपी ओली** — पार्टीभित्रको आन्तरिक विवादबीच ओलीले नेतृत्व नछाड्ने प्रस्ट पारेका छन्। [पढ्नुहोस् →](https://nagariknews.nagariknetwork.com/politics/ncp-34-35.html)
 10. `खेल` **मेचीनगरले जित्यो 'झापा १-काठमाडौं कप फुटसल' को उपाधि** — डिफेन्डिङ च्याम्पियन साविक मेचीनगरले दोस्रो झापा १-काठमाडौं कप फुटसल प्रतियोगिताको उपाधि जितेको छ। [पढ्नुहोस् →](https://nagariknews.nagariknetwork.com/sports/mechinagar-wins-second-jhapa-1-kathmandu-cup-futsal-title-29-46.html)
 
-## Annapurna Post
+## ![Annapurna Post](https://www.google.com/s2/favicons?sz=32&domain=annapurnapost.com) Annapurna Post
 
 1. `राजनीति` **कांग्रेसको संस्थापनइतर समूहको राष्ट्रिय भेलामा विभिन्न प्रतिवेदनहरू पेश** — भेलामा सांगठनिक तथा राजनीतिक प्रतिवेदनहरू प्रस्तुत गरिएको छ। [पढ्नुहोस् →](https://annapurnapost.com/story/505540/)
 2. `अर्थ` **अर्थमन्त्रीले प्रवासी नेपालीलाई भने- नेपालमा ढुक्कसँग लगानी गर्नूहोस्** — ग्वाङ्झाउमा भएको एनआरएन सम्मेलनमा भिडियो सन्देशमार्फत अर्थमन्त्रीको आग्रह। [पढ्नुहोस् →](https://annapurnapost.com/story/505537/)
