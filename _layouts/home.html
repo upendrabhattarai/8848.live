@@ -3,8 +3,13 @@ layout: default
 ---
 {% assign latest = site.posts.first %}
 {% if latest.wordcloud %}
-<div class="wordcloud-box">
-  <canvas id="wordcloud-canvas"></canvas>
+<div class="wordcloud-section">
+  <div class="wordcloud-label">
+    <p class="wordcloud-label-text">Buzzwords dominating the headlines today</p>
+  </div>
+  <div class="wordcloud-box">
+    <canvas id="wordcloud-canvas"></canvas>
+  </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
 <script>
