@@ -52,11 +52,17 @@
   </main>
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <img class="footer-logo" src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848.live logo" onerror="this.style.display='none'">
-      <p class="footer-desc">
-        <span data-lang-en>8848.live automatically curates and publishes the most-read headlines from Nepal's major news outlets every day, in their original language.</span>
-        <span data-lang-np>8848.live ले नेपालका प्रमुख सञ्चारमाध्यमहरूबाट दैनिक रूपमा सबैभन्दा धेरै पढिने शीर्षकहरू तिनको मौलिक भाषामा स्वचालित रूपमा संकलन र प्रकाशन गर्छ।</span>
-      </p>
+      <div class="footer-logo-col">
+        <img class="footer-logo" src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848.live logo" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="footer-middle">
+        <p class="footer-desc">
+          <span data-lang-en>Curated lists of must-read headlines from major news outlets in Nepal.</span>
+          <span data-lang-np>नेपालका प्रमुख सञ्चारमाध्यमहरूबाट अनिवार्य पढ्नैपर्ने शीर्षकहरूको संगृहीत सूची।</span>
+        </p>
+        <p class="footer-contact"><span data-lang-en>Contact:</span><span data-lang-np>सम्पर्क:</span> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        <p class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+      </div>
       <div class="footer-sources">
         <span class="footer-sources-label">
           <span class="live-dot"></span>
@@ -70,8 +76,6 @@
         <span class="footer-source-item">Nagarik News</span>
         <span class="footer-source-item">Annapurna Post</span>
       </div>
-      <p class="footer-contact"><span data-lang-en>Contact:</span><span data-lang-np>सम्पर्क:</span> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-      <p class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
     </div>
   </footer>
   <script>
