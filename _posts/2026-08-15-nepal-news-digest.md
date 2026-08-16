@@ -232,6 +232,4 @@ Top stories spanning politics, business, sports, world and more from each of Nep
 </div>
 
 ---
-*This digest is generated automatically each day, pulling top stories across politics, business, sports, world, culture and more from each outlet — not just a single top-5 list.*
-
-*Note: The Himalayan Times could not be included today — its site blocks automated access. We'll keep retrying each day. Annapurna Post's homepage did not return fresh content on this run, so today's picks are carried over from the outlet's most recent successful fetch.*
+*This digest is generated each day, pulling top stories across politics, business, sports, world, culture and more from each of the outlets.*
