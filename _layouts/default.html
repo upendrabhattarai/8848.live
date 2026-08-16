@@ -79,6 +79,9 @@
       </div>
     </div>
   </footer>
+  <button id="scroll-top-btn" class="scroll-top-btn" type="button" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+  </button>
   <script>
     (function () {
       var themeBtn = document.getElementById('theme-toggle');
@@ -99,6 +102,22 @@
           var next = current === 'np' ? 'en' : 'np';
           root.setAttribute('data-lang', next);
           try { localStorage.setItem('lang', next); } catch (e) {}
+        });
+      }
+
+      var scrollBtn = document.getElementById('scroll-top-btn');
+      if (scrollBtn) {
+        var toggleVisible = function () {
+          if (window.scrollY > 420) {
+            scrollBtn.classList.add('visible');
+          } else {
+            scrollBtn.classList.remove('visible');
+          }
+        };
+        window.addEventListener('scroll', toggleVisible, { passive: true });
+        toggleVisible();
+        scrollBtn.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
     })();
