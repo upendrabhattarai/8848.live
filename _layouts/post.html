@@ -87,23 +87,27 @@ layout: default
         var filename = slug + '-8848-live.png';
         var file = new File([blob], filename, { type: 'image/png' });
 
-        // Prefer the OS-level share sheet when it can carry the image — this hands the
-        // image + link together to whichever app the user picks (works for Instagram,
-        // and for the Twitter/Facebook apps on mobile too).
+        if (kind === 'twitter' || kind === 'facebook') {
+          // Twitter/X and Facebook's web share links have no way to receive an attached
+          // image (and some desktop browsers' native share sheet will silently drop the
+          // file when handing off to these), so always save the image locally and open
+          // the platform's share dialog pre-filled with the text and link.
+          downloadBlob(blob, filename);
+          if (kind === 'twitter') {
+            openShareUrl('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(pageUrl));
+          } else {
+            openShareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl));
+          }
+          return;
+        }
+
+        // Instagram has no web share intent at all — the only way to hand it an image
+        // is the OS-level native share sheet (mobile) or a manual upload from a saved file.
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           navigator.share({ files: [file], title: name, text: text, url: pageUrl }).catch(function () {});
           return;
         }
-
-        // Desktop fallback: there's no web API to attach an image to a tweet/FB post
-        // automatically, so save the image (ready to attach) and open the platform's
-        // share dialog pre-filled with the text and link.
         downloadBlob(blob, filename);
-        if (kind === 'twitter') {
-          openShareUrl('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(pageUrl));
-        } else if (kind === 'facebook') {
-          openShareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl));
-        }
       });
     });
   });
