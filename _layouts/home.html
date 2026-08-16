@@ -29,19 +29,20 @@ layout: default
       var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
       function render() {
         canvas.width = box.clientWidth;
-        canvas.height = 320;
+        canvas.height = Math.max(420, Math.round(box.clientWidth * 0.78));
         WordCloud(canvas, {
           list: list,
-          gridSize: Math.round(canvas.width / 90),
-          weightFactor: function (size) { return Math.pow(size, 0.85) * (canvas.width / 90); },
+          gridSize: Math.round(canvas.width / 130),
+          weightFactor: function (size) { return Math.pow(size, 0.9) * (canvas.width / 70); },
           fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
           fontWeight: '700',
           color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
-          rotateRatio: 0.35,
+          rotateRatio: 0.3,
           rotationSteps: 2,
           backgroundColor: 'transparent',
-          shape: 'circle',
-          ellipticity: 0.75
+          shape: 'square',
+          ellipticity: 0.85,
+          minSize: 8
         });
       }
       render();
