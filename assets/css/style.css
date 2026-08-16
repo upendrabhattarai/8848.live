@@ -545,83 +545,86 @@ main.wrap { padding: 32px 24px 80px; }
 .back-link:hover { color: var(--red-dark); }
 
 /* Footer */
-.site-footer { background: var(--footer-bg); padding: 0; margin-top: 24px; --footer-media-h: 84px; }
+.site-footer { background: var(--footer-bg); padding: 0; margin-top: 24px; --footer-side-w: 150px; }
 
 .footer-inner {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   text-align: left;
 }
 
 .footer-logo-col {
-  flex: 0 0 auto;
+  flex: 0 0 var(--footer-side-w);
+  width: var(--footer-side-w);
   display: flex;
   align-items: center;
-  padding: 20px 28px 20px 0;
-  margin-right: 28px;
+  justify-content: center;
+  padding: 0 20px;
   border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.footer-logo { height: var(--footer-media-h); width: auto; max-width: 140px; object-fit: contain; display: block; }
+.footer-logo { height: 100%; width: auto; max-width: 100%; object-fit: contain; display: block; }
 
 .footer-middle {
-  flex: 1;
+  flex: 2 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px 0;
+  padding: 32px 44px;
 }
 
 .footer-desc {
   color: var(--footer-text);
-  font-size: 0.9rem;
-  max-width: 420px;
-  margin: 0 0 12px;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin: 0 0 16px;
+  line-height: 1.65;
 }
 
-.footer-divider { width: 56px; height: 1px; background: rgba(255,255,255,0.16); margin: 0 0 12px; }
+.footer-divider { width: 64px; height: 1px; background: rgba(255,255,255,0.16); margin: 0 0 16px; }
 
 .footer-sources {
-  flex: 0 0 auto;
+  flex: 0 0 var(--footer-side-w);
+  width: var(--footer-side-w);
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  align-items: flex-start;
-  max-height: var(--footer-media-h);
-  gap: 6px 10px;
-  padding: 20px 0 20px 28px;
-  margin-left: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 16px 18px;
   border-left: 1px solid rgba(255,255,255,0.1);
 }
 
 .footer-sources-label {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  width: 100%;
   color: #fff;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
+  text-align: center;
 }
 
 .footer-source-item {
   color: var(--footer-text);
   font-size: 0.76rem;
   font-weight: 500;
-  padding: 2px 9px;
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 20px;
+  text-align: center;
+  width: 100%;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.footer-contact { margin: 0 0 6px; color: rgba(255,255,255,0.85); font-size: 0.88rem; }
+.footer-contact { margin: 0 0 6px; color: rgba(255,255,255,0.85); font-size: 0.95rem; }
 
 .footer-contact a { color: #fff; font-weight: 600; }
 
@@ -630,29 +633,32 @@ main.wrap { padding: 32px 24px 80px; }
 @media (max-width: 700px) {
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-logo-col {
+    width: auto;
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-right: 0;
     padding: 24px 0;
     justify-content: center;
   }
   .footer-logo { height: 48px; max-width: none; }
-  .footer-middle { align-items: center; padding: 24px 0; }
+  .footer-middle { align-items: center; padding: 24px 20px; }
   .footer-divider { margin: 0 auto 12px; }
   .footer-sources {
+    width: auto;
     border-left: none;
     border-top: 1px solid rgba(255,255,255,0.1);
-    margin-left: 0;
-    padding: 24px 0;
-    justify-content: center;
-    align-items: center;
+    padding: 20px 0;
     flex-direction: row;
     flex-wrap: wrap;
-    max-height: none;
-    flex: 0 0 auto;
-    width: 100%;
+    justify-content: center;
+    gap: 6px 10px;
   }
-  .footer-sources-label { justify-content: center; width: 100%; }
+  .footer-sources-label { justify-content: center; width: 100%; margin-bottom: 4px; }
+  .footer-source-item {
+    width: auto;
+    padding: 2px 9px;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 20px;
+  }
 }
 
 @keyframes fadeInUp {
