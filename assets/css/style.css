@@ -467,6 +467,73 @@ main.wrap { padding: 32px 24px 80px; }
 
 .post-content a, .page-content a { color: var(--red); font-weight: 500; }
 
+/* Share buttons */
+.share-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.share-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-3);
+  margin-right: 2px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-2);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.share-btn svg { width: 14px; height: 14px; }
+
+.share-btn:hover {
+  background: var(--red-light);
+  border-color: var(--red);
+  color: var(--red);
+  transform: translateY(-1px);
+}
+
+.share-btn:disabled { opacity: 0.5; cursor: wait; transform: none; }
+
+.outlet-box { position: relative; }
+
+.outlet-share-row {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.outlet-share-row .share-btn {
+  width: 26px;
+  height: 26px;
+  background: var(--bg-card);
+}
+
+.outlet-share-row .share-btn svg { width: 12px; height: 12px; }
+
+@media (max-width: 620px) {
+  .outlet-share-row { position: static; justify-content: flex-end; margin-bottom: 10px; }
+}
+
 /* Outlet boxes: narrow rotated-label sidebar + wide headline column */
 .outlet-box {
   display: flex;
@@ -512,7 +579,7 @@ main.wrap { padding: 32px 24px 80px; }
 .outlet-items {
   flex: 1;
   min-width: 0;
-  padding: 24px 26px;
+  padding: 24px 46px 24px 26px;
 }
 
 .outlet-items ol, .outlet-items ul { margin: 0; padding-left: 20px; }
