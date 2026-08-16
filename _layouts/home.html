@@ -160,6 +160,10 @@ layout: default
     {% if post.wordcloud %}
     <canvas class="mini-wc" id="mini-wc-{{ forloop.index0 }}"></canvas>
     {% endif %}
+    <span class="mini-visits" data-visit-key="8848live_digest_{{ post.date | date: '%Y-%m-%d' }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span class="mini-visits-count">···</span>
+    </span>
   </a>
   {% endfor %}
 </div>
@@ -215,6 +219,25 @@ layout: default
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(renderAll, 200);
     });
+  });
+})();
+</script>
+<script>
+(function () {
+  // Real-time cumulative visit counts per digest, read (not incremented) here —
+  // the count itself is incremented on the individual digest page on each visit.
+  document.querySelectorAll('.mini-visits[data-visit-key]').forEach(function (el) {
+    var key = el.getAttribute('data-visit-key');
+    var countEl = el.querySelector('.mini-visits-count');
+    if (!key || !countEl) return;
+    fetch('https://countapi.mileshilliard.com/api/v1/get/' + encodeURIComponent(key))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var n = data && data.value != null ? parseInt(data.value, 10) : 0;
+        if (isNaN(n) || n < 0) n = 0;
+        countEl.textContent = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n);
+      })
+      .catch(function () { countEl.textContent = '0'; });
   });
 })();
 </script>

@@ -18,6 +18,15 @@ layout: default
   </a>
 </article>
 
+<script>
+(function () {
+  // Record one visit to this digest — read back (not incremented) on the homepage's
+  // "Past 10 days" cards to show a real-time cumulative view count per digest.
+  var key = '8848live_digest_{{ page.date | date: "%Y-%m-%d" }}';
+  fetch('https://countapi.mileshilliard.com/api/v1/hit/' + encodeURIComponent(key)).catch(function () {});
+})();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 (function () {
