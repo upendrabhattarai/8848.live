@@ -562,7 +562,7 @@ main.wrap { padding: 32px 24px 80px; }
   border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.footer-logo { height: 100%; width: auto; object-fit: contain; display: block; }
+.footer-logo { height: 75%; width: auto; object-fit: contain; display: block; }
 
 .footer-middle {
   flex: 2 1 auto;
