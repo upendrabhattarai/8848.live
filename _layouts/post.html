@@ -122,3 +122,21 @@ layout: default
   });
 })();
 </script>
+
+<script>
+(function () {
+  // Touch-device support: tap a headline to expand/collapse its summary,
+  // without breaking the "Read →" link or desktop hover behavior.
+  document.querySelectorAll('.outlet-items li').forEach(function (li) {
+    li.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return; // let links navigate normally
+      if (!window.matchMedia('(hover: none)').matches) return; // desktop keeps :hover
+      var wasExpanded = li.classList.contains('expanded');
+      document.querySelectorAll('.outlet-items li.expanded').forEach(function (other) {
+        if (other !== li) other.classList.remove('expanded');
+      });
+      li.classList.toggle('expanded', !wasExpanded);
+    });
+  });
+})();
+</script>
