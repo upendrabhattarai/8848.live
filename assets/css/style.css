@@ -411,6 +411,17 @@ main.wrap { padding: 32px 24px 80px; }
 }
 .mini-visits svg { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.75; }
 
+.archive-visits {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-3);
+  margin: -6px 0 12px;
+}
+.archive-visits svg { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.75; }
+
 .archive-link-row { text-align: center; margin-top: 30px; }
 .archive-link { color: var(--red); font-weight: 700; font-size: 0.92rem; }
 .archive-link:hover { color: var(--red-dark); }
