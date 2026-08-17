@@ -140,3 +140,16 @@ layout: default
   });
 })();
 </script>
+
+<script>
+(function () {
+  // Open outbound article links (the "Read →" links to outlet sites) in a new tab,
+  // leaving internal links (back-link, footer, nav) untouched.
+  document.querySelectorAll('.post-content a[href^="http"]').forEach(function (a) {
+    if (a.hostname && a.hostname !== window.location.hostname) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+  });
+})();
+</script>
