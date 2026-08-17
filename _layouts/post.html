@@ -68,6 +68,8 @@ layout: default
     }).catch(function () { cb(null); });
   }
 
+  var PAGE_DATE = '{{ page.date | date: "%Y-%m-%d" }}';
+
   document.querySelectorAll('.outlet-box').forEach(function (box) {
     var nameEl = box.querySelector('.outlet-name');
     var name = nameEl ? nameEl.textContent.trim() : 'Nepal News';
@@ -82,38 +84,36 @@ layout: default
       '<button type="button" class="share-btn" data-share="instagram" aria-label="Share on Instagram">' + IG_ICON + '</button>';
     box.appendChild(bar);
 
+    // Points at a pre-generated share page carrying Open Graph tags for this
+    // outlet's real headline-card PNG, so Twitter/Facebook show the image
+    // automatically instead of relying on a manually-attached download.
+    var shareUrl = 'https://8848.live/share/' + PAGE_DATE + '/' + slug + '/';
+    var text = name + ' — top headlines today via 8848.live';
+
     bar.addEventListener('click', function (e) {
       var btn = e.target.closest('.share-btn');
       if (!btn) return;
       var kind = btn.getAttribute('data-share');
-      var pageUrl = location.href.split('#')[0] + '#' + box.id;
-      var text = name + ' — top headlines today via 8848.live';
 
+      if (kind === 'twitter') {
+        openShareUrl('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(shareUrl));
+        return;
+      }
+      if (kind === 'facebook') {
+        openShareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl));
+        return;
+      }
+
+      // Instagram has no link-preview share intent — it only accepts an
+      // attached file via the native OS share sheet, so render one on demand.
       btn.disabled = true;
       boxToBlob(box, function (blob) {
         btn.disabled = false;
         if (!blob) return;
         var filename = slug + '-8848-live.png';
         var file = new File([blob], filename, { type: 'image/png' });
-
-        if (kind === 'twitter' || kind === 'facebook') {
-          // Twitter/X and Facebook's web share links have no way to receive an attached
-          // image (and some desktop browsers' native share sheet will silently drop the
-          // file when handing off to these), so always save the image locally and open
-          // the platform's share dialog pre-filled with the text and link.
-          downloadBlob(blob, filename);
-          if (kind === 'twitter') {
-            openShareUrl('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(pageUrl));
-          } else {
-            openShareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl));
-          }
-          return;
-        }
-
-        // Instagram has no web share intent at all — the only way to hand it an image
-        // is the OS-level native share sheet (mobile) or a manual upload from a saved file.
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          navigator.share({ files: [file], title: name, text: text, url: pageUrl }).catch(function () {});
+          navigator.share({ files: [file], title: name, text: text, url: shareUrl }).catch(function () {});
           return;
         }
         downloadBlob(blob, filename);

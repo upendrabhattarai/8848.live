@@ -1,6 +1,7 @@
 title: 8848.live
 description: Daily digest of the most-read Nepali news headlines.
 email: info.8848live@gmail.com
+url: "https://8848.live"
 plugins:
   - jekyll-feed
 permalink: /:year/:month/:day/:title/

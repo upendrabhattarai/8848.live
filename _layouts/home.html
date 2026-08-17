@@ -23,7 +23,7 @@ layout: default
   </div>
   <div class="hero-right">
     {% if latest.wordcloud %}
-    <div class="pulse-card">
+    <div class="pulse-card" id="wordcloud">
       <span class="pulse-eyebrow">
         <span data-lang-en>Today's Pulse</span>
         <span data-lang-np>आजको चर्चा</span>
@@ -109,19 +109,25 @@ layout: default
       var fbBtn = document.getElementById('wc-share-facebook');
       var igBtn = document.getElementById('wc-share-instagram');
       var shareText = "Today's buzzwords from Nepal's headlines, via 8848.live";
+      // Points at a pre-generated share page carrying Open Graph tags for the
+      // real word-cloud PNG, so Twitter/Facebook show the image automatically
+      // instead of relying on a manually-attached download.
+      var shareUrl = 'https://8848.live/share/{{ latest.date | date: "%Y-%m-%d" }}/wordcloud/';
 
       if (twBtn) twBtn.addEventListener('click', function () {
-        openShareUrl('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(location.href));
+        openShareUrl('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(shareUrl));
       });
       if (fbBtn) fbBtn.addEventListener('click', function () {
-        openShareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
+        openShareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl));
       });
       if (igBtn) igBtn.addEventListener('click', function () {
+        // Instagram has no link-preview share intent — it only accepts an
+        // attached file via the native OS share sheet.
         canvas.toBlob(function (blob) {
           if (!blob) return;
           var file = new File([blob], '8848-live-wordcloud.png', { type: 'image/png' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({ files: [file], title: '8848.live', text: shareText, url: location.href }).catch(function () {});
+            navigator.share({ files: [file], title: '8848.live', text: shareText, url: shareUrl }).catch(function () {});
           } else {
             downloadBlob(blob, '8848-live-wordcloud.png');
           }
