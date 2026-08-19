@@ -711,8 +711,12 @@ main.wrap { padding: 32px 24px 80px; }
 @media (max-width: 780px) {
   .latest-digest-row { flex-direction: column; }
   .sentiment-col { flex: 0 0 auto; }
-  .gauge-cell.today { height: 300px; }
-  .gauge-cell.yesterday { height: 110px; }
+  /* flex-basis must be reset to auto here, otherwise the base rule's
+     "flex: 2.4 1 0" / "flex: 1.5 1 0" (basis 0) wins over height and the
+     gauges collapse to 0px tall on mobile, even though the label and
+     share-row above/below them render fine. */
+  .gauge-cell.today { flex: 0 0 auto; height: 300px; }
+  .gauge-cell.yesterday { flex: 0 0 auto; height: 110px; }
 }
 
 
