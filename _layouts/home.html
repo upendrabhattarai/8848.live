@@ -73,17 +73,22 @@ layout: default
         canvas.height = Math.max(420, Math.round(box.clientWidth * 0.78));
         WordCloud(canvas, {
           list: list,
-          gridSize: Math.round(canvas.width / 130),
-          weightFactor: function (size) { return Math.pow(size, 0.9) * (canvas.width / 70); },
+          // Bigram phrases ("word1 word2") are longer than single words, so this
+          // uses a finer grid, a gentler weight curve, and shrinkToFit so all 50
+          // phrases always get placed (shrunk rather than dropped) instead of the
+          // lowest-frequency ones silently disappearing off-canvas.
+          gridSize: Math.round(canvas.width / 160),
+          weightFactor: function (size) { return Math.pow(size, 0.8) * (canvas.width / 110); },
           fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
           fontWeight: '700',
           color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
-          rotateRatio: 0.3,
+          rotateRatio: 0.15,
           rotationSteps: 2,
           backgroundColor: 'transparent',
           shape: 'square',
-          ellipticity: 0.85,
-          minSize: 8
+          ellipticity: 0.9,
+          minSize: 0,
+          shrinkToFit: true
         });
         setTimeout(drawWatermark, 80);
       }
@@ -273,17 +278,21 @@ layout: default
       canvas.height = h;
       WordCloud(canvas, {
         list: item.words,
-        gridSize: Math.max(4, Math.round(canvas.width / 55)),
-        weightFactor: function (size) { return Math.pow(size, 0.85) * (canvas.width / 95); },
+        // Same shrinkToFit treatment as the main pulse-card cloud, since past-10-days
+        // mini clouds render whatever wordcloud data that day's post was built with
+        // (bigram phrases going forward, single words for older posts).
+        gridSize: Math.max(4, Math.round(canvas.width / 65)),
+        weightFactor: function (size) { return Math.pow(size, 0.8) * (canvas.width / 130); },
         fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
         fontWeight: '700',
         color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
-        rotateRatio: 0.2,
+        rotateRatio: 0.1,
         rotationSteps: 2,
         backgroundColor: 'transparent',
         shape: 'square',
-        ellipticity: 0.85,
-        minSize: 6
+        ellipticity: 0.9,
+        minSize: 0,
+        shrinkToFit: true
       });
     }
 
