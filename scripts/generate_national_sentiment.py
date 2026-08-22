@@ -200,10 +200,13 @@ def draw_gauge(ax, value, caption, no_data=False):
     ax.text(0, -0.42, caption, fontsize=15, fontfamily=MONO, fontweight="bold", color=INK, ha="center", va="center", zorder=6)
 
 
-def save_single_gauge(value, caption, out_path, no_data=False):
+def save_single_gauge(value, caption, out_path, no_data=False, watermark=False):
     fig, ax = plt.subplots(figsize=(5.6, 3.7))
     fig.patch.set_facecolor(PAPER)
     draw_gauge(ax, value, caption, no_data=no_data)
+    if watermark:
+        fig.text(0.985, 0.02, "\u00a9 8848.live", fontsize=8, fontfamily=MONO, fontweight="bold",
+                  color="#8a93a3", alpha=0.65, ha="right", va="bottom")
     fig.tight_layout()
     fig.savefig(out_path, dpi=180, facecolor=PAPER, bbox_inches="tight", pad_inches=0.12)
     plt.close(fig)
@@ -220,6 +223,8 @@ def save_share_card(today_val, yesterday_val, yesterday_no_data, out_path):
     ax_yesterday = fig.add_axes([0.30, 0.03, 0.40, 0.26])
     draw_gauge(ax_today, today_val, "Today")
     draw_gauge(ax_yesterday, yesterday_val, "Yesterday", no_data=yesterday_no_data)
+    fig.text(0.99, 0.015, "\u00a9 8848.live", fontsize=10, fontfamily=MONO, fontweight="bold",
+              color="#8a93a3", alpha=0.65, ha="right", va="bottom")
     fig.savefig(out_path, dpi=100, facecolor=PAPER)
     plt.close(fig)
 
@@ -323,8 +328,8 @@ def main():
     # --- images ---
     img_dir = os.path.join(repo_root, "assets", "shares", date)
     os.makedirs(img_dir, exist_ok=True)
-    save_single_gauge(today_mean, "Today", os.path.join(img_dir, "national-sentiment-today.png"))
-    save_single_gauge(yesterday_mean, "Yesterday", os.path.join(img_dir, "national-sentiment-yesterday.png"), no_data=yesterday_no_data)
+    save_single_gauge(today_mean, "Today", os.path.join(img_dir, "national-sentiment-today.png"), watermark=True)
+    save_single_gauge(yesterday_mean, "Yesterday", os.path.join(img_dir, "national-sentiment-yesterday.png"), no_data=yesterday_no_data, watermark=True)
     save_share_card(today_mean, yesterday_mean, yesterday_no_data, os.path.join(img_dir, "national-sentiment.png"))
     print(f"Saved gauge images -> {img_dir}")
 

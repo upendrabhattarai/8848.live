@@ -56,6 +56,23 @@ layout: default
       ];
       var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
 
+      // Rank-based font sizing (min/max count normalized to a canvas-relative
+      // font range) rather than a fixed multiplier on the raw count. On a
+      // typical day most bigram counts cluster at 1-2, so a flat multiplier
+      // left the cloud mostly tiny text with large blank margins. Normalizing
+      // by that day's own min/max count guarantees the cloud always spans a
+      // full, box-filling size range regardless of how skewed the day's
+      // counts are; shrinkToFit still keeps every word safely on-canvas.
+      var wcCounts = list.map(function (item) { return item[1]; });
+      var wcMin = Math.min.apply(null, wcCounts);
+      var wcMax = Math.max.apply(null, wcCounts);
+      function pulseWordSize(count) {
+        var t = wcMax === wcMin ? 0.5 : Math.pow((count - wcMin) / (wcMax - wcMin), 0.55);
+        var minFont = canvas.width / 45;
+        var maxFont = canvas.width / 11;
+        return minFont + t * (maxFont - minFont);
+      }
+
       function drawWatermark() {
         var ctx = canvas.getContext('2d');
         var fontSize = Math.max(11, Math.round(canvas.width / 85));
@@ -78,7 +95,7 @@ layout: default
           // phrases always get placed (shrunk rather than dropped) instead of the
           // lowest-frequency ones silently disappearing off-canvas.
           gridSize: Math.round(canvas.width / 160),
-          weightFactor: function (size) { return Math.pow(size, 0.8) * (canvas.width / 110); },
+          weightFactor: function (size) { return pulseWordSize(size); },
           fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
           fontWeight: '700',
           color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
@@ -276,13 +293,25 @@ layout: default
       if (w <= 0 || h <= 0) return;
       canvas.width = w;
       canvas.height = h;
+      // Same rank-based min/max font sizing as the main pulse-card cloud (see
+      // pulseWordSize above) so these small cards fill their box too, just
+      // scaled for a much smaller canvas and fewer words (top 20).
+      var miniCounts = item.words.map(function (pair) { return pair[1]; });
+      var miniMin = Math.min.apply(null, miniCounts);
+      var miniMax = Math.max.apply(null, miniCounts);
+      function miniWordSize(count) {
+        var t = miniMax === miniMin ? 0.5 : Math.pow((count - miniMin) / (miniMax - miniMin), 0.55);
+        var minFont = canvas.width / 22;
+        var maxFont = canvas.width / 6;
+        return minFont + t * (maxFont - minFont);
+      }
       WordCloud(canvas, {
         list: item.words,
         // Same shrinkToFit treatment as the main pulse-card cloud, since past-10-days
         // mini clouds render whatever wordcloud data that day's post was built with
         // (bigram phrases going forward, single words for older posts).
         gridSize: Math.max(4, Math.round(canvas.width / 65)),
-        weightFactor: function (size) { return Math.pow(size, 0.8) * (canvas.width / 130); },
+        weightFactor: function (size) { return miniWordSize(size); },
         fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
         fontWeight: '700',
         color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
