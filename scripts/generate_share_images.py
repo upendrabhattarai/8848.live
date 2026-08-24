@@ -216,12 +216,13 @@ SHARE_PAGE_TMPL = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url={redirect}">
 <title>{title}</title>
 <meta property="og:type" content="article">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:image" content="{image}">
+<meta property="og:image:secure_url" content="{image}">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="{page_url}">
@@ -234,7 +235,7 @@ SHARE_PAGE_TMPL = """<!DOCTYPE html>
 </head>
 <body>
 <p>Redirecting to <a href="{redirect}">the full digest</a>&hellip;</p>
-<script>location.replace({redirect_js});</script>
+<script>setTimeout(function () { location.replace({redirect_js}); }, 300);</script>
 </body>
 </html>
 """
