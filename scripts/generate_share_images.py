@@ -235,7 +235,7 @@ SHARE_PAGE_TMPL = """<!DOCTYPE html>
 </head>
 <body>
 <p>Redirecting to <a href="{redirect}">the full digest</a>&hellip;</p>
-<script>setTimeout(function () { location.replace({redirect_js}); }, 300);</script>
+<script>setTimeout(function () {{ location.replace({redirect_js}); }}, 300);</script>
 </body>
 </html>
 """
