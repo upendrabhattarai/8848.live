@@ -92,10 +92,6 @@ permalink: /date-converter/
   </div>
 </div>
 
-<p class="visual-nepal-note">
-  <span data-lang-en>Covers 14 April 1943 – 13 April 2034 (Bikram Sambat 2000–2090). Calendar day-count data adapted from the open-source <a href="https://github.com/remotemerge/nepali-date-converter" target="_blank" rel="noopener">nepali-date-converter</a> project (MIT).</span>
-  <span data-lang-np>१४ अप्रिल १९४३ – १३ अप्रिल २०३४ (विक्रम संवत् २०००–२०९०) सम्म समेट्छ। पात्रो डेटा खुला-स्रोत <a href="https://github.com/remotemerge/nepali-date-converter" target="_blank" rel="noopener">nepali-date-converter</a> प्रोजेक्टबाट लिइएको हो (MIT)।</span>
-</p>
 
 <script>
 (function () {
