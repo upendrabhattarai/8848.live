@@ -227,26 +227,30 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 }
 
 .side-nav {
-  flex: 0 0 176px;
+  /* Shrink-wrap to the widest tab label rather than a fixed column width --
+     keeps the sidebar as narrow as possible so main-panel gets the rest. */
+  flex: 0 0 auto;
+  width: max-content;
   position: sticky;
   top: 20px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-right: none;
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .side-nav-tabs { display: flex; flex-direction: column; gap: 2px; }
 
 .side-nav-tab {
   display: block;
-  padding: 11px 18px;
+  padding: 9px 14px;
   margin-right: -1px;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-3);
   background: transparent;
+  white-space: nowrap;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   border-right: 1px solid var(--border);
@@ -267,7 +271,7 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 .main-panel {
   flex: 1 1 auto;
   min-width: 0;
-  padding-left: 32px;
+  padding-left: 14px;
 }
 
 @media (max-width: 780px) {
