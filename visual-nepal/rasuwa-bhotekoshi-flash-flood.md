@@ -27,11 +27,24 @@ permalink: /visual-nepal/rasuwa-bhotekoshi-flash-flood/
       if (h > 200) { wrap.style.height = h + 'px'; }
     } catch (e) {}
   }
-  iframe.addEventListener('load', function () {
+  function armResize() {
     resize();
-    setTimeout(resize, 500);
-    setTimeout(resize, 1500);
-  });
+    setTimeout(resize, 400);
+    setTimeout(resize, 1200);
+    setTimeout(resize, 3000);
+  }
+  // The iframe is same-origin and often already finished loading (e.g. cached)
+  // by the time this script runs, so the 'load' event can fire before this
+  // listener attaches and never be seen. Check readyState directly too.
+  try {
+    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+      armResize();
+    } else {
+      iframe.addEventListener('load', armResize);
+    }
+  } catch (e) {
+    iframe.addEventListener('load', armResize);
+  }
 })();
 </script>
 
