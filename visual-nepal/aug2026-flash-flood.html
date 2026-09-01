@@ -108,7 +108,7 @@
   button:focus-visible, input:focus-visible, .chip:focus-visible{ outline:2px solid var(--hazard); outline-offset:2px; }
 
   /* ---- map area ---- */
-  #map-wrap{ position:relative; flex:none; height:75vh; min-height:520px; }
+  #map-wrap{ position:relative; flex:none; height:640px; }
   #map{ position:absolute; inset:0; z-index:1; background:#0a0e0f; }
   .leaflet-container{ font-family:var(--font-body); background:#0a0e0f; }
   .leaflet-control-attribution{
@@ -153,7 +153,7 @@
   #tooltip.visible{ opacity:1; }
 
   @media (max-width: 860px){
-    #map-wrap{ height:56vh; min-height:380px; }
+    #map-wrap{ height:420px; }
     #info-card{ width:min(250px, 76vw); }
   }
   @media (prefers-reduced-motion: reduce){ * { transition:none !important; animation:none !important; } }
