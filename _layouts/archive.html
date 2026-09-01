@@ -12,9 +12,21 @@ layout: default
   </p>
 </div>
 
-{% comment %} Digests older than 30 days drop off the archive entirely. {% endcomment %}
+{% comment %} Digests older than 30 days drop off the archive entirely. site.posts
+   is already sorted newest-first, so we can just count how many leading posts
+   are still within the window and slice to that count -- avoids relying on
+   filter chains inside where_exp, which isn't reliably supported. {% endcomment %}
 {% assign cutoff_ts = site.time | date: "%s" | minus: 2592000 %}
-{% assign visible_posts = site.posts | where_exp: "p", "p.date | date: '%s' >= cutoff_ts" %}
+{% assign visible_count = 0 %}
+{% for post in site.posts %}
+  {% assign post_ts = post.date | date: "%s" %}
+  {% if post_ts >= cutoff_ts %}
+    {% assign visible_count = visible_count | plus: 1 %}
+  {% else %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+{% assign visible_posts = site.posts | slice: 0, visible_count %}
 
 {% assign grid_posts = visible_posts | slice: 1, 10 %}
 {% if grid_posts.size > 0 %}
