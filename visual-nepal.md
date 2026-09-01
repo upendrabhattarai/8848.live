@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Visual Nepal
 permalink: /visual-nepal/
 ---
@@ -9,23 +9,24 @@ permalink: /visual-nepal/
     <span data-lang-en>Nepal in Visual</span>
     <span data-lang-np>दृश्यमा नेपाल</span>
   </h1>
+  <p class="page-hero-subtitle">
+    <span data-lang-en>Data on the map of Nepal.</span>
+    <span data-lang-np>नेपालको नक्सामा तथ्याङ्क।</span>
+  </p>
 </div>
-
-<p class="page-content-lead">
-  <span data-lang-en>Data on the map of Nepal.</span>
-  <span data-lang-np>नेपालको नक्सामा तथ्याङ्क।</span>
-</p>
 
 <div class="visual-nepal-grid">
   <a class="visual-card" href="{{ '/visual-nepal/aug2026-flash-flood.html' | relative_url }}" target="_blank" rel="noopener">
-    <div class="visual-card-preview" data-native-w="1440" data-native-h="900" data-crop-x="380">
-      <iframe src="{{ '/visual-nepal/aug2026-flash-flood.html' | relative_url }}" loading="lazy" tabindex="-1" title="Rasuwa–Bhotekoshi flash flood satellite map preview"></iframe>
-    </div>
     <div class="visual-card-body">
       <h2 class="visual-card-title">
         <span data-lang-en>Rasuwa–Bhotekoshi Flash Flood<br>Aug 2026</span>
         <span data-lang-np>रसुवा–भोटेकोशी पहिरो बाढी<br>अगस्ट २०२६</span>
       </h2>
+    </div>
+    <div class="visual-card-preview" data-native-w="1440" data-native-h="900" data-crop-x="380">
+      <iframe src="{{ '/visual-nepal/aug2026-flash-flood.html' | relative_url }}" loading="lazy" tabindex="-1" title="Rasuwa–Bhotekoshi flash flood satellite map preview"></iframe>
+    </div>
+    <div class="visual-card-footer">
       <p class="visual-card-desc">
         <span data-lang-en>The flood's flow path, modelled inundation extent, and infrastructure damage — mapped on satellite imagery and extracted from various sources.</span>
         <span data-lang-np>बाढीको बहाव मार्ग, अनुमानित डुबान क्षेत्र, र पूर्वाधार क्षति — स्याटेलाइट तस्बिरमा नक्सांकन गरिएको र विभिन्न स्रोतबाट संकलन गरिएको।</span>
@@ -38,14 +39,16 @@ permalink: /visual-nepal/
   </a>
 
   <a class="visual-card" href="{{ '/visual-nepal/waters-of-nepal.html' | relative_url }}" target="_blank" rel="noopener">
-    <div class="visual-card-preview" data-native-w="1440" data-native-h="900" data-crop-x="0">
-      <iframe src="{{ '/visual-nepal/waters-of-nepal.html' | relative_url }}" loading="lazy" tabindex="-1" title="Waters of Nepal satellite map preview"></iframe>
-    </div>
     <div class="visual-card-body">
       <h2 class="visual-card-title">
         <span data-lang-en>The Waters of Nepal</span>
         <span data-lang-np>नेपालका जलस्रोतहरू</span>
       </h2>
+    </div>
+    <div class="visual-card-preview" data-native-w="1440" data-native-h="900" data-crop-x="0">
+      <iframe src="{{ '/visual-nepal/waters-of-nepal.html' | relative_url }}" loading="lazy" tabindex="-1" title="Waters of Nepal satellite map preview"></iframe>
+    </div>
+    <div class="visual-card-footer">
       <p class="visual-card-desc">
         <span data-lang-en>A live satellite basemap of Nepal's glaciers, lakes, and rivers and more.</span>
         <span data-lang-np>नेपालका हिमनदी, ताल, नदी र थप जलस्रोतहरूको प्रत्यक्ष स्याटेलाइट आधार नक्सा।</span>

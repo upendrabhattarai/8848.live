@@ -117,7 +117,7 @@ a { text-decoration: none; }
 .topnav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 22px;
   padding: 18px 0;
 }
 
@@ -158,7 +158,7 @@ a { text-decoration: none; }
 html:not([data-lang="np"]) [data-lang-np] { display: none; }
 html[data-lang="np"] [data-lang-en] { display: none; }
 
-.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-right { display: flex; align-items: center; gap: 6px; margin-left: auto; flex: 0 0 auto; }
 
 .lang-toggle {
   height: 36px;
@@ -177,18 +177,35 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 
 .lang-toggle:hover { border-color: var(--red); color: var(--red); }
 
-.nav-links { display: flex; gap: 4px; }
+/* Concise, single-row "tab" style nav, anchored to the left next to the
+   brand -- horizontally scrollable (no wrap) so it never breaks the header
+   row on narrow screens instead of stacking or overflowing awkwardly. */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
 
 .nav-links a {
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--text-3);
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 
 .nav-links a:hover { color: var(--red); background: var(--red-light); }
+
+@media (max-width: 700px) {
+  .topnav { gap: 12px; }
+  .nav-links a { padding: 6px 9px; font-size: 0.78rem; }
+}
 
 .theme-toggle {
   width: 36px;
@@ -223,31 +240,40 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 
 main.wrap { padding: 32px 24px 80px; }
 
-/* Hero: split 60/40 layout */
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 32px;
-  align-items: center;
-  padding: 44px 0 8px;
+/* Nepal Today: centered title above two equal-width boxes (word cloud + sentiment).
+   .page-hero-head/.page-hero-title share the same centered big-headline style
+   for other page heroes (e.g. Visual Nepal's "Nepal in Visual"). */
+.nepal-today-head, .page-hero-head {
+  text-align: center;
+  padding: 44px 0 20px;
 }
 
-.hero-heading {
+.nepal-today-title, .page-hero-title {
   margin: 0 0 14px;
   color: var(--text);
   font-weight: 800;
-  font-size: 2.1rem;
-  line-height: 1.18;
+  font-size: 2.4rem;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
-.hero-subheading {
-  margin: 0 0 20px;
+.page-hero-subtitle {
+  margin: 0 auto;
+  max-width: 56ch;
   color: var(--text-3);
-  font-size: 1.05rem;
-  line-height: 1.55;
-  max-width: 46ch;
+  font-size: 1.02rem;
+  line-height: 1.6;
 }
+
+.nepal-today-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  padding-bottom: 8px;
+}
+
+.wordcloud-col { min-width: 0; display: flex; flex-direction: column; }
 
 .hero-badge {
   display: inline-flex;
@@ -272,8 +298,6 @@ main.wrap { padding: 32px 24px 80px; }
   animation: blink 1.8s ease-in-out infinite;
 }
 
-.hero-right { min-width: 0; }
-
 .pulse-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -284,29 +308,32 @@ main.wrap { padding: 32px 24px 80px; }
   animation: fadeInUp 0.6s ease forwards;
 }
 
-.pulse-eyebrow {
-  display: inline-block;
+/* Shared eyebrow label for the word cloud + sentiment boxes -- bigger and
+   centered, unlike the old small left-aligned tag it replaced. */
+.box-eyebrow {
+  display: block;
+  text-align: center;
   color: var(--red);
   font-weight: 800;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  margin: 2px 0 10px;
 }
 
 .pulse-card canvas { display: block; width: 100%; }
 
-.pulse-caption {
-  margin: 8px 0 0;
+.box-copyright {
+  margin: 10px 0 0;
   text-align: center;
   color: var(--text-3);
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.74rem;
+  font-weight: 600;
 }
 
 @media (max-width: 780px) {
-  .hero-grid { grid-template-columns: 1fr; padding-top: 28px; }
-  .hero-heading { font-size: 1.6rem; }
+  .nepal-today-grid { grid-template-columns: 1fr; padding-top: 8px; }
+  .nepal-today-head { padding-top: 28px; }
+  .nepal-today-title { font-size: 1.7rem; }
 }
 
 /* Cards */
@@ -422,9 +449,6 @@ main.wrap { padding: 32px 24px 80px; }
 }
 .archive-visits svg { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.75; }
 
-.archive-link-row { text-align: center; margin-top: 30px; }
-.archive-link { color: var(--red); font-weight: 700; font-size: 0.92rem; }
-.archive-link:hover { color: var(--red-dark); }
 
 .archive-header { text-align: center; margin: 4px 0 28px; }
 .archive-sub { color: var(--text-3); font-size: 0.92rem; margin: 6px 0 0; }
@@ -435,6 +459,64 @@ main.wrap { padding: 32px 24px 80px; }
 }
 
 .post-card, .page-card { animation-delay: 0s; }
+
+.page-content-lead { color: var(--text-2); font-size: 1.02rem; line-height: 1.65; margin: 0 0 20px; }
+
+/* Visual Nepal: two equal-width map cards, one row */
+.visual-nepal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 4px 0 20px;
+}
+.visual-card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.visual-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: rgba(220,20,60,0.25);
+}
+.visual-card-preview {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  background: #0a0e0f;
+}
+.visual-card-preview iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  pointer-events: none;
+  transform-origin: top left;
+}
+.visual-card-body { padding: 18px 20px 12px; }
+.visual-card-title { margin: 0; font-size: 1.08rem; font-weight: 800; color: var(--text); line-height: 1.3; }
+.visual-card-footer { padding: 14px 20px 22px; }
+.visual-card-desc { margin: 0 0 12px; font-size: 0.86rem; line-height: 1.55; color: var(--text-2); }
+.visual-card-cta { color: var(--red); font-weight: 700; font-size: 0.85rem; }
+.visual-nepal-note {
+  color: var(--text-3);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+@media (max-width: 780px) {
+  .visual-nepal-grid { grid-template-columns: 1fr; }
+  .visual-card-preview { height: 220px; }
+}
 
 .post-eyebrow {
   display: inline-flex;
@@ -686,37 +768,32 @@ main.wrap { padding: 32px 24px 80px; }
 
 .back-link:hover { color: var(--red-dark); }
 
-/* --- National Sentiment Quantified (homepage, next to Latest digest) --- */
-.latest-digest-row { display: flex; align-items: stretch; gap: 24px; }
-.latest-digest-col { flex: 1 1 50%; min-width: 0; }
+/* --- National Sentiment Quantified (homepage, next to word cloud, today only) --- */
+.sentiment-outer-col { min-width: 0; display: flex; flex-direction: column; }
 .sentiment-col {
-  flex: 1 1 50%; min-width: 0;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  min-width: 0;
+  background: var(--bg-card); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
   padding: 16px 16px 14px; overflow: hidden;
+  /* Grow to fill the grid-stretched column height, so this box matches the
+     word cloud box's (canvas-driven) height exactly, rather than sizing to
+     its own small intrinsic content and leaving blank space below. */
+  flex: 1 1 auto;
+  min-height: 0;
 }
-.sentiment-col-label {
-  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
-  color: var(--text-3); margin: 0 0 6px; text-align: center; flex: 0 0 auto; line-height: 1.35;
-}
-.sentiment-col-label .line-1 { display: block; color: var(--red); font-size: 0.72rem; }
-.sentiment-col-label .line-2 { display: block; }
 .gauge-cell { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
-.gauge-cell.today { flex: 2.4 1 0; }
-.gauge-cell.yesterday { flex: 1.5 1 0; }
+.gauge-cell.today { flex: 1 1 auto; }
 .gauge-cell img { max-width: 100%; max-height: 100%; width: 100%; height: 100%; object-fit: contain; }
-.gauge-divider { flex: 0 0 auto; height: 2px; background: var(--red); border: none; margin: 0 0 2px; opacity: 0.85; }
-.sentiment-share-row { flex: 0 0 auto; justify-content: center; margin-top: 8px; }
-.featured-card { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+/* The gauge PNG is generated in both a light- and dark-theme color variant
+   (transparent background either way); only one shows at a time. */
+.gauge-cell .gauge-dark { display: none; }
+[data-theme="dark"] .gauge-cell .gauge-light { display: none; }
+[data-theme="dark"] .gauge-cell .gauge-dark { display: block; }
+.sentiment-share-row { margin-top: 8px; }
+/* Full-width "Latest digest" card, below the Nepal Today grid */
+.featured-card-full { width: 100%; box-sizing: border-box; }
 @media (max-width: 780px) {
-  .latest-digest-row { flex-direction: column; }
-  .sentiment-col { flex: 0 0 auto; }
-  /* flex-basis must be reset to auto here, otherwise the base rule's
-     "flex: 2.4 1 0" / "flex: 1.5 1 0" (basis 0) wins over height and the
-     gauges collapse to 0px tall on mobile, even though the label and
-     share-row above/below them render fine. */
-  .gauge-cell.today { flex: 0 0 auto; height: 300px; }
-  .gauge-cell.yesterday { flex: 0 0 auto; height: 110px; }
+  .gauge-cell.today { height: 300px; }
 }
 
 
