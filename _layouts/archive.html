@@ -1,18 +1,22 @@
 ---
 layout: default
 ---
-<div class="archive-header">
-  <h1 class="page-title">
+<div class="page-hero-head">
+  <h1 class="page-hero-title">
     <span data-lang-en>Archive</span>
     <span data-lang-np>अभिलेख</span>
   </h1>
-  <p class="archive-sub">
-    <span data-lang-en>Every digest before today.</span>
-    <span data-lang-np>आजभन्दा अघिका सबै डाइजेस्टहरू।</span>
+  <p class="page-hero-subtitle">
+    <span data-lang-en>Digest before today.</span>
+    <span data-lang-np>आजभन्दा अघिका डाइजेस्टहरू।</span>
   </p>
 </div>
 
-{% assign grid_posts = site.posts | slice: 1, 10 %}
+{% comment %} Digests older than 30 days drop off the archive entirely. {% endcomment %}
+{% assign cutoff_ts = site.time | date: "%s" | minus: 2592000 %}
+{% assign visible_posts = site.posts | where_exp: "p", "p.date | date: '%s' >= cutoff_ts" %}
+
+{% assign grid_posts = visible_posts | slice: 1, 10 %}
 {% if grid_posts.size > 0 %}
 <div class="section-divider"><span class="section-label"><span data-lang-en>Past 10 days</span><span data-lang-np>विगत १० दिन</span></span></div>
 <div class="mini-grid">
@@ -119,7 +123,7 @@ layout: default
 </script>
 {% endif %}
 
-{% assign archived = site.posts | slice: 11, 999999 %}
+{% assign archived = visible_posts | slice: 11, 999999 %}
 {% if archived.size > 0 %}
 <div class="section-divider"><span class="section-label"><span data-lang-en>Older digests</span><span data-lang-np>पुराना डाइजेस्टहरू</span></span></div>
 <div class="card-grid">

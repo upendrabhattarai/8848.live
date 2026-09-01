@@ -8,12 +8,11 @@ layout: default
     <span data-lang-np>नेपाल आज</span>
   </h1>
   {% if latest %}
-  <span class="hero-badge">
+  <p class="page-hero-subtitle">
     <span class="live-dot"></span>
-    <span data-lang-en>Updated</span>
-    <span data-lang-np>अद्यावधिक</span>
-    {{ latest.date | date: "%B %-d, %Y" }}
-  </span>
+    <span data-lang-en>Updated {{ latest.date | date: "%B %-d, %Y" }}</span>
+    <span data-lang-np>अद्यावधिक {{ latest.date | date: "%B %-d, %Y" }}</span>
+  </p>
   {% endif %}
 </div>
 <div class="nepal-today-grid">
@@ -24,7 +23,9 @@ layout: default
         <span data-lang-en>Today's Headline Buzz</span>
         <span data-lang-np>आजको समाचार शब्दावली</span>
       </span>
-      <canvas id="wordcloud-canvas"></canvas>
+      <div class="wordcloud-cell">
+        <canvas id="wordcloud-canvas"></canvas>
+      </div>
       <p class="box-copyright">© 8848.live</p>
     </div>
     <div class="share-row">

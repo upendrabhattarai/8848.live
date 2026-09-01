@@ -118,7 +118,7 @@ a { text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 22px;
-  padding: 18px 0;
+  padding: 18px 32px;
 }
 
 .brand-block {
@@ -322,6 +322,8 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   font-size: 1.02rem;
   line-height: 1.6;
 }
+.page-hero-subtitle a { color: var(--red); font-weight: 700; }
+.page-hero-subtitle a:hover { color: var(--red-dark); }
 
 .nepal-today-grid {
   display: grid;
@@ -333,26 +335,17 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 
 .wordcloud-col { min-width: 0; display: flex; flex-direction: column; }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  color: var(--text-2);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.78rem;
-  font-weight: 600;
-}
 
 .live-dot {
+  display: inline-block;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--green);
   box-shadow: 0 0 0 3px rgba(22,163,74,0.18);
   flex: none;
+  vertical-align: middle;
+  margin-bottom: 2px;
   animation: blink 1.8s ease-in-out infinite;
 }
 
@@ -361,9 +354,27 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  padding: 14px 12px 12px;
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  /* Match .sentiment-col's sizing so the two boxes come out exactly the
+     same width AND height -- both stretch to fill the grid row, and both
+     center their core content (canvas / gauge image) in the leftover
+     space via their inner cell, instead of the word cloud box just sizing
+     to its own intrinsic canvas height. */
+  flex: 1 1 auto;
+  min-height: 0;
   opacity: 0;
   animation: fadeInUp 0.6s ease forwards;
+}
+
+.wordcloud-cell {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 /* Shared eyebrow label for the word cloud + sentiment boxes -- bigger and
@@ -378,7 +389,7 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   margin: 2px 0 10px;
 }
 
-.pulse-card canvas { display: block; width: 100%; }
+.pulse-card canvas { display: block; max-width: 100%; max-height: 100%; }
 
 .box-copyright {
   margin: 10px 0 0;
@@ -508,8 +519,6 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 .archive-visits svg { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.75; }
 
 
-.archive-header { text-align: center; margin: 4px 0 28px; }
-.archive-sub { color: var(--text-3); font-size: 0.92rem; margin: 6px 0 0; }
 .archive-empty { color: var(--text-3); text-align: center; padding: 20px 0; }
 
 @media (max-width: 700px) {
@@ -580,9 +589,13 @@ html[data-lang="np"] [data-lang-en] { display: none; }
    app in an iframe so the site header + sidebar nav stay visible around it,
    instead of navigating away to a bare, chrome-less file). */
 .map-page-head { padding-top: 8px; }
+/* Height is set inline by JS once the (same-origin) iframe's own content
+   finishes loading, matched to its real scrollHeight -- so the outer page
+   grows to fit the map + its info content instead of clipping it inside a
+   fixed-height, internally-scrolling box. min-height is just the pre-JS /
+   no-JS fallback. */
 .map-embed-wrap {
   width: 100%;
-  height: 80vh;
   min-height: 480px;
   margin: 4px 0 22px;
   border: 1px solid var(--border);
@@ -592,9 +605,6 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 }
 .map-embed-wrap iframe { display: block; width: 100%; height: 100%; border: 0; }
 .map-page-desc { max-width: 70ch; }
-@media (max-width: 780px) {
-  .map-embed-wrap { height: 60vh; min-height: 380px; }
-}
 
 .post-eyebrow {
   display: inline-flex;
@@ -850,12 +860,11 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 .sentiment-outer-col { min-width: 0; display: flex; flex-direction: column; }
 .sentiment-col {
   min-width: 0;
-  background: var(--bg-card); border-radius: var(--radius-lg);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
   padding: 16px 16px 14px; overflow: hidden;
   /* Grow to fill the grid-stretched column height, so this box matches the
-     word cloud box's (canvas-driven) height exactly, rather than sizing to
-     its own small intrinsic content and leaving blank space below. */
+     word cloud box's height exactly. */
   flex: 1 1 auto;
   min-height: 0;
 }
@@ -867,7 +876,7 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 .gauge-cell .gauge-dark { display: none; }
 [data-theme="dark"] .gauge-cell .gauge-light { display: none; }
 [data-theme="dark"] .gauge-cell .gauge-dark { display: block; }
-.sentiment-share-row { margin-top: 8px; }
+/* .sentiment-share-row now matches .share-row's default margin-top (14px) so the two homepage boxes come out exactly equal height. */
 /* Full-width "Latest digest" card, below the Nepal Today grid */
 .featured-card-full { width: 100%; box-sizing: border-box; }
 @media (max-width: 780px) {

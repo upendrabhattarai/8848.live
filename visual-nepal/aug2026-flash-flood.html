@@ -46,15 +46,15 @@
   }
   *{box-sizing:border-box;}
   html,body{height:100%;}
-  body{ margin:0; display:flex; flex-direction:column; height:100vh; background:var(--paper); color:var(--ink); font-family:var(--font-body); overflow-y:auto; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); }
 
-  #app{ position:relative; width:100%; flex:1 1 auto; min-height:0; display:flex; }
+  #app{ position:relative; width:100%; display:flex; flex-direction:column; }
 
   /* ---- persistent flood sidebar (always visible — this page has one subject) ---- */
   #sidebar{
-    width:380px; min-width:380px; height:100%; overflow-y:auto;
-    background:var(--surface); border-right:1px solid var(--line);
-    padding:20px 20px 28px; z-index:500; position:relative;
+    width:100%; overflow-y:visible;
+    background:var(--surface); border-top:1px solid var(--line);
+    padding:22px 24px 32px; position:relative;
   }
   #sidebar h1{ font-family:var(--font-display); font-weight:700; font-size:1.32rem; margin:0 0 3px; color:var(--hazard); text-wrap:balance; }
   #sidebar .subtitle{ font-size:0.78rem; color:var(--ink-soft); font-weight:500; margin-bottom:14px; }
@@ -108,7 +108,7 @@
   button:focus-visible, input:focus-visible, .chip:focus-visible{ outline:2px solid var(--hazard); outline-offset:2px; }
 
   /* ---- map area ---- */
-  #map-wrap{ position:relative; flex:1; height:100%; }
+  #map-wrap{ position:relative; flex:none; height:75vh; min-height:520px; }
   #map{ position:absolute; inset:0; z-index:1; background:#0a0e0f; }
   .leaflet-container{ font-family:var(--font-body); background:#0a0e0f; }
   .leaflet-control-attribution{
@@ -153,42 +153,41 @@
   #tooltip.visible{ opacity:1; }
 
   @media (max-width: 860px){
-    #app{ flex-direction:column; }
-    #sidebar{ width:100%; min-width:0; height:46vh; border-right:none; border-bottom:1px solid var(--line); }
-    #map-wrap{ height:54vh; }
+    #map-wrap{ height:56vh; min-height:380px; }
     #info-card{ width:min(250px, 76vw); }
   }
   @media (prefers-reduced-motion: reduce){ * { transition:none !important; animation:none !important; } }
 </style>
 </head>
 <body>
-<header class="site-header">
-  <nav class="topnav wrap">
-    <a class="brand-block" href="https://8848.live/">
-      <span class="brand-logo-badge"><img src="https://8848.live/assets/img/logo.png" alt="8848.live home"></span>
-      <span class="brand">8848.live</span>
-    </a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="https://8848.live/"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
-        <a href="https://8848.live/archive/"><span data-lang-en>News Archive</span><span data-lang-np>समाचार अभिलेख</span></a>
-        <a href="https://8848.live/visual-nepal/"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
-        <a href="https://8848.live/contact/"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
-      </div>
-      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Toggle Nepali translation">
-        <span data-lang-en>नेपाली</span>
-        <span data-lang-np>English</span>
-      </button>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
-      </button>
-    </div>
-  </nav>
-  <div class="accent-bar"></div>
-</header>
 
 <div id="app">
+
+  <div id="map-wrap">
+    <div id="map" role="img" aria-label="Interactive satellite map of the Aug 2026 Rasuwa–Bhotekoshi flash flood"></div>
+
+    <div id="basemap-switch">
+      <button data-base="sat" class="active" type="button">Satellite</button>
+      <button data-base="satlabels" type="button">Satellite + labels</button>
+      <button data-base="topo" type="button">Topographic</button>
+    </div>
+
+    <div id="zoom-controls">
+      <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+      <button id="zoom-out" type="button" aria-label="Zoom out">&minus;</button>
+      <button id="zoom-reset" type="button" aria-label="Reset view" style="font-size:0.7rem;">&#8635;</button>
+    </div>
+
+    <div id="info-card" class="float-panel">
+      <div class="info-kicker"><span id="info-kicker-text">Feature</span><button class="info-close" id="info-close" aria-label="Close">&times;</button></div>
+      <h3 id="info-title"></h3>
+      <div id="info-stats"></div>
+      <div class="info-note" id="info-note"></div>
+      <span class="source-tag" id="info-source"></span>
+    </div>
+
+    <div id="tooltip"></div>
+  </div>
 
   <div id="sidebar">
     <h1>⚠ Rasuwa–Bhotekoshi flash flood</h1>
@@ -239,32 +238,6 @@
     <div class="flood-cause" id="hot-sources" style="margin-top:8px;"></div>
 
     <div id="flood-sources"></div>
-  </div>
-
-  <div id="map-wrap">
-    <div id="map" role="img" aria-label="Interactive satellite map of the Aug 2026 Rasuwa–Bhotekoshi flash flood"></div>
-
-    <div id="basemap-switch">
-      <button data-base="sat" class="active" type="button">Satellite</button>
-      <button data-base="satlabels" type="button">Satellite + labels</button>
-      <button data-base="topo" type="button">Topographic</button>
-    </div>
-
-    <div id="zoom-controls">
-      <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
-      <button id="zoom-out" type="button" aria-label="Zoom out">&minus;</button>
-      <button id="zoom-reset" type="button" aria-label="Reset view" style="font-size:0.7rem;">&#8635;</button>
-    </div>
-
-    <div id="info-card" class="float-panel">
-      <div class="info-kicker"><span id="info-kicker-text">Feature</span><button class="info-close" id="info-close" aria-label="Close">&times;</button></div>
-      <h3 id="info-title"></h3>
-      <div id="info-stats"></div>
-      <div class="info-note" id="info-note"></div>
-      <span class="source-tag" id="info-source"></span>
-    </div>
-
-    <div id="tooltip"></div>
   </div>
 
 </div>
