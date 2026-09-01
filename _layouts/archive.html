@@ -19,7 +19,7 @@ layout: default
 {% assign cutoff_ts = site.time | date: "%s" | minus: 2592000 %}
 {% assign visible_count = 0 %}
 {% for post in site.posts %}
-  {% assign post_ts = post.date | date: "%s" %}
+  {% assign post_ts = post.date | date: "%s" | plus: 0 %}
   {% if post_ts >= cutoff_ts %}
     {% assign visible_count = visible_count | plus: 1 %}
   {% else %}
