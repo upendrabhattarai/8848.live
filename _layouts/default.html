@@ -48,7 +48,7 @@
   {% assign is_contact = false %}
   {% if page.url == "/" %}{% assign is_home = true %}{% endif %}
   {% if page.url == "/archive/" or page.layout == "post" %}{% assign is_archive = true %}{% endif %}
-  {% if page.url == "/visual-nepal/" %}{% assign is_visual = true %}{% endif %}
+  {% if page.url contains "/visual-nepal/" %}{% assign is_visual = true %}{% endif %}
   {% if page.url == "/contact/" %}{% assign is_contact = true %}{% endif %}
   <header class="site-header">
     <nav class="topnav wrap">

@@ -16,7 +16,7 @@ permalink: /visual-nepal/
 </div>
 
 <div class="visual-nepal-grid">
-  <a class="visual-card" href="{{ '/visual-nepal/aug2026-flash-flood.html' | relative_url }}" target="_blank" rel="noopener">
+  <a class="visual-card" href="{{ '/visual-nepal/rasuwa-bhotekoshi-flash-flood/' | relative_url }}">
     <div class="visual-card-body">
       <h2 class="visual-card-title">
         <span data-lang-en>Rasuwa–Bhotekoshi Flash Flood<br>Aug 2026</span>
@@ -38,7 +38,7 @@ permalink: /visual-nepal/
     </div>
   </a>
 
-  <a class="visual-card" href="{{ '/visual-nepal/waters-of-nepal.html' | relative_url }}" target="_blank" rel="noopener">
+  <a class="visual-card" href="{{ '/visual-nepal/waters-of-nepal-map/' | relative_url }}">
     <div class="visual-card-body">
       <h2 class="visual-card-title">
         <span data-lang-en>The Waters of Nepal</span>
