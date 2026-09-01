@@ -45,10 +45,12 @@
   {% assign is_home = false %}
   {% assign is_archive = false %}
   {% assign is_visual = false %}
+  {% assign is_date_converter = false %}
   {% assign is_contact = false %}
   {% if page.url == "/" %}{% assign is_home = true %}{% endif %}
   {% if page.url == "/archive/" or page.layout == "post" %}{% assign is_archive = true %}{% endif %}
   {% if page.url contains "/visual-nepal/" %}{% assign is_visual = true %}{% endif %}
+  {% if page.url == "/date-converter/" %}{% assign is_date_converter = true %}{% endif %}
   {% if page.url == "/contact/" %}{% assign is_contact = true %}{% endif %}
   <header class="site-header">
     <nav class="topnav wrap">
@@ -75,6 +77,7 @@
         <a class="side-nav-tab{% if is_home %} active{% endif %}" href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
         <a class="side-nav-tab{% if is_archive %} active{% endif %}" href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Archive</span><span data-lang-np>समाचार अभिलेख</span></a>
         <a class="side-nav-tab{% if is_visual %} active{% endif %}" href="{{ '/visual-nepal/' | relative_url }}"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
+        <a class="side-nav-tab{% if is_date_converter %} active{% endif %}" href="{{ '/date-converter/' | relative_url }}"><span data-lang-en>Date Converter</span><span data-lang-np>मिति परिवर्तक</span></a>
         <a class="side-nav-tab{% if is_contact %} active{% endif %}" href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
       </nav>
     </aside>
