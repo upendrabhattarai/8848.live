@@ -177,34 +177,8 @@ html[data-lang="np"] [data-lang-en] { display: none; }
 
 .lang-toggle:hover { border-color: var(--red); color: var(--red); }
 
-/* Concise, single-row "tab" style nav, anchored to the left next to the
-   brand -- horizontally scrollable (no wrap) so it never breaks the header
-   row on narrow screens instead of stacking or overflowing awkwardly. */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.nav-links::-webkit-scrollbar { display: none; }
-
-.nav-links a {
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-3);
-  white-space: nowrap;
-  transition: all 0.15s ease;
-}
-
-.nav-links a:hover { color: var(--red); background: var(--red-light); }
-
 @media (max-width: 700px) {
   .topnav { gap: 12px; }
-  .nav-links a { padding: 6px 9px; font-size: 0.78rem; }
 }
 
 .theme-toggle {
@@ -238,7 +212,87 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   opacity: 0.9;
 }
 
-main.wrap { padding: 32px 24px 80px; }
+/* Page shell: single-column vertical tab list on the left, main content on
+   the right. The active tab's background matches the page canvas (--bg-page)
+   and its right border is erased + pulled 1px past the sidebar's own right
+   edge, so the tab visually fuses with -- looks "grown out of" -- whatever
+   page content is currently showing, folder-tab style. Inactive tabs keep
+   the divider border, reading as separate from the content. */
+.page-shell {
+  display: flex;
+  align-items: flex-start;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.side-nav {
+  flex: 0 0 176px;
+  position: sticky;
+  top: 20px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  padding: 10px 0;
+}
+
+.side-nav-tabs { display: flex; flex-direction: column; gap: 2px; }
+
+.side-nav-tab {
+  display: block;
+  padding: 11px 18px;
+  margin-right: -1px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-3);
+  background: transparent;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-right: 1px solid var(--border);
+  transition: all 0.15s ease;
+}
+
+.side-nav-tab:hover { color: var(--red); background: var(--red-light); }
+
+.side-nav-tab.active {
+  color: var(--red);
+  font-weight: 800;
+  background: var(--bg-page);
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
+  border-right-color: var(--bg-page);
+}
+
+.main-panel {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 32px;
+}
+
+@media (max-width: 780px) {
+  .page-shell { flex-direction: column; padding: 20px 20px 60px; }
+  .side-nav {
+    position: static;
+    width: 100%;
+    flex: 0 0 auto;
+    border-radius: var(--radius-lg);
+    border-right: 1px solid var(--border);
+    padding: 8px;
+  }
+  .side-nav-tabs { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+  .side-nav-tab {
+    margin-right: 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+  }
+  .side-nav-tab.active {
+    border-color: var(--border);
+    background: var(--red-light);
+    border-right-color: var(--border);
+  }
+  .main-panel { padding-left: 0; padding-top: 20px; }
+}
 
 /* Nepal Today: centered title above two equal-width boxes (word cloud + sentiment).
    .page-hero-head/.page-hero-title share the same centered big-headline style

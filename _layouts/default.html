@@ -42,18 +42,20 @@
   <!-- End Cloudflare Web Analytics -->
 </head>
 <body>
+  {% assign is_home = false %}
+  {% assign is_archive = false %}
+  {% assign is_visual = false %}
+  {% assign is_contact = false %}
+  {% if page.url == "/" %}{% assign is_home = true %}{% endif %}
+  {% if page.url == "/archive/" or page.layout == "post" %}{% assign is_archive = true %}{% endif %}
+  {% if page.url == "/visual-nepal/" %}{% assign is_visual = true %}{% endif %}
+  {% if page.url == "/contact/" %}{% assign is_contact = true %}{% endif %}
   <header class="site-header">
     <nav class="topnav wrap">
       <a class="brand-block" href="{{ '/' | relative_url }}">
         <span class="brand-logo-badge"><img src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848.live home"></span>
         <span class="brand">{{ site.title }}</span>
       </a>
-      <div class="nav-links">
-        <a href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
-        <a href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Archive</span><span data-lang-np>समाचार अभिलेख</span></a>
-        <a href="{{ '/visual-nepal/' | relative_url }}"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
-        <a href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
-      </div>
       <div class="nav-right">
         <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Toggle Nepali translation">
           <span data-lang-en>नेपाली</span>
@@ -67,9 +69,19 @@
     </nav>
     <div class="accent-bar"></div>
   </header>
-  <main class="wrap">
-    {{ content }}
-  </main>
+  <div class="page-shell">
+    <aside class="side-nav">
+      <nav class="side-nav-tabs">
+        <a class="side-nav-tab{% if is_home %} active{% endif %}" href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
+        <a class="side-nav-tab{% if is_archive %} active{% endif %}" href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Archive</span><span data-lang-np>समाचार अभिलेख</span></a>
+        <a class="side-nav-tab{% if is_visual %} active{% endif %}" href="{{ '/visual-nepal/' | relative_url }}"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
+        <a class="side-nav-tab{% if is_contact %} active{% endif %}" href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
+      </nav>
+    </aside>
+    <main class="main-panel">
+      {{ content }}
+    </main>
+  </div>
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-logo-col">
