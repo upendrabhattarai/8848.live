@@ -2,6 +2,8 @@
 layout: default
 title: "The Waters of Nepal · Visual Nepal"
 permalink: /visual-nepal/waters-of-nepal-map/
+image: /assets/shares/visual-nepal/waters.png
+description: "A live satellite basemap of Nepal's glaciers, lakes, and rivers, via 8848.live."
 ---
 
 <div class="page-hero-head map-page-head">

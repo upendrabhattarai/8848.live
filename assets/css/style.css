@@ -542,8 +542,6 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  text-decoration: none;
-  color: inherit;
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
@@ -551,6 +549,32 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
   border-color: rgba(220,20,60,0.25);
+}
+/* The clickable map area (title/preview/description) -- a link nested
+   inside the .visual-card div rather than the div itself being the link,
+   so the share-row's buttons below it aren't nested inside an <a> (which
+   would make every button click also trigger the card's navigation). */
+.visual-card-link { display: block; text-decoration: none; color: inherit; }
+.visual-card-share-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 20px 18px;
+}
+
+/* Single share-button row used on standalone tool pages (Date Converter). */
+.tool-share-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -4px 0 28px;
+}
+.tool-share-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-right: 4px;
 }
 .visual-card-preview {
   position: relative;

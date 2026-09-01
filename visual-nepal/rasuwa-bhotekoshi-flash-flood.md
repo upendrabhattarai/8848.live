@@ -2,6 +2,8 @@
 layout: default
 title: "Rasuwa–Bhotekoshi Flash Flood, Aug 2026 · Visual Nepal"
 permalink: /visual-nepal/rasuwa-bhotekoshi-flash-flood/
+image: /assets/shares/visual-nepal/flash-flood.png
+description: "The flood's flow path, modelled inundation extent, and infrastructure damage, mapped on satellite imagery, via 8848.live."
 ---
 
 <div class="page-hero-head map-page-head">
