@@ -2,37 +2,30 @@
 layout: default
 ---
 {% assign latest = site.posts.first %}
-<div class="hero-grid">
-  <div class="hero-left">
-    <h1 class="hero-heading">
-      <span data-lang-en>Know what Nepal is reading today in less than 5 minutes.</span>
-      <span data-lang-np>नेपालले आज के पढिरहेको छ, ५ मिनेटभन्दा कममा जान्नुहोस्।</span>
-    </h1>
-    <p class="hero-subheading">
-      <span data-lang-en>The top stories from major news outlets, summarized.</span>
-      <span data-lang-np>प्रमुख सञ्चारमाध्यमका उत्कृष्ट समाचारहरू सारांशमा।</span>
-    </p>
-    {% if latest %}
-    <span class="hero-badge">
-      <span class="live-dot"></span>
-      <span data-lang-en>Updated</span>
-      <span data-lang-np>अद्यावधिक</span>
-      {{ latest.date | date: "%B %-d, %Y" }}
-    </span>
-    {% endif %}
-  </div>
-  <div class="hero-right">
+<div class="nepal-today-head">
+  <h1 class="nepal-today-title">
+    <span data-lang-en>Nepal Today</span>
+    <span data-lang-np>नेपाल आज</span>
+  </h1>
+  {% if latest %}
+  <span class="hero-badge">
+    <span class="live-dot"></span>
+    <span data-lang-en>Updated</span>
+    <span data-lang-np>अद्यावधिक</span>
+    {{ latest.date | date: "%B %-d, %Y" }}
+  </span>
+  {% endif %}
+</div>
+<div class="nepal-today-grid">
+  <div class="wordcloud-col">
     {% if latest.wordcloud %}
     <div class="pulse-card" id="wordcloud">
-      <span class="pulse-eyebrow">
-        <span data-lang-en>Today's Pulse</span>
-        <span data-lang-np>आजको चर्चा</span>
+      <span class="box-eyebrow">
+        <span data-lang-en>Today's Headline Buzz</span>
+        <span data-lang-np>आजको समाचार शब्दावली</span>
       </span>
       <canvas id="wordcloud-canvas"></canvas>
-      <p class="pulse-caption">
-        <span data-lang-en>Buzzwords dominating the headlines today</span>
-        <span data-lang-np>आज सुर्खियामा रहेका शब्दहरू</span>
-      </p>
+      <p class="box-copyright">© 8848.live</p>
     </div>
     <div class="share-row">
       <button type="button" class="share-btn" id="wc-share-twitter" aria-label="Share on X">
@@ -73,18 +66,6 @@ layout: default
         return minFont + t * (maxFont - minFont);
       }
 
-      function drawWatermark() {
-        var ctx = canvas.getContext('2d');
-        var fontSize = Math.max(11, Math.round(canvas.width / 85));
-        ctx.save();
-        ctx.font = '600 ' + fontSize + 'px Inter, sans-serif';
-        ctx.textAlign = 'right';
-        ctx.textBaseline = 'bottom';
-        ctx.fillStyle = 'rgba(120,120,120,0.55)';
-        ctx.fillText('© 8848.live', canvas.width - 10, canvas.height - 8);
-        ctx.restore();
-      }
-
       function render() {
         canvas.width = box.clientWidth;
         canvas.height = Math.max(420, Math.round(box.clientWidth * 0.78));
@@ -107,7 +88,6 @@ layout: default
           minSize: 0,
           shrinkToFit: true
         });
-        setTimeout(drawWatermark, 80);
       }
       render();
       window.addEventListener('resize', render);
@@ -159,38 +139,20 @@ layout: default
     </script>
     {% endif %}
   </div>
-</div>
-
-{% if latest %}
-<div class="section-divider"><span class="section-label"><span data-lang-en>Latest digest</span><span data-lang-np>पछिल्लो डाइजेस्ट</span></span></div>
-{% assign ns_date = latest.date | date: "%Y-%m-%d" %}
-<div class="latest-digest-row">
-  <div class="latest-digest-col">
-    <a class="card featured-card" href="{{ latest.url | relative_url }}">
-      <h2 class="card-title">{{ latest.title }}</h2>
-      <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>
-      <p class="card-excerpt">
-        <span data-lang-en>{{ latest.summary_en | default: latest.excerpt | strip_html }}</span>
-        <span data-lang-np>{{ latest.summary_np | default: latest.excerpt | strip_html }}</span>
-      </p>
-      <span class="card-link">
-        <span data-lang-en>Read full digest →</span>
-        <span data-lang-np>पूरा डाइजेस्ट पढ्नुहोस् →</span>
+  {% if latest %}
+  {% assign ns_date = latest.date | date: "%Y-%m-%d" %}
+  <div class="sentiment-outer-col">
+    <aside class="sentiment-col" id="national-sentiment">
+      <span class="box-eyebrow">
+        <span data-lang-en>Today's Sentiment Speedo</span>
+        <span data-lang-np>आजको जनभावना मिटर</span>
       </span>
-    </a>
-  </div>
-  <aside class="sentiment-col" id="national-sentiment">
-    <p class="sentiment-col-label">
-      <span class="line-1" data-lang-en>Nepal</span><span class="line-1" data-lang-np>नेपाल</span>
-      <span class="line-2" data-lang-en>National Sentiment Quantified</span><span class="line-2" data-lang-np>राष्ट्रिय भावना मापन</span>
-    </p>
-    <div class="gauge-cell today">
-      <img src="{{ '/assets/shares/' | append: ns_date | append: '/national-sentiment-today.png' | relative_url }}" alt="Today's national sentiment gauge" loading="lazy">
-    </div>
-    <hr class="gauge-divider">
-    <div class="gauge-cell yesterday">
-      <img src="{{ '/assets/shares/' | append: ns_date | append: '/national-sentiment-yesterday.png' | relative_url }}" alt="Yesterday's national sentiment gauge" loading="lazy">
-    </div>
+      <div class="gauge-cell today">
+        <img class="gauge-light" src="{{ '/assets/shares/' | append: ns_date | append: '/national-sentiment-today-light.png' | relative_url }}" alt="Today's national sentiment gauge" loading="lazy">
+        <img class="gauge-dark" src="{{ '/assets/shares/' | append: ns_date | append: '/national-sentiment-today-dark.png' | relative_url }}" alt="Today's national sentiment gauge" loading="lazy">
+      </div>
+      <p class="box-copyright">© 8848.live</p>
+    </aside>
     <div class="share-row sentiment-share-row">
       <button type="button" class="share-btn" id="ns-share-twitter" aria-label="Share on X">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.8L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.3L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z"/></svg>
@@ -202,8 +164,27 @@ layout: default
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
       </button>
     </div>
-  </aside>
+  </div>
+  {% endif %}
 </div>
+
+{% if latest %}
+<div class="section-divider"><span class="section-label"><span data-lang-en>Latest digest</span><span data-lang-np>पछिल्लो डाइजेस्ट</span></span></div>
+<a class="card featured-card featured-card-full" href="{{ latest.url | relative_url }}">
+  <h2 class="card-title">
+    <span data-lang-en>Read what Nepal is reading today in 5 minutes</span>
+    <span data-lang-np>नेपालले आज के पढिरहेको छ, ५ मिनेटमा पढ्नुहोस्</span>
+  </h2>
+  <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>
+  <p class="card-excerpt">
+    <span data-lang-en>{{ latest.summary_en | default: latest.excerpt | strip_html }}</span>
+    <span data-lang-np>{{ latest.summary_np | default: latest.excerpt | strip_html }}</span>
+  </p>
+  <span class="card-link">
+    <span data-lang-en>Read full digest →</span>
+    <span data-lang-np>पूरा डाइजेस्ट पढ्नुहोस् →</span>
+  </span>
+</a>
 <script>
 (function () {
   var twBtn = document.getElementById('ns-share-twitter');
@@ -244,126 +225,4 @@ layout: default
   });
 })();
 </script>
-{% endif %}
-
-{% assign grid_posts = site.posts | slice: 1, 10 %}
-{% if grid_posts.size > 0 %}
-<div class="section-divider"><span class="section-label"><span data-lang-en>Past 10 days</span><span data-lang-np>विगत १० दिन</span></span></div>
-<div class="mini-grid">
-  {% for post in grid_posts %}
-  <a class="card mini-card" style="animation-delay: {{ forloop.index0 | times: 0.05 }}s" href="{{ post.url | relative_url }}">
-    <p class="card-date">{{ post.date | date: "%b %-d" }}</p>
-    <h3 class="card-title">{{ post.title | split: ": " | first }}</h3>
-    {% if post.wordcloud %}
-    <canvas class="mini-wc" id="mini-wc-{{ forloop.index0 }}"></canvas>
-    {% endif %}
-    <span class="mini-visits" data-visit-key="8848live_digest_{{ post.date | date: '%Y-%m-%d' }}">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-      <span class="mini-visits-count">···</span>
-    </span>
-  </a>
-  {% endfor %}
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
-<script>
-(function () {
-  function ready(fn) {
-    if (window.WordCloud) { fn(); return; }
-    setTimeout(function () { ready(fn); }, 60);
-  }
-  ready(function () {
-    var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
-    var clouds = [
-      {% for post in grid_posts %}
-      {% if post.wordcloud %}
-      {
-        id: 'mini-wc-{{ forloop.index0 }}',
-        words: [{% assign top_words = post.wordcloud | slice: 0, 20 %}{% for w in top_words %}[{{ w.word | jsonify }}, {{ w.count }}]{% unless forloop.last %}, {% endunless %}{% endfor %}]
-      }{% unless forloop.last %},{% endunless %}
-      {% endif %}
-      {% endfor %}
-    ];
-
-    function renderMini(item) {
-      var canvas = document.getElementById(item.id);
-      if (!canvas || !item.words.length) return;
-      var rect = canvas.getBoundingClientRect();
-      var w = Math.round(rect.width);
-      var h = Math.round(rect.height);
-      if (w <= 0 || h <= 0) return;
-      canvas.width = w;
-      canvas.height = h;
-      // Same rank-based min/max font sizing as the main pulse-card cloud (see
-      // pulseWordSize above) so these small cards fill their box too, just
-      // scaled for a much smaller canvas and fewer words (top 20).
-      var miniCounts = item.words.map(function (pair) { return pair[1]; });
-      var miniMin = Math.min.apply(null, miniCounts);
-      var miniMax = Math.max.apply(null, miniCounts);
-      function miniWordSize(count) {
-        var t = miniMax === miniMin ? 0.5 : Math.pow((count - miniMin) / (miniMax - miniMin), 0.55);
-        var minFont = canvas.width / 22;
-        var maxFont = canvas.width / 6;
-        return minFont + t * (maxFont - minFont);
-      }
-      WordCloud(canvas, {
-        list: item.words,
-        // Same shrinkToFit treatment as the main pulse-card cloud, since past-10-days
-        // mini clouds render whatever wordcloud data that day's post was built with
-        // (bigram phrases going forward, single words for older posts).
-        gridSize: Math.max(4, Math.round(canvas.width / 65)),
-        weightFactor: function (size) { return miniWordSize(size); },
-        fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
-        fontWeight: '700',
-        color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
-        rotateRatio: 0.1,
-        rotationSteps: 2,
-        backgroundColor: 'transparent',
-        shape: 'square',
-        ellipticity: 0.9,
-        minSize: 0,
-        shrinkToFit: true
-      });
-    }
-
-    function renderAll() { clouds.forEach(renderMini); }
-    renderAll();
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(renderAll, 200);
-    });
-  });
-})();
-</script>
-<script>
-(function () {
-  // Real-time cumulative visit counts per digest, read (not incremented) here —
-  // the count itself is incremented on the individual digest page on each visit.
-  document.querySelectorAll('.mini-visits[data-visit-key]').forEach(function (el) {
-    var key = el.getAttribute('data-visit-key');
-    var countEl = el.querySelector('.mini-visits-count');
-    if (!key || !countEl) return;
-    fetch('https://countapi.mileshilliard.com/api/v1/get/' + encodeURIComponent(key))
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (data) {
-        var n = data && data.value != null ? parseInt(data.value, 10) : 0;
-        if (isNaN(n) || n < 0) n = 0;
-        countEl.textContent = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n);
-      })
-      .catch(function () { countEl.textContent = '0'; });
-  });
-})();
-</script>
-{% endif %}
-
-{% assign total = site.posts.size %}
-{% if total > 11 %}
-<div class="archive-link-row">
-  <a class="archive-link" href="{{ '/archive/' | relative_url }}">
-    <span data-lang-en>View archive</span><span data-lang-np>अभिलेख हेर्नुहोस्</span>
-    ({{ total | minus: 11 }}
-    <span data-lang-en>more digest{% if total > 12 %}s{% endif %}</span>
-    <span data-lang-np>थप डाइजेस्ट</span>) →
-  </a>
-</div>
 {% endif %}

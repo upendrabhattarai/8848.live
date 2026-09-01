@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-  {% feed_meta %}
+  
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78d3c50a7d4947ffa081c7b5c0cdc50e"}'></script>
   <!-- End Cloudflare Web Analytics -->
@@ -51,7 +51,8 @@
       <div class="nav-right">
         <div class="nav-links">
           <a href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
-          <a href="{{ '/archive/' | relative_url }}"><span data-lang-en>Archive</span><span data-lang-np>अभिलेख</span></a>
+          <a href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Archive</span><span data-lang-np>समाचार अभिलेख</span></a>
+          <a href="{{ '/visual-nepal/' | relative_url }}"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
           <a href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
         </div>
         <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Toggle Nepali translation">

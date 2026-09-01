@@ -7,12 +7,121 @@ layout: default
     <span data-lang-np>अभिलेख</span>
   </h1>
   <p class="archive-sub">
-    <span data-lang-en>Digests older than the last 10 days.</span>
-    <span data-lang-np>विगत १० दिनभन्दा पुराना डाइजेस्टहरू।</span>
+    <span data-lang-en>Every digest before today.</span>
+    <span data-lang-np>आजभन्दा अघिका सबै डाइजेस्टहरू।</span>
   </p>
 </div>
+
+{% assign grid_posts = site.posts | slice: 1, 10 %}
+{% if grid_posts.size > 0 %}
+<div class="section-divider"><span class="section-label"><span data-lang-en>Past 10 days</span><span data-lang-np>विगत १० दिन</span></span></div>
+<div class="mini-grid">
+  {% for post in grid_posts %}
+  <a class="card mini-card" style="animation-delay: {{ forloop.index0 | times: 0.05 }}s" href="{{ post.url | relative_url }}">
+    <p class="card-date">{{ post.date | date: "%b %-d" }}</p>
+    <h3 class="card-title">{{ post.title | split: ": " | first }}</h3>
+    {% if post.wordcloud %}
+    <canvas class="mini-wc" id="mini-wc-{{ forloop.index0 }}"></canvas>
+    {% endif %}
+    <span class="mini-visits" data-visit-key="8848live_digest_{{ post.date | date: '%Y-%m-%d' }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span class="mini-visits-count">···</span>
+    </span>
+  </a>
+  {% endfor %}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
+<script>
+(function () {
+  function ready(fn) {
+    if (window.WordCloud) { fn(); return; }
+    setTimeout(function () { ready(fn); }, 60);
+  }
+  ready(function () {
+    var palette = ['#dc143c', '#a50e2d', '#003893', '#0d9488', '#374151', '#b45309'];
+    var clouds = [
+      {% for post in grid_posts %}
+      {% if post.wordcloud %}
+      {
+        id: 'mini-wc-{{ forloop.index0 }}',
+        words: [{% assign top_words = post.wordcloud | slice: 0, 20 %}{% for w in top_words %}[{{ w.word | jsonify }}, {{ w.count }}]{% unless forloop.last %}, {% endunless %}{% endfor %}]
+      }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+      {% endfor %}
+    ];
+
+    function renderMini(item) {
+      var canvas = document.getElementById(item.id);
+      if (!canvas || !item.words.length) return;
+      var rect = canvas.getBoundingClientRect();
+      var w = Math.round(rect.width);
+      var h = Math.round(rect.height);
+      if (w <= 0 || h <= 0) return;
+      canvas.width = w;
+      canvas.height = h;
+      // Same rank-based min/max font sizing as the main pulse-card cloud so
+      // these small cards fill their box too, scaled for a much smaller
+      // canvas and fewer words (top 20).
+      var miniCounts = item.words.map(function (pair) { return pair[1]; });
+      var miniMin = Math.min.apply(null, miniCounts);
+      var miniMax = Math.max.apply(null, miniCounts);
+      function miniWordSize(count) {
+        var t = miniMax === miniMin ? 0.5 : Math.pow((count - miniMin) / (miniMax - miniMin), 0.55);
+        var minFont = canvas.width / 22;
+        var maxFont = canvas.width / 6;
+        return minFont + t * (maxFont - minFont);
+      }
+      WordCloud(canvas, {
+        list: item.words,
+        gridSize: Math.max(4, Math.round(canvas.width / 65)),
+        weightFactor: function (size) { return miniWordSize(size); },
+        fontFamily: "'Inter', 'Noto Sans Devanagari', sans-serif",
+        fontWeight: '700',
+        color: function () { return palette[Math.floor(Math.random() * palette.length)]; },
+        rotateRatio: 0.1,
+        rotationSteps: 2,
+        backgroundColor: 'transparent',
+        shape: 'square',
+        ellipticity: 0.9,
+        minSize: 0,
+        shrinkToFit: true
+      });
+    }
+
+    function renderAll() { clouds.forEach(renderMini); }
+    renderAll();
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderAll, 200);
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  // Real-time cumulative visit counts per digest, read (not incremented) here —
+  // the count itself is incremented on the individual digest page on each visit.
+  document.querySelectorAll('.mini-visits[data-visit-key]').forEach(function (el) {
+    var key = el.getAttribute('data-visit-key');
+    var countEl = el.querySelector('.mini-visits-count');
+    if (!key || !countEl) return;
+    fetch('https://countapi.mileshilliard.com/api/v1/get/' + encodeURIComponent(key))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        var n = data && data.value != null ? parseInt(data.value, 10) : 0;
+        if (isNaN(n) || n < 0) n = 0;
+        countEl.textContent = n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n);
+      })
+      .catch(function () { countEl.textContent = '0'; });
+  });
+})();
+</script>
+{% endif %}
+
 {% assign archived = site.posts | slice: 11, 999999 %}
 {% if archived.size > 0 %}
+<div class="section-divider"><span class="section-label"><span data-lang-en>Older digests</span><span data-lang-np>पुराना डाइजेस्टहरू</span></span></div>
 <div class="card-grid">
   {% for post in archived %}
   <a class="card" style="animation-delay: {{ forloop.index0 | times: 0.04 }}s" href="{{ post.url | relative_url }}">
@@ -33,10 +142,10 @@ layout: default
   </a>
   {% endfor %}
 </div>
-{% else %}
+{% elsif grid_posts.size == 0 %}
 <p class="archive-empty">
-  <span data-lang-en>No older digests yet — check back after 10 days.</span>
-  <span data-lang-np>अहिलेसम्म पुराना डाइजेस्ट छैनन् — १० दिनपछि फेरि हेर्नुहोस्।</span>
+  <span data-lang-en>No digests yet — check back tomorrow.</span>
+  <span data-lang-np>अहिलेसम्म डाइजेस्ट छैनन् — भोलि फेरि हेर्नुहोस्।</span>
 </p>
 {% endif %}
 

@@ -16,11 +16,11 @@ headlines from the three outlets into the unified national categories):
   columns: outlet, unified_category, headline
 
 OUTPUT:
-  data/national-sentiment/history.csv                          (running day-over-day log)
-  assets/shares/<date>/national-sentiment-today.png             (on-page image, big)
-  assets/shares/<date>/national-sentiment-yesterday.png         (on-page image, small)
-  assets/shares/<date>/national-sentiment.png                   (1200x630 share/OG image)
-  share/<date>/national-sentiment/index.html                    (share page w/ OG tags)
+  data/national-sentiment/history.csv                             (running day-over-day log)
+  assets/shares/<date>/national-sentiment-today-light.png         (on-page gauge, light theme, transparent bg)
+  assets/shares/<date>/national-sentiment-today-dark.png          (on-page gauge, dark theme, transparent bg)
+  assets/shares/<date>/national-sentiment.png                     (1200x630 share/OG image, framed, unchanged)
+  share/<date>/national-sentiment/index.html                      (share page w/ OG tags)
 
 Usage: python3 generate_national_sentiment.py <repo_root> <YYYY-MM-DD>
 """
@@ -84,7 +84,7 @@ INK = "#1f2933"
 GOLD = "#b45309"
 CRIMSON = "#dc143c"
 PAPER = "#fffaf4"
-CMAP = LinearSegmentedColormap.from_list("sentiment", ["#e5484d", "#8a93a3", "#2fbf71"], N=256)
+CMAP = LinearSegmentedColormap.from_list("sentiment", ["#e5484d", "#ffffff", "#2fbf71"], N=256)
 
 
 def curved_text(ax, text, start_angle_deg, direction, radius, fontsize, deg_per_char, color, weight="bold"):
@@ -97,17 +97,34 @@ def curved_text(ax, text, start_angle_deg, direction, radius, fontsize, deg_per_
                  rotation_mode="anchor")
 
 
-def draw_gauge(ax, value, caption, no_data=False):
+def draw_gauge(ax, value, caption=None, no_data=False, theme="light", frame=True, score_box=True):
     ax.set_xlim(-1.35, 1.35)
     ax.set_ylim(-0.55, 1.5)
     ax.axis("off")
     ax.set_aspect("equal")
 
-    frame = mpatches.FancyBboxPatch(
-        (-1.28, -0.5), 2.56, 1.9, boxstyle="round,pad=0.02,rounding_size=0.06",
-        linewidth=1.4, edgecolor=GOLD, facecolor=PAPER, alpha=(0.55 if no_data else 0.9), zorder=0
-    )
-    ax.add_patch(frame)
+    # Theme-aware ink: the outer frame + cream background used to make these
+    # legible against *any* surface, but that baked-in whitish card is what
+    # we're removing (the gauge now renders transparent so the surrounding
+    # page/card supplies the background) -- so the fine text needs its own
+    # light/dark variant to stay readable against a light or dark card.
+    if theme == "dark":
+        ink = "#e5e7eb"
+        neg_c, neu_c, pos_c = "#ff8a8a", "#c3c9d4", "#5ee69a"
+        score_pos, score_neg, score_neu = "#5ee69a", "#ff8a8a", "#c3c9d4"
+        nodata_ink = "#c3c9d4"
+    else:
+        ink = INK
+        neg_c, neu_c, pos_c = "#a5303a", "#5b6472", "#1e7a4c"
+        score_pos, score_neg, score_neu = "#2fbf71", "#e5484d", "#5b6472"
+        nodata_ink = "#6b7280"
+
+    if frame:
+        gauge_frame = mpatches.FancyBboxPatch(
+            (-1.28, -0.5), 2.56, 1.9, boxstyle="round,pad=0.02,rounding_size=0.06",
+            linewidth=1.4, edgecolor=GOLD, facecolor=PAPER, alpha=(0.55 if no_data else 0.9), zorder=0
+        )
+        ax.add_patch(gauge_frame)
 
     n_seg, thickness, r_outer = 180, 0.30, 1.0
     band_alpha = 0.25 if no_data else 0.72
@@ -126,21 +143,23 @@ def draw_gauge(ax, value, caption, no_data=False):
         x1, y1 = (r_outer + 0.05) * np.cos(rad), (r_outer + 0.05) * np.sin(rad)
         ax.plot([x0, x1], [y0, y1], color=GOLD, linewidth=1.0, alpha=0.35 if no_data else 0.6, zorder=2)
 
-    curved_text(ax, "NEGATIVE", 176, -1, 1.16, 9.5, 3.3, "#a5303a")
-    curved_text(ax, "NEUTRAL", 99.9, -1, 1.16, 9.5, 3.3, "#5b6472")
-    curved_text(ax, "POSITIVE", 27.1, -1, 1.16, 9.5, 3.3, "#1e7a4c")
-    ax.text(-1.09, 0.05, "-3", fontsize=10.5, fontfamily=MONO, fontweight="bold", color="#a5303a", ha="center", va="center", zorder=6)
-    ax.text(0, 1.10, "0", fontsize=10.5, fontfamily=MONO, fontweight="bold", color="#5b6472", ha="center", va="center", zorder=6)
-    ax.text(1.09, 0.05, "+3", fontsize=10.5, fontfamily=MONO, fontweight="bold", color="#1e7a4c", ha="center", va="center", zorder=6)
+    curved_text(ax, "NEGATIVE", 176, -1, 1.16, 9.5, 3.3, neg_c)
+    curved_text(ax, "NEUTRAL", 99.9, -1, 1.16, 9.5, 3.3, neu_c)
+    curved_text(ax, "POSITIVE", 27.1, -1, 1.16, 9.5, 3.3, pos_c)
+    ax.text(-1.09, 0.05, "-3", fontsize=10.5, fontfamily=MONO, fontweight="bold", color=neg_c, ha="center", va="center", zorder=6)
+    ax.text(0, 1.10, "0", fontsize=10.5, fontfamily=MONO, fontweight="bold", color=neu_c, ha="center", va="center", zorder=6)
+    ax.text(1.09, 0.05, "+3", fontsize=10.5, fontfamily=MONO, fontweight="bold", color=pos_c, ha="center", va="center", zorder=6)
 
     if no_data:
         ax.add_patch(plt.Circle((0, 0), 0.09, facecolor="#9aa5b1", edgecolor=GOLD, linewidth=1.2, zorder=4))
         ax.add_patch(plt.Circle((0, 0), 0.035, facecolor=GOLD, zorder=4))
-        box = mpatches.FancyBboxPatch((-0.5, 0.19), 1.0, 0.21, boxstyle="round,pad=0.0,rounding_size=0.045",
-                                       linewidth=1.1, edgecolor="#9aa5b1", facecolor="white", alpha=0.7, zorder=5)
-        ax.add_patch(box)
-        ax.text(0, 0.295, "NO DATA YET", fontsize=9, fontfamily=MONO, fontweight="bold", color="#6b7280", ha="center", va="center", zorder=6)
-        ax.text(0, -0.42, caption, fontsize=15, fontfamily=MONO, fontweight="bold", color="#9aa5b1", ha="center", va="center", zorder=6)
+        if score_box:
+            box = mpatches.FancyBboxPatch((-0.5, 0.19), 1.0, 0.21, boxstyle="round,pad=0.0,rounding_size=0.045",
+                                           linewidth=1.1, edgecolor="#9aa5b1", facecolor="white", alpha=0.7, zorder=5)
+            ax.add_patch(box)
+        ax.text(0, 0.295, "NO DATA YET", fontsize=9, fontfamily=MONO, fontweight="bold", color=nodata_ink, ha="center", va="center", zorder=6)
+        if caption:
+            ax.text(0, -0.42, caption, fontsize=15, fontfamily=MONO, fontweight="bold", color="#9aa5b1", ha="center", va="center", zorder=6)
         return
 
     value_c = max(GAUGE_MIN, min(GAUGE_MAX, value))
@@ -189,26 +208,31 @@ def draw_gauge(ax, value, caption, no_data=False):
     ax.add_patch(plt.Circle((0, 0), 0.09, facecolor="#3a3f4b", edgecolor=GOLD, linewidth=1.2, zorder=4))
     ax.add_patch(plt.Circle((0, 0), 0.035, facecolor=GOLD, zorder=4))
 
-    box_color = "#2fbf71" if value_c > 0.08 else ("#e5484d" if value_c < -0.08 else "#5b6472")
-    box = mpatches.FancyBboxPatch((-box_half_w, box_bottom), 2 * box_half_w, box_top - box_bottom,
-                                   boxstyle="round,pad=0.0,rounding_size=0.045",
-                                   linewidth=1.1, edgecolor=box_color, facecolor="white", alpha=0.62, zorder=5)
-    ax.add_patch(box)
+    box_color = score_pos if value_c > 0.08 else (score_neg if value_c < -0.08 else score_neu)
+    if score_box:
+        box = mpatches.FancyBboxPatch((-box_half_w, box_bottom), 2 * box_half_w, box_top - box_bottom,
+                                       boxstyle="round,pad=0.0,rounding_size=0.045",
+                                       linewidth=1.1, edgecolor=box_color, facecolor="white", alpha=0.62, zorder=5)
+        ax.add_patch(box)
     mid_y = (box_top + box_bottom) / 2
-    ax.text(0, mid_y + 0.06, "NET SCORE", fontsize=8.5, fontfamily=MONO, fontweight="bold", color=INK, ha="center", va="center", alpha=0.85, zorder=6)
+    ax.text(0, mid_y + 0.06, "NET SCORE", fontsize=8.5, fontfamily=MONO, fontweight="bold", color=ink, ha="center", va="center", alpha=0.85, zorder=6)
     ax.text(0, mid_y - 0.06, f"{value:+.2f}", fontsize=8.5, fontfamily=MONO, fontweight="bold", color=box_color, ha="center", va="center", zorder=6)
-    ax.text(0, -0.42, caption, fontsize=15, fontfamily=MONO, fontweight="bold", color=INK, ha="center", va="center", zorder=6)
+    if caption:
+        ax.text(0, -0.42, caption, fontsize=15, fontfamily=MONO, fontweight="bold", color=ink, ha="center", va="center", zorder=6)
 
 
-def save_single_gauge(value, caption, out_path, no_data=False, watermark=False):
+def save_single_gauge(value, out_path, no_data=False, theme="light"):
+    """On-page gauge: frameless/transparent, theme-matched text, no caption
+    (only one gauge shows on the page now, so "Today"/"Yesterday" would be
+    redundant). No baked-in copyright here -- the page renders a single
+    "\u00a9 8848.live" line below the box in HTML (shared .box-copyright class,
+    same font/centering as the word cloud box) instead of drawing one into
+    the image pixels."""
     fig, ax = plt.subplots(figsize=(5.6, 3.7))
-    fig.patch.set_facecolor(PAPER)
-    draw_gauge(ax, value, caption, no_data=no_data)
-    if watermark:
-        fig.text(0.985, 0.02, "\u00a9 8848.live", fontsize=8, fontfamily=MONO, fontweight="bold",
-                  color="#8a93a3", alpha=0.65, ha="right", va="bottom")
+    fig.patch.set_alpha(0)
+    draw_gauge(ax, value, caption=None, no_data=no_data, theme=theme, frame=False, score_box=False)
     fig.tight_layout()
-    fig.savefig(out_path, dpi=180, facecolor=PAPER, bbox_inches="tight", pad_inches=0.12)
+    fig.savefig(out_path, dpi=180, transparent=True, bbox_inches="tight", pad_inches=0.12)
     plt.close(fig)
 
 
@@ -329,8 +353,8 @@ def main():
     # --- images ---
     img_dir = os.path.join(repo_root, "assets", "shares", date)
     os.makedirs(img_dir, exist_ok=True)
-    save_single_gauge(today_mean, "Today", os.path.join(img_dir, "national-sentiment-today.png"), watermark=True)
-    save_single_gauge(yesterday_mean, "Yesterday", os.path.join(img_dir, "national-sentiment-yesterday.png"), no_data=yesterday_no_data, watermark=True)
+    save_single_gauge(today_mean, os.path.join(img_dir, "national-sentiment-today-light.png"), theme="light")
+    save_single_gauge(today_mean, os.path.join(img_dir, "national-sentiment-today-dark.png"), theme="dark")
     save_share_card(today_mean, yesterday_mean, yesterday_no_data, os.path.join(img_dir, "national-sentiment.png"))
     print(f"Saved gauge images -> {img_dir}")
 
