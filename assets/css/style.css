@@ -563,18 +563,14 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   padding: 0 20px 18px;
 }
 
-/* Single share-button row used on standalone tool pages (Date Converter). */
+/* Single share-button row used on standalone tool pages (Date Converter) --
+   sits right under its tool's box, aligned to the bottom-right corner. */
 .tool-share-row {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
-  margin: -4px 0 28px;
-}
-.tool-share-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-3);
-  margin-right: 4px;
+  margin: 14px 0 28px;
 }
 .visual-card-preview {
   position: relative;

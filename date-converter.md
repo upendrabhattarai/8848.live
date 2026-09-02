@@ -17,46 +17,6 @@ description: Convert between the English (AD) and Nepali Bikram Sambat (BS) cale
   </p>
 </div>
 
-<div class="tool-share-row">
-  <span class="tool-share-label">
-    <span data-lang-en>Share this tool</span>
-    <span data-lang-np>यो उपकरण साझा गर्नुहोस्</span>
-  </span>
-  <button type="button" class="share-btn" data-share="twitter" aria-label="Share on X">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.8L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.3L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z"/></svg>
-  </button>
-  <button type="button" class="share-btn" data-share="facebook" aria-label="Share on Facebook">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg>
-  </button>
-  <button type="button" class="share-btn" data-share="instagram" aria-label="Share on Instagram">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
-  </button>
-</div>
-
-<script>
-(function () {
-  var shareUrl = 'https://8848.live/share/date-converter/';
-  var text = 'Date Converter (AD ↔ BS) — via 8848.live';
-  var row = document.currentScript.previousElementSibling;
-  if (!row || !row.classList.contains('tool-share-row')) {
-    row = document.querySelector('.tool-share-row');
-  }
-  if (!row) return;
-  row.addEventListener('click', function (e) {
-    var btn = e.target.closest('.share-btn');
-    if (!btn) return;
-    var kind = btn.getAttribute('data-share');
-    if (kind === 'twitter') {
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(shareUrl), '_blank', 'noopener,width=600,height=520');
-    } else if (kind === 'facebook') {
-      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank', 'noopener,width=600,height=520');
-    } else if (kind === 'instagram') {
-      window.open('https://8848.live/assets/shares/date-converter.png', '_blank', 'noopener');
-    }
-  });
-})();
-</script>
-
 <div class="converter-card" id="date-converter">
   <div class="converter-tabs">
     <button type="button" class="converter-tab active" data-mode="ad-to-bs">
@@ -112,6 +72,42 @@ description: Convert between the English (AD) and Nepali Bikram Sambat (BS) cale
     <span data-lang-np>आज</span>
   </button>
 </div>
+
+<div class="tool-share-row">
+  <button type="button" class="share-btn" data-share="twitter" aria-label="Share on X">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.8L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.3L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z"/></svg>
+  </button>
+  <button type="button" class="share-btn" data-share="facebook" aria-label="Share on Facebook">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg>
+  </button>
+  <button type="button" class="share-btn" data-share="instagram" aria-label="Share on Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  var shareUrl = 'https://8848.live/share/date-converter/';
+  var text = 'Date Converter (AD ↔ BS) — via 8848.live';
+  var row = document.currentScript.previousElementSibling;
+  if (!row || !row.classList.contains('tool-share-row')) {
+    row = document.querySelector('.tool-share-row');
+  }
+  if (!row) return;
+  row.addEventListener('click', function (e) {
+    var btn = e.target.closest('.share-btn');
+    if (!btn) return;
+    var kind = btn.getAttribute('data-share');
+    if (kind === 'twitter') {
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(shareUrl), '_blank', 'noopener,width=600,height=520');
+    } else if (kind === 'facebook') {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank', 'noopener,width=600,height=520');
+    } else if (kind === 'instagram') {
+      window.open('https://8848.live/assets/shares/date-converter.png', '_blank', 'noopener');
+    }
+  });
+})();
+</script>
 
 <div class="calendars-grid">
   <div class="mini-calendar" id="calendar-ad">
