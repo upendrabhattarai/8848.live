@@ -198,10 +198,16 @@ def parse_post(md_path):
     words = front.get('wordcloud') or []
 
     outlets = []
-    for box_html in re.split(r'(?=<div class="outlet-box">)', body):
-        if '<div class="outlet-box">' not in box_html:
+    for box_html in re.split(r'(?=<div class="outlet-box)', body):
+        if '<div class="outlet-box' not in box_html:
             continue
-        name_m = re.search(r'<span class="outlet-name">([^<]+)</span>', box_html)
+        # New (category-digest) format nests bilingual spans inside outlet-name,
+        # e.g. <span class="outlet-name"><span data-lang-en>X</span><span data-lang-np>Y</span></span>
+        # -- prefer the English variant for the slug/title. Old (outlet-digest)
+        # format has plain text directly inside outlet-name -- still supported.
+        name_m = re.search(r'<span class="outlet-name">\s*<span data-lang-en>([^<]+)</span>', box_html, re.DOTALL)
+        if not name_m:
+            name_m = re.search(r'<span class="outlet-name">([^<]+)</span>', box_html)
         if not name_m:
             continue
         name = html.unescape(name_m.group(1).strip())
