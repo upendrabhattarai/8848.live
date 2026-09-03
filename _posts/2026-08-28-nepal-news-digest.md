@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-The Bhotekoshi-Trishuli flood disaster continues to dominate coverage with the death toll climbing past 469, nearly Rs 2 billion pouring into the Prime Minister's Disaster Relief Fund, and the China trade corridor severed, alongside Norway's King Harald's death and Nepali fighter Rabindra Dhant's breakthrough run at Road to UFC, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

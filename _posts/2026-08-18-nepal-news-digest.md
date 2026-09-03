@@ -108,8 +108,6 @@ summary_en: "Today's digest covers Nepali Congress president Gagan Thapa formall
 summary_np: "आजको डाइजेस्टमा नेपाली कांग्रेस सभापति गगन थापाले देउवा पक्षको कानुनी चुनौतीका बीच १५औँ महाधिवेशन प्रक्रिया औपचारिक रूपमा सुरु गरेको, एमालेले किरण थापालाई बागमतीको मुख्यमन्त्री बनाउने निर्णय गरेको, भारतीय सेनाध्यक्ष धीरज सेठको काठमाडौं भ्रमण र प्रधानमन्त्री बालेन्द्र शाहसँगको भेटवार्ता, पत्रकार किशोर श्रेष्ठलाई पुनः पक्राउ गर्ने अनुमति ललितपुर अदालतले नदिएको, इरानसँगको वार्तामा बाधा पुगे ओमानमाथि बमबारी गर्ने ट्रम्पको धम्की, रोल्पामा पहिरोका कारण विद्यालय बन्द भएको प्रसंग, र थप समेटिएको छ।"
 ---
 
-Today's digest covers Nepali Congress president Gagan Thapa formally launching the party's 15th general convention process amid the Deuba camp's legal challenge, UML's decision to make Kiran Thapa Bagmati's chief minister, Indian Army Chief Dhiraj Seth's Kathmandu visit and meeting with PM Balendra Shah, a Lalitpur court denying police's bid to re-arrest journalist Kishor Shrestha, Trump's threat to bomb Oman if it blocks Iran talks, a Rolpa landslide forcing school closures, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

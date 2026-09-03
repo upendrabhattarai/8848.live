@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-Today's digest spans political transitions in Bagmati, the Garima Chaudhary murder case, US-Canada trade tensions, a worsening Japanese encephalitis outbreak, and PM Balen's Mustang visit, along with cricket, technology and opinion stories from six outlets.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

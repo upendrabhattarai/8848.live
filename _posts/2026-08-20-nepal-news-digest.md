@@ -108,8 +108,6 @@ summary_en: "Today's digest is dominated by Bagmati Province's new government as
 summary_np: "आजको डाइजेस्टमा बागमती प्रदेशमा एमालेका किरण थापा मगर राप्रपाको समर्थनमा मुख्यमन्त्री पदको शपथ लिने भएकोसँगै केन्द्रको निर्देशन विपरीत समर्थन दिएका सांसद उद्धव थापालाई राप्रपाले पार्टीबाटै निष्कासन गरेको, अख्तियार प्रमुख प्रेमकुमार राई र रास्वपा सभापति रवि लामिछाने दुवैले अख्तियारलाई राजनीतिक हस्तक्षेपमुक्त बनाउनुपर्ने बताएको, कर्णालीका मुख्यमन्त्री मंगलबहादुर शाहीले विश्वासको मत पाएको, रुसी मिसाइल आक्रमणमा युक्रेनको किभमा १२–१३ जनाको मृत्यु भएको, र लगातार चौथो दिन घटेर नेप्सेको कारोबार रकम झन्डै २ अर्बले खुम्चिएको समेटिएको छ, र थप।"
 ---
 
-Today's digest covers Bagmati Province's new government, the CIAA autonomy debate, confidence votes in Karnali, Russia's missile strikes on Kyiv, and NEPSE's continued slide, along with stories on the Hormuz Strait standoff, foreign aid policy, and sport across cricket and football.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

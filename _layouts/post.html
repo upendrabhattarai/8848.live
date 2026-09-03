@@ -7,8 +7,17 @@ layout: default
     <span data-lang-en>Daily digest</span>
     <span data-lang-np>दैनिक डाइजेस्ट</span>
   </span>
-  <h1 class="post-title">{{ page.title }}</h1>
+  <h1 class="post-title">
+    <span data-lang-en>{{ page.title }}</span>
+    <span data-lang-np>{{ page.title_np | default: page.title }}</span>
+  </h1>
   <p class="post-date">{{ page.date | date: "%B %-d, %Y" }}</p>
+  {% if page.summary_en %}
+  <p class="post-summary">
+    <span data-lang-en>{{ page.summary_en }}</span>
+    <span data-lang-np>{{ page.summary_np | default: page.summary_en }}</span>
+  </p>
+  {% endif %}
   <div class="post-content">
     {{ content }}
   </div>

@@ -108,8 +108,6 @@ summary_en: "Today's digest is led by Bagmati's new government facing a Koshi su
 summary_np: "आजको डाइजेस्टमा बागमतीको नयाँ सरकारसँगै कोशीमा कांग्रेसले समर्थन फिर्ता लिएको, प्रधानमन्त्री कार्यालयको दबाब प्रकरणमा अख्तियार प्रमुख प्रेमकुमार राईलाई सांसदहरूले साढे ४ घण्टा प्रश्न गरेको, कांग्रेस महाधिवेशन रोक्न देउवा पक्ष सर्वोच्च अदालत पुगेको, रुसी मिसाइल हमलामा किभमा दर्जनौंको मृत्यु भएको, इमरान खान स्वास्थ्य परीक्षणपछि फेरि जेल फर्किएको, सुनको भाउ बढ्दा नेप्से फेरि घटेको र रोल्पा पहिरो पीडित अझै राहतविहीन रहेको समेटिएको छ, र थप।"
 ---
 
-Today's digest is led by Bagmati's new government facing a Koshi support withdrawal by Congress even as CIAA chief Premkumar Rai faces four-and-a-half hours of parliamentary questioning over pressure from the PM's office, Deuba's faction petitions the Supreme Court to halt the Congress general convention, Russian missile strikes kill over a dozen in Kyiv, Imran Khan is returned to Adiala jail after a health check, NEPSE slides again as gold prices climb, and Rolpa landslide survivors remain stranded without relief, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

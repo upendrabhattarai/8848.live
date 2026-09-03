@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-Today's digest is dominated by the Bhotekoshi-Trishuli flash flood disaster that struck Rasuwa and Nuwakot on the morning of August 26, triggered by an earthquake-induced avalanche on the Tibetan side of the border — alongside continuing political developments in Gandaki and Bagmati provinces.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

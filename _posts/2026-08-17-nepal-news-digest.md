@@ -108,8 +108,6 @@ summary_en: "Today's digest covers Bagmati Chief Minister Indra Baniya's resigna
 summary_np: "आजको डाइजेस्टमा बागमतीका मुख्यमन्त्री इन्द्र बानियाँको राजीनामा र लुम्बिनीका मुख्यमन्त्री चेतनारायण आचार्यले पाएको विश्वासको मतसहित प्रदेश सरकार पुनर्गठन, भारतीय सेनाध्यक्ष धिरज सेठको काठमाडौं भ्रमण र मानार्थ दर्जा समारोह, पत्रकार किशोर श्रेष्ठको निरन्तर थुनुवा, जाजरकोट र काभ्रेमा भएका पहिरो तथा सडक दुर्घटना, र थप समेटिएको छ।"
 ---
 
-Today's digest covers Bagmati Chief Minister Indra Baniya's resignation and Lumbini Chief Minister Chetnarayan Acharya's vote of confidence amid provincial cabinet reshuffles, Indian Army Chief Dhiraj Seth's Kathmandu visit and honorary rank ceremony, journalist Kishore Shrestha's continued detention, deadly landslides and road accidents in Jajarkot and Kavre, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

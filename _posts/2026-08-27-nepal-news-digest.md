@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-The Bhotekoshi-Trishuli flash flood disaster continues to dominate the news with mounting death tolls, missing persons and economic damage across Rasuwa, Nuwakot and Dhading, alongside political turbulence in Gandaki and Nepali Congress, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

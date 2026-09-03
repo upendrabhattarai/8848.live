@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-Today's digest covers fallout from the Bara and Saptari child-safety cases and the privacy failures around them, provincial confidence votes in Koshi, and Nepal's stock market and cement-industry pressures, alongside sports, robotics and opinion stories from six outlets and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

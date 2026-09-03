@@ -108,8 +108,6 @@ summary_en: "Top stories spanning politics, business, sports, world and more fro
 summary_np: "आज नेपालका प्रमुख सञ्चारमाध्यमहरूबाट राजनीति, व्यापार, खेलकुद, विश्व लगायतका विषयमा प्रमुख समाचारहरू।"
 ---
 
-Top stories spanning politics, business, sports, world and more from each of Nepal's major outlets today.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

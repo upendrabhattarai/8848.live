@@ -108,8 +108,6 @@ wordcloud:
     count: 2
 ---
 
-Today's Nepal news is dominated by the Bhotekoshi flood relief and rescue effort, cross-government coordination, Rabindra Dhant's UFC final run, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

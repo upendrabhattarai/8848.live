@@ -108,8 +108,6 @@ summary_en: "Today's coverage spans Congress's internal leadership battle, deadl
 summary_np: "आजको कभरेजमा नेपाली कांग्रेसको आन्तरिक नेतृत्व विवाद, कर्णाली र रोल्पामा घातक पहिरो, भारतीय प्रधानसेनापतिको काठमाडौं भ्रमण र कोलम्बिया तथा इन्डोनेसियाको भूकम्प लगायत नेपालका प्रमुख सञ्चारमाध्यमहरूका शीर्ष समाचार समेटिएका छन्।"
 ---
 
-Today's coverage spans Congress's internal leadership battle, deadly landslides across Karnali and Rolpa, the Indian army chief's Kathmandu visit, and earthquakes in Colombia and Indonesia, from each of Nepal's major outlets.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

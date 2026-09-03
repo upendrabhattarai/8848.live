@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-Today's Nepal news centers on the Bhotekoshi flood's mounting toll and cross-border rescue effort, foreign relief pouring in, market and infrastructure fallout, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

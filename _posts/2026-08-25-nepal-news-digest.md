@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-Today's digest covers parliamentary outrage and a fresh corruption case tied to the Garima Chaudhary case, Koshi's confidence vote and cabinet reshuffles, monsoon flooding and landslides across highways, plus stock market, sports and opinion stories from six outlets and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

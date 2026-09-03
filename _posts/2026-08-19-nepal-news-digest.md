@@ -108,8 +108,6 @@ summary_en: "Today's digest covers the Nepali Congress pressing ahead with its 1
 summary_np: "आजको डाइजेस्टमा नेपाली कांग्रेसले विधानको व्यवस्था नै निलम्बन गरेर १५औँ महाधिवेशन प्रक्रिया अघि बढाएको र देउवा समूहले कानुनी चुनौती दिने तयारी गरेको, एमालेले किरण थापालाई बागमतीको मुख्यमन्त्री बनाउने निर्णय गरेको बेला सुदूरपश्चिमका मुख्यमन्त्री खगराज भट्टले विश्वासको मत पाएको, भारतीय स्थल सेनाध्यक्ष जनरल धीरज सेठ र प्रधानमन्त्री बालेन्द्र शाहबीचको भेटवार्ता, समाचार प्रकाशनकै आधारमा पत्रकार किशोर श्रेष्ठलाई थुनामा राख्न नमिल्ने सर्वोच्च अदालतको आदेश, रेडक्रसका पूर्वअध्यक्ष सञ्जिब थापा गोदाम घर खरिद प्रकरणमा पक्राउ परेको, बाराकी तीन वर्षीया बालिकाको हत्याप्रकरणले सिर्जेको आक्रोश, एनसेलले लागू गरेको ६० सेकेन्ड पल्स दर, र लगातार चौथो दिन घटेको नेप्से समेटिएको छ।"
 ---
 
-Today's digest covers the Nepali Congress pressing ahead with its 15th general convention process by suspending party statute provisions and drawing a legal challenge from the Deuba camp, UML's move to make Kiran Thapa Bagmati's chief minister while Sudurpaschim's Khagraj Bhatta wins a confidence vote, Indian Army Chief General Dheeraj Seth's meeting with PM Balendra Shah, the Supreme Court ruling that journalist Kishor Shrestha cannot be held in custody merely over a news report, Nepal Red Cross Society's former president Sanjib Thapa's arrest over a Rs 2 crore warehouse-purchase scam, the murder of a three-year-old girl in Bara sparking protests, Ncell's new 60-second pulse rate on international calls, and NEPSE's fourth straight day of losses.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

@@ -108,8 +108,6 @@ wordcloud:
     count: 1
 ---
 
-Nepal's flood disaster deepens as Chitwan is forced to bury 229 unidentified bodies, up to 400 workers remain feared trapped in flooded Rasuwa tunnels, and the government formally requests specialised rescue help from India and China, while the opposition Congress demands international rescue teams and Karnali's provincial government is completed with three new women ministers, and more.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">

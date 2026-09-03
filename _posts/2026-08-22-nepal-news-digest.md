@@ -110,8 +110,6 @@ wordcloud:
     count: 1
 ---
 
-Today's digest spans political transitions in Bagmati and the Congress convention fight, the Bara toddler murder case, foreign trade and gold-price movements, and cricket, health and culture stories from six outlets.
-
 <div class="outlet-box">
   <div class="outlet-side">
     <img class="outlet-icon" src="https://www.google.com/s2/favicons?sz=32&domain=ekantipur.com" alt="eKantipur">
