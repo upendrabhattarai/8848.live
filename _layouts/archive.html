@@ -3,14 +3,17 @@ layout: default
 ---
 <div class="page-hero-head">
   <h1 class="page-hero-title">
-    <span data-lang-en>Archive</span>
-    <span data-lang-np>अभिलेख</span>
+    <span data-lang-en>News Portal</span>
+    <span data-lang-np>समाचार पोर्टल</span>
   </h1>
   <p class="page-hero-subtitle">
-    <span data-lang-en>Digest before today.</span>
-    <span data-lang-np>आजभन्दा अघिका डाइजेस्टहरू।</span>
+    <span data-lang-en>Today's digest, plus everything before it.</span>
+    <span data-lang-np>आजको डाइजेस्ट, साथै अघिका सबै डाइजेस्टहरू।</span>
   </p>
 </div>
+
+{% assign latest = site.posts.first %}
+{% include latest-digest-card.html %}
 
 {% comment %} Digests older than 30 days drop off the archive entirely. site.posts
    is already sorted newest-first, so we can just count how many leading posts

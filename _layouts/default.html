@@ -79,7 +79,7 @@
     <aside class="side-nav">
       <nav class="side-nav-tabs">
         <a class="side-nav-tab{% if is_home %} active{% endif %}" href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
-        <a class="side-nav-tab{% if is_archive %} active{% endif %}" href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Archive</span><span data-lang-np>समाचार अभिलेख</span></a>
+        <a class="side-nav-tab{% if is_archive %} active{% endif %}" href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Portal</span><span data-lang-np>समाचार पोर्टल</span></a>
         <a class="side-nav-tab{% if is_visual %} active{% endif %}" href="{{ '/visual-nepal/' | relative_url }}"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
         <a class="side-nav-tab{% if is_date_converter %} active{% endif %}" href="{{ '/date-converter/' | relative_url }}"><span data-lang-en>Date Converter</span><span data-lang-np>मिति परिवर्तक</span></a>
         <a class="side-nav-tab{% if is_contact %} active{% endif %}" href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
@@ -100,21 +100,14 @@
           <span data-lang-np>नेपालका प्रमुख सञ्चारमाध्यमहरूबाट उत्कृष्ट शीर्षकहरूको संगृहीत सूची।</span>
         </p>
         <div class="footer-divider"></div>
-        <p class="footer-contact"><span data-lang-en>Contact:</span><span data-lang-np>सम्पर्क:</span> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
         <p class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
       </div>
       <div class="footer-sources">
         <span class="footer-sources-label">
-          <span class="live-dot"></span>
-          <span data-lang-en>Tracking</span>
-          <span data-lang-np>अनुगमन</span>
+          <span data-lang-en>Contact</span>
+          <span data-lang-np>सम्पर्क</span>
         </span>
-        <span class="footer-source-item">The Kathmandu Post</span>
-        <span class="footer-source-item">eKantipur</span>
-        <span class="footer-source-item">Setopati</span>
-        <span class="footer-source-item">Online Khabar</span>
-        <span class="footer-source-item">Nagarik News</span>
-        <span class="footer-source-item">Annapurna Post</span>
+        <a class="footer-source-item footer-email-link" href="mailto:{{ site.email }}">{{ site.email }}</a>
       </div>
     </div>
   </footer>

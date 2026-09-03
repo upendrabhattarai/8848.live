@@ -1326,3 +1326,17 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   .category-box .outlet-items li { flex-direction: column; }
   .story-icons { max-width: none; justify-content: flex-start; margin-top: 6px; }
 }
+
+/* Small, faded list of covered outlets under the "Read full digest" link
+   on the latest-digest featured card (home page + top of News Portal page). */
+.card-sources {
+  margin: 12px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-3);
+  opacity: 0.75;
+  font-weight: 500;
+}
+
+.footer-email-link { text-decoration: none; }
+.footer-email-link:hover { color: #fff; text-decoration: underline; }

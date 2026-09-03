@@ -169,23 +169,8 @@ layout: default
   {% endif %}
 </div>
 
+{% include latest-digest-card.html %}
 {% if latest %}
-<div class="section-divider"><span class="section-label"><span data-lang-en>Latest digest</span><span data-lang-np>पछिल्लो डाइजेस्ट</span></span></div>
-<a class="card featured-card featured-card-full" href="{{ latest.url | relative_url }}">
-  <h2 class="card-title">
-    <span data-lang-en>Read what Nepal is reading today in 5 minutes</span>
-    <span data-lang-np>नेपालले आज के पढिरहेको छ, ५ मिनेटमा पढ्नुहोस्</span>
-  </h2>
-  <p class="card-date">{{ latest.date | date: "%B %-d, %Y" }}</p>
-  <p class="card-excerpt">
-    <span data-lang-en>{{ latest.summary_en | default: latest.excerpt | strip_html }}</span>
-    <span data-lang-np>{{ latest.summary_np | default: latest.excerpt | strip_html }}</span>
-  </p>
-  <span class="card-link">
-    <span data-lang-en>Read full digest →</span>
-    <span data-lang-np>पूरा डाइजेस्ट पढ्नुहोस् →</span>
-  </span>
-</a>
 <script>
 (function () {
   var twBtn = document.getElementById('ns-share-twitter');
