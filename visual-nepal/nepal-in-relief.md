@@ -106,21 +106,38 @@ description: "Nepal: A Province-by-Province Elevation Atlas — hillshaded relie
 
 <div class="relief-lightbox" id="relief-lightbox" role="dialog" aria-modal="true" aria-label="Full resolution relief map">
   <button type="button" class="relief-lightbox-close" id="relief-lightbox-close" aria-label="Close">&times;</button>
-  <img class="relief-lightbox-img" id="relief-lightbox-img" src="" alt="">
+  <div class="relief-lightbox-viewport" id="relief-lightbox-viewport">
+    <img class="relief-lightbox-img" id="relief-lightbox-img" src="" alt="">
+  </div>
   <p class="relief-lightbox-caption" id="relief-lightbox-caption"></p>
 </div>
 
 <script>
 (function () {
   var box = document.getElementById('relief-lightbox');
+  var viewport = document.getElementById('relief-lightbox-viewport');
   var img = document.getElementById('relief-lightbox-img');
   var caption = document.getElementById('relief-lightbox-caption');
   var closeBtn = document.getElementById('relief-lightbox-close');
 
+  var MAX_SCALE = 4;   // how far past "fit to window" scroll-zoom can go
+  var fitWidth = 0;    // px width of the image at 1x ("fit"), captured lazily
+
+  function resetZoom() {
+    img.style.width = '';
+    img.style.maxWidth = '';
+    img.style.maxHeight = '';
+    viewport.classList.remove('is-zoomed');
+    viewport.scrollLeft = 0;
+    viewport.scrollTop = 0;
+    fitWidth = 0;
+  }
+
   function open(src, label) {
+    resetZoom();
     img.src = src;
     img.alt = label;
-    caption.textContent = label;
+    caption.textContent = label + ' \u00b7 scroll to zoom, drag to pan';
     box.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
@@ -128,7 +145,77 @@ description: "Nepal: A Province-by-Province Elevation Atlas — hillshaded relie
     box.classList.remove('is-open');
     document.body.style.overflow = '';
     img.src = '';
+    resetZoom();
   }
+
+  // Wheel-zoom toward the cursor: resize the image in real pixels and
+  // adjust scrollLeft/scrollTop so the point under the cursor doesn't
+  // appear to move, the same trick image viewers like Google Maps use.
+  function zoomAt(clientX, clientY, factor) {
+    if (!img.naturalWidth) return;
+    var beforeRect = img.getBoundingClientRect();
+    if (!fitWidth) fitWidth = beforeRect.width;
+
+    var vpRect = viewport.getBoundingClientRect();
+    var mx = clientX - vpRect.left;
+    var my = clientY - vpRect.top;
+
+    // Position of the cursor within the image itself, in the image's
+    // current (pre-zoom-step) pixel space -- this is the point we'll
+    // keep fixed under the cursor after resizing.
+    var imgOffsetX = beforeRect.left - vpRect.left + viewport.scrollLeft;
+    var imgOffsetY = beforeRect.top - vpRect.top + viewport.scrollTop;
+    var ratioX = (mx + viewport.scrollLeft - imgOffsetX) / beforeRect.width;
+    var ratioY = (my + viewport.scrollTop - imgOffsetY) / beforeRect.height;
+
+    var newW = Math.min(fitWidth * MAX_SCALE, Math.max(fitWidth, beforeRect.width * factor));
+    if (newW <= fitWidth + 0.5) {
+      resetZoom();
+      return;
+    }
+    var newH = beforeRect.height * (newW / beforeRect.width);
+
+    img.style.maxWidth = 'none';
+    img.style.maxHeight = 'none';
+    img.style.width = newW + 'px';
+    viewport.classList.add('is-zoomed');
+
+    viewport.scrollLeft = ratioX * newW - mx;
+    viewport.scrollTop = ratioY * newH - my;
+  }
+
+  viewport.addEventListener('wheel', function (e) {
+    if (!box.classList.contains('is-open')) return;
+    e.preventDefault();
+    var factor = e.deltaY < 0 ? 1.2 : 1 / 1.2;
+    zoomAt(e.clientX, e.clientY, factor);
+  }, { passive: false });
+
+  viewport.addEventListener('dblclick', resetZoom);
+
+  // Click-and-drag panning once zoomed in (two-finger trackpad scroll
+  // and the scrollbar already work for free since this is a real
+  // scrollable element).
+  var dragging = false, startX = 0, startY = 0, startScrollX = 0, startScrollY = 0;
+  viewport.addEventListener('mousedown', function (e) {
+    if (!viewport.classList.contains('is-zoomed')) return;
+    dragging = true;
+    startX = e.clientX; startY = e.clientY;
+    startScrollX = viewport.scrollLeft; startScrollY = viewport.scrollTop;
+    viewport.classList.add('is-panning');
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    viewport.scrollLeft = startScrollX - (e.clientX - startX);
+    viewport.scrollTop = startScrollY - (e.clientY - startY);
+  });
+  window.addEventListener('mouseup', function () {
+    if (dragging) {
+      dragging = false;
+      viewport.classList.remove('is-panning');
+    }
+  });
 
   document.querySelectorAll('.relief-thumb').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -144,8 +231,8 @@ description: "Nepal: A Province-by-Province Elevation Atlas — hillshaded relie
   }
 
   closeBtn.addEventListener('click', close);
-  box.addEventListener('click', function (e) {
-    if (e.target === box) close();
+  viewport.addEventListener('click', function (e) {
+    if (e.target === viewport) close();
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && box.classList.contains('is-open')) close();

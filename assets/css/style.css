@@ -732,24 +732,52 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   .relief-grid { grid-template-columns: 1fr; }
 }
 
-/* Simple click-to-enlarge lightbox -- one full-res <img>, no carousel. */
+/* Simple click-to-enlarge lightbox -- one full-res <img>, no carousel.
+   Zoom is scroll-wheel driven: the viewport is a real scrollable element
+   and wheel just resizes the image (keeping the point under the cursor
+   fixed via scrollLeft/scrollTop math), so panning after zooming in is
+   just native scrolling -- two-finger trackpad scroll, the scrollbar, or
+   click-and-drag (added in JS) -- rather than a custom transform. */
 .relief-lightbox {
   position: fixed;
   inset: 0;
   z-index: 200;
   display: none;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   padding: 28px;
   background: rgba(8,9,11,0.88);
 }
 .relief-lightbox.is-open { display: flex; }
+.relief-lightbox-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+}
+/* Flexbox centering clips the start of overflowed content, so once zoomed
+   switch to top-left alignment -- the scroll math in JS already accounts
+   for this so the zoomed-to point stays put when the class flips. */
+.relief-lightbox-viewport.is-zoomed {
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: grab;
+}
+.relief-lightbox-viewport.is-panning { cursor: grabbing; }
+.relief-lightbox-viewport::-webkit-scrollbar { width: 10px; height: 10px; }
+.relief-lightbox-viewport::-webkit-scrollbar-track { background: transparent; }
+.relief-lightbox-viewport::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 6px; }
 .relief-lightbox-img {
   display: block;
   max-width: 100%;
   max-height: 100%;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-lg);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .relief-lightbox-caption {
   position: absolute;
