@@ -252,6 +252,25 @@ def main():
         redirect_url=f'{SITE_URL}/visual-nepal/waters-of-nepal-map/',
     )
 
+    # --- Nepal in Relief card ---
+    generate_map_card(
+        font_dir,
+        os.path.join(img_dir, 'nepal-in-relief.png'),
+        accent=TEAL,
+        eyebrow='Visual Nepal · Elevation Atlas',
+        title_lines=['Nepal in Relief'],
+        subtitle='A province-by-province elevation atlas — hillshaded relief and terrain for all seven provinces.',
+        tag_text='8848.live/visual-nepal',
+    )
+    write_share_page(
+        os.path.join(repo_root, 'share', 'visual-nepal', 'nepal-in-relief', 'index.html'),
+        title='Nepal in Relief — Visual Nepal',
+        description='Nepal: A Province-by-Province Elevation Atlas — hillshaded relief maps, elevation profiles, and terrain for all seven provinces, via 8848.live.',
+        image_url=f'{SITE_URL}/assets/shares/visual-nepal/nepal-in-relief.png',
+        page_url=f'{SITE_URL}/share/visual-nepal/nepal-in-relief/',
+        redirect_url=f'{SITE_URL}/visual-nepal/nepal-in-relief/',
+    )
+
     # --- Date converter card ---
     generate_date_converter_card(font_dir, os.path.join(repo_root, 'assets', 'shares', 'date-converter.png'))
     write_share_page(
@@ -266,9 +285,11 @@ def main():
     print('Done. Wrote:')
     print(' ', os.path.join(img_dir, 'flash-flood.png'))
     print(' ', os.path.join(img_dir, 'waters.png'))
+    print(' ', os.path.join(img_dir, 'nepal-in-relief.png'))
     print(' ', os.path.join(repo_root, 'assets', 'shares', 'date-converter.png'))
     print('  share/visual-nepal/flash-flood/index.html')
     print('  share/visual-nepal/waters/index.html')
+    print('  share/visual-nepal/nepal-in-relief/index.html')
     print('  share/date-converter/index.html')
 
 
