@@ -817,9 +817,9 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   gap: 24px;
   max-width: 1100px;
   margin: 0 auto 28px;
-  align-items: start;
+  align-items: stretch;
 }
-.converters-row .converter-card { max-width: none; margin: 0; }
+.converters-row .converter-card { max-width: none; margin: 0; width: 100%; height: 100%; }
 .converter-card {
   max-width: 620px;
   margin: 0 auto 28px;
@@ -828,6 +828,9 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .converter-card-title {
   margin: 0 0 16px;
