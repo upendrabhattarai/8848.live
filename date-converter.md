@@ -1,23 +1,28 @@
 ---
 layout: default
-title: Date Converter
+title: Date Converter & Age Calculator
 permalink: /date-converter/
 image: /assets/shares/date-converter.png
-description: Convert between the English (AD) and Nepali Bikram Sambat (BS) calendars, and browse both side by side.
+description: Convert between the English (AD) and Nepali Bikram Sambat (BS) calendars, browse both side by side, and calculate your age from either calendar.
 ---
 
 <div class="page-hero-head">
   <h1 class="page-hero-title">
-    <span data-lang-en>Date Converter</span>
-    <span data-lang-np>मिति परिवर्तक</span>
+    <span data-lang-en>Date Converter &amp; Age Calculator</span>
+    <span data-lang-np>मिति परिवर्तक तथा उमेर क्यालकुलेटर</span>
   </h1>
   <p class="page-hero-subtitle">
-    <span data-lang-en>Convert between the English (AD) and Nepali Bikram Sambat (BS) calendars, and browse both side by side.</span>
-    <span data-lang-np>अंग्रेजी (AD) र नेपाली विक्रम संवत् (BS) पात्रोबीच मिति रूपान्तरण गर्नुहोस्, र दुवैलाई छेउछेउ हेर्नुहोस्।</span>
+    <span data-lang-en>Convert between the English (AD) and Nepali Bikram Sambat (BS) calendars, browse both side by side, and calculate your age from either calendar.</span>
+    <span data-lang-np>अंग्रेजी (AD) र नेपाली विक्रम संवत् (BS) पात्रोबीच मिति रूपान्तरण गर्नुहोस्, दुवैलाई छेउछेउ हेर्नुहोस्, र आफ्नो उमेर पनि गणना गर्नुहोस्।</span>
   </p>
 </div>
 
+<div class="converters-row">
 <div class="converter-card" id="date-converter">
+  <h2 class="converter-card-title">
+    <span data-lang-en>Date Converter</span>
+    <span data-lang-np>मिति परिवर्तक</span>
+  </h2>
   <div class="converter-tabs">
     <button type="button" class="converter-tab active" data-mode="ad-to-bs">
       <span data-lang-en>English → Nepali</span>
@@ -73,6 +78,62 @@ description: Convert between the English (AD) and Nepali Bikram Sambat (BS) cale
   </button>
 </div>
 
+<div class="converter-card" id="age-calculator">
+  <h2 class="converter-card-title">
+    <span data-lang-en>Age Calculator</span>
+    <span data-lang-np>उमेर क्यालकुलेटर</span>
+  </h2>
+  <div class="converter-tabs">
+    <button type="button" class="converter-tab active" data-mode="dob-ad">
+      <span data-lang-en>English date</span>
+      <span data-lang-np>अंग्रेजी मिति</span>
+    </button>
+    <button type="button" class="converter-tab" data-mode="dob-bs">
+      <span data-lang-en>Nepali date</span>
+      <span data-lang-np>नेपाली मिति</span>
+    </button>
+  </div>
+
+  <div class="converter-panel" id="panel-dob-ad">
+    <label class="converter-label" for="dob-ad-input">
+      <span data-lang-en>Date of birth (English)</span>
+      <span data-lang-np>जन्म मिति (अंग्रेजी)</span>
+    </label>
+    <input type="date" id="dob-ad-input" class="converter-input" min="1943-04-14">
+  </div>
+
+  <div class="converter-panel" id="panel-dob-bs" hidden>
+    <label class="converter-label">
+      <span data-lang-en>Date of birth (Nepali)</span>
+      <span data-lang-np>जन्म मिति (नेपाली)</span>
+    </label>
+    <div class="converter-select-row">
+      <select id="dob-bs-year-select" class="converter-select" aria-label="BS birth year"></select>
+      <select id="dob-bs-month-select" class="converter-select" aria-label="BS birth month"></select>
+      <select id="dob-bs-day-select" class="converter-select" aria-label="BS birth day"></select>
+    </div>
+  </div>
+
+  <div class="converter-result" id="age-result">
+    <div class="converter-result-bs">
+      <span class="converter-result-label">
+        <span data-lang-en>Age</span>
+        <span data-lang-np>उमेर</span>
+      </span>
+      <span class="converter-result-value" id="age-value">—</span>
+    </div>
+    <div class="converter-result-divider">🎂</div>
+    <div class="converter-result-ad">
+      <span class="converter-result-label">
+        <span data-lang-en>Next birthday</span>
+        <span data-lang-np>अर्को जन्मदिन</span>
+      </span>
+      <span class="converter-result-value" id="age-next-birthday">—</span>
+    </div>
+  </div>
+</div>
+</div>
+
 <div class="tool-share-row">
   <button type="button" class="share-btn" data-share="twitter" aria-label="Share on X">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-6.8L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.3L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z"/></svg>
@@ -88,7 +149,7 @@ description: Convert between the English (AD) and Nepali Bikram Sambat (BS) cale
 <script>
 (function () {
   var shareUrl = 'https://8848.live/share/date-converter/';
-  var text = 'Date Converter (AD ↔ BS) — via 8848.live';
+  var text = 'Date Converter & Age Calculator (AD ↔ BS) — via 8848.live';
   var row = document.currentScript.previousElementSibling;
   if (!row || !row.classList.contains('tool-share-row')) {
     row = document.querySelector('.tool-share-row');
@@ -407,5 +468,172 @@ description: Convert between the English (AD) and Nepali Bikram Sambat (BS) cale
   populateBsYearSelect();
   bsYearSel.value = String(selected.bs.year);
   syncAll();
+
+  // Expose shared BS<->AD helpers + today's date for other tools on this
+  // page (e.g. the Age Calculator) so we don't duplicate the conversion table.
+  window.NepaliDate = {
+    bsToAD: bsToAD,
+    adToBS: adToBS,
+    bsDaysInMonth: bsDaysInMonth,
+    BS_MIN_YEAR: BS_MIN_YEAR,
+    BS_MAX_YEAR: BS_MAX_YEAR,
+    MONTH_EN: MONTH_EN,
+    MONTH_NP: MONTH_NP,
+    lang: lang,
+    numStr: numStr,
+    today: { ad: todayAD, bs: todayBS }
+  };
+  document.dispatchEvent(new CustomEvent('nepali-date-ready'));
+})();
+</script>
+
+<script>
+(function () {
+  var NP = window.NepaliDate;
+  if (!NP) return;
+
+  var tabs = document.querySelectorAll('#age-calculator .converter-tab');
+  var panelAD = document.getElementById('panel-dob-ad');
+  var panelBS = document.getElementById('panel-dob-bs');
+  var adInput = document.getElementById('dob-ad-input');
+  var bsYearSel = document.getElementById('dob-bs-year-select');
+  var bsMonthSel = document.getElementById('dob-bs-month-select');
+  var bsDaySel = document.getElementById('dob-bs-day-select');
+  var ageValue = document.getElementById('age-value');
+  var nextBirthdayValue = document.getElementById('age-next-birthday');
+
+  if (!adInput) return;
+
+  var todayAD = NP.today.ad;
+  var mode = 'dob-ad';
+
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+  function daysInMonthAD(y, m) { return new Date(Date.UTC(y, m + 1, 0)).getUTCDate(); }
+
+  function populateBsMonthSelect() {
+    var cur = bsMonthSel.value;
+    var names = NP.lang() === 'np' ? NP.MONTH_NP : NP.MONTH_EN;
+    bsMonthSel.innerHTML = names.map(function (n, i) { return '<option value="' + i + '">' + n + '</option>'; }).join('');
+    bsMonthSel.value = cur !== '' ? cur : '0';
+  }
+  function populateBsYearSelect() {
+    var opts = [];
+    for (var y = NP.BS_MIN_YEAR; y <= NP.today.bs.year; y++) { opts.push('<option value="' + y + '">' + y + '</option>'); }
+    bsYearSel.innerHTML = opts.join('');
+  }
+  function populateBsDaySelect(year, month, keepDay) {
+    var max = NP.bsDaysInMonth(year, month);
+    var opts = [];
+    for (var d = 1; d <= max; d++) { opts.push('<option value="' + d + '">' + d + '</option>'); }
+    bsDaySel.innerHTML = opts.join('');
+    bsDaySel.value = String(Math.min(keepDay || 1, max));
+  }
+
+  function calcAgeParts(by, bm, bd, ty, tm, td) {
+    var y = ty - by, m = tm - bm, d = td - bd;
+    if (d < 0) {
+      m -= 1;
+      var pm = tm - 1, py = ty;
+      if (pm < 0) { pm = 11; py--; }
+      d += daysInMonthAD(py, pm);
+    }
+    if (m < 0) { m += 12; y -= 1; }
+    return { years: y, months: m, days: d };
+  }
+
+  function nextBirthdayDaysAway(bm, bd, ty, tm, td) {
+    var nbYear = ty;
+    var thisYearMs = Date.UTC(ty, bm, Math.min(bd, daysInMonthAD(ty, bm)));
+    var todayMs = Date.UTC(ty, tm, td);
+    if (thisYearMs < todayMs) { nbYear = ty + 1; }
+    var targetMs = Date.UTC(nbYear, bm, Math.min(bd, daysInMonthAD(nbYear, bm)));
+    return Math.round((targetMs - todayMs) / 86400000);
+  }
+
+  function ageString(y, m, d) {
+    if (NP.lang() === 'np') {
+      return NP.numStr(y) + ' वर्ष ' + NP.numStr(m) + ' महिना ' + NP.numStr(d) + ' दिन';
+    }
+    return y + ' yr' + (y === 1 ? '' : 's') + ' ' + m + ' mo' + (m === 1 ? '' : 's') + ' ' + d + ' day' + (d === 1 ? '' : 's');
+  }
+  function nextBirthdayString(days) {
+    if (days === 0) { return NP.lang() === 'np' ? 'आज!' : 'Today!'; }
+    if (NP.lang() === 'np') { return NP.numStr(days) + ' दिनमा'; }
+    return 'in ' + days + ' day' + (days === 1 ? '' : 's');
+  }
+
+  function computeFromAD(y, m, d) {
+    var ty = todayAD.year, tm = todayAD.month, td = todayAD.date;
+    if (Date.UTC(y, m, d) > Date.UTC(ty, tm, td)) {
+      ageValue.textContent = NP.lang() === 'np' ? 'भविष्यको मिति' : 'Future date';
+      nextBirthdayValue.textContent = '—';
+      return;
+    }
+    var parts = calcAgeParts(y, m, d, ty, tm, td);
+    ageValue.textContent = ageString(parts.years, parts.months, parts.days);
+    nextBirthdayValue.textContent = nextBirthdayString(nextBirthdayDaysAway(m, d, ty, tm, td));
+  }
+
+  function readADAndCompute() {
+    var parts = adInput.value.split('-');
+    if (parts.length !== 3) return;
+    var y = parseInt(parts[0], 10), m = parseInt(parts[1], 10) - 1, d = parseInt(parts[2], 10);
+    if (!y || isNaN(m) || isNaN(d)) return;
+    computeFromAD(y, m, d);
+  }
+  function readBSAndCompute() {
+    var y = parseInt(bsYearSel.value, 10), m = parseInt(bsMonthSel.value, 10), d = parseInt(bsDaySel.value, 10);
+    var ad = NP.bsToAD(y, m, d);
+    computeFromAD(ad.year, ad.month, ad.date);
+  }
+
+  Array.prototype.forEach.call(tabs, function (tab) {
+    tab.addEventListener('click', function () {
+      Array.prototype.forEach.call(tabs, function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      mode = tab.getAttribute('data-mode');
+      panelAD.hidden = mode !== 'dob-ad';
+      panelBS.hidden = mode !== 'dob-bs';
+      if (mode === 'dob-ad') { readADAndCompute(); } else { readBSAndCompute(); }
+    });
+  });
+
+  adInput.addEventListener('change', readADAndCompute);
+  bsYearSel.addEventListener('change', function () {
+    populateBsDaySelect(parseInt(bsYearSel.value, 10), parseInt(bsMonthSel.value, 10), parseInt(bsDaySel.value, 10));
+    readBSAndCompute();
+  });
+  bsMonthSel.addEventListener('change', function () {
+    populateBsDaySelect(parseInt(bsYearSel.value, 10), parseInt(bsMonthSel.value, 10), parseInt(bsDaySel.value, 10));
+    readBSAndCompute();
+  });
+  bsDaySel.addEventListener('change', readBSAndCompute);
+
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.addEventListener('click', function () {
+      setTimeout(function () {
+        populateBsMonthSelect();
+        if (mode === 'dob-ad') { readADAndCompute(); } else { readBSAndCompute(); }
+      }, 0);
+    });
+  }
+
+  // ---- init: default to a birth date 20 years before today so the box
+  // shows a real computed age right away, same spirit as the date
+  // converter defaulting to "today". ----
+  adInput.max = todayAD.year + '-' + pad2(todayAD.month + 1) + '-' + pad2(todayAD.date);
+  var defaultADYear = todayAD.year - 20;
+  var defaultADDate = Math.min(todayAD.date, daysInMonthAD(defaultADYear, todayAD.month));
+  adInput.value = defaultADYear + '-' + pad2(todayAD.month + 1) + '-' + pad2(defaultADDate);
+
+  var defaultBS = NP.adToBS(defaultADYear, todayAD.month, defaultADDate);
+  populateBsYearSelect();
+  bsYearSel.value = String(defaultBS.year);
+  populateBsMonthSelect();
+  bsMonthSel.value = String(defaultBS.month);
+  populateBsDaySelect(defaultBS.year, defaultBS.month, defaultBS.date);
+
+  readADAndCompute();
 })();
 </script>
