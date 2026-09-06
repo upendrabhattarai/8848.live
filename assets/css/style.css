@@ -1622,8 +1622,13 @@ html[data-lang="np"] [data-lang-en] { display: none; }
   box-shadow: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
-.newsletter-signup--footer .newsletter-signup-desc { color: var(--text-3); }
+.newsletter-signup--footer .newsletter-signup-desc { color: var(--text-3); margin-left: auto; margin-right: auto; }
+.newsletter-signup--footer .newsletter-signup-status { text-align: center; }
 @media (max-width: 560px) {
   .newsletter-signup-form { flex-direction: column; }
   .newsletter-signup-btn { width: 100%; }
