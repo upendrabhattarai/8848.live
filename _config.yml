@@ -10,4 +10,4 @@ timezone: Asia/Kathmandu
 # Buttondown newsletter username (from https://buttondown.com/settings) used by
 # the email-subscribe form in _includes/newsletter_signup.html. Sign up free at
 # https://buttondown.com/register, then replace this placeholder.
-buttondown_username: "YOUR_BUTTONDOWN_USERNAME"
+buttondown_username: "upen"
