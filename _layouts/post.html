@@ -21,6 +21,9 @@ layout: default
   <div class="post-content">
     {{ content }}
   </div>
+
+  {% include newsletter_signup.html variant="post" %}
+
   <a class="back-link" href="{{ '/' | relative_url }}">
     <span data-lang-en>← Back to all digests</span>
     <span data-lang-np>← सबै डाइजेस्टमा फर्कनुहोस्</span>

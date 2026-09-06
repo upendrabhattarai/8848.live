@@ -110,6 +110,9 @@
         <a class="footer-source-item footer-email-link" href="mailto:{{ site.email }}">{{ site.email }}</a>
       </div>
     </div>
+    <div class="wrap">
+      {% include newsletter_signup.html variant="footer" %}
+    </div>
   </footer>
   <button id="scroll-top-btn" class="scroll-top-btn" type="button" aria-label="Scroll to top">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
@@ -153,6 +156,58 @@
         });
       }
     })();
+  </script>
+
+  <script>
+  (function () {
+    // Newsletter signup (Buttondown embed form) — one or more
+    // [data-newsletter-form] elements may be present on a page (footer +
+    // below a post). We submit them into a shared hidden iframe so the
+    // page doesn't navigate away, then show a bilingual status message.
+    var forms = document.querySelectorAll('[data-newsletter-form]');
+    if (!forms.length) return;
+
+    function lang() { return document.documentElement.getAttribute('data-lang') === 'np' ? 'np' : 'en'; }
+
+    var MSG_SUBMITTING = { en: 'Submitting…', np: 'पेश गर्दै…' };
+    var MSG_DONE = {
+      en: 'Almost done — check your inbox to confirm the subscription. If you don’t see it, check spam/junk.',
+      np: 'लगभग सकियो — सब्स्क्रिप्सन पुष्टि गर्न आफ्नो इनबक्स हेर्नुहोस्। नदेखे स्प्याम/जंक फोल्डर पनि जाँच्नुहोस्।'
+    };
+
+    var frameName = 'buttondown-newsletter-frame';
+    var frame = document.createElement('iframe');
+    frame.name = frameName;
+    frame.title = 'Newsletter subscription response';
+    frame.hidden = true;
+    document.body.appendChild(frame);
+
+    var activeForm = null;
+
+    function setStatus(form, msg) {
+      var status = form.parentElement ? form.parentElement.querySelector('[data-newsletter-status]') : null;
+      if (status) { status.textContent = msg[lang()]; }
+    }
+
+    frame.addEventListener('load', function () {
+      if (!activeForm) return;
+      setStatus(activeForm, MSG_DONE);
+      var btn = activeForm.querySelector('.newsletter-signup-btn');
+      if (btn) { btn.disabled = false; }
+      activeForm.reset();
+      activeForm = null;
+    });
+
+    Array.prototype.forEach.call(forms, function (form) {
+      form.target = frameName;
+      form.addEventListener('submit', function () {
+        activeForm = form;
+        var btn = form.querySelector('.newsletter-signup-btn');
+        if (btn) { btn.disabled = true; }
+        setStatus(form, MSG_SUBMITTING);
+      });
+    });
+  })();
   </script>
 </body>
 </html>

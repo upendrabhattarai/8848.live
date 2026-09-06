@@ -1,0 +1,40 @@
+{% assign nl_variant = include.variant | default: "default" %}
+{% assign nl_username = site.buttondown_username %}
+<div class="newsletter-signup newsletter-signup--{{ nl_variant }}">
+  <div class="newsletter-signup-text">
+    <p class="newsletter-signup-title">
+      <span data-lang-en>Get the daily digest by email</span>
+      <span data-lang-np>दैनिक डाइजेस्ट इमेलमा पाउनुहोस्</span>
+    </p>
+    <p class="newsletter-signup-desc">
+      <span data-lang-en>One email a day with Nepal's top headlines, plus occasional site updates. No spam, unsubscribe anytime.</span>
+      <span data-lang-np>दिनको एउटा मात्र इमेल — नेपालका मुख्य शीर्षकहरू र कहिलेकाहीं वेबसाइट अपडेट। स्प्याम छैन, जुनसुकै बेला अनसब्स्क्राइब गर्न सकिन्छ।</span>
+    </p>
+  </div>
+  <form
+    class="newsletter-signup-form"
+    action="https://buttondown.com/api/emails/embed-subscribe/{{ nl_username }}"
+    method="post"
+    data-newsletter-form
+  >
+    <label class="sr-only" for="newsletter-email-{{ nl_variant }}">
+      <span data-lang-en>Email address</span>
+      <span data-lang-np>इमेल ठेगाना</span>
+    </label>
+    <input
+      id="newsletter-email-{{ nl_variant }}"
+      class="newsletter-signup-input"
+      type="email"
+      name="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+      required
+    >
+    <input type="hidden" name="embed" value="1">
+    <button type="submit" class="newsletter-signup-btn">
+      <span data-lang-en>Subscribe</span>
+      <span data-lang-np>सब्स्क्राइब</span>
+    </button>
+  </form>
+  <p class="newsletter-signup-status" data-newsletter-status aria-live="polite"></p>
+</div>
