@@ -14,7 +14,40 @@ layout: default
     <span data-lang-np>अद्यावधिक {{ latest.date | date: "%B %-d, %Y" }}</span>
   </p>
   {% endif %}
+  <p class="hero-tagline">
+    <span data-lang-en>Ten newsrooms, one page. Every morning we read Nepal's major outlets, cluster the same story across them, and rank what matters most.</span>
+    <span data-lang-np>दस समाचार कक्ष, एउटै पृष्ठ। हरेक बिहान नेपालका प्रमुख सञ्चारमाध्यम पढेर एउटै घटनाका समाचार जोडिन्छन् र सबैभन्दा महत्त्वपूर्ण कुरा क्रमबद्ध गरिन्छ।</span>
+  </p>
+  {% if latest %}
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="{{ latest.url | relative_url }}"><span data-lang-en>Read today's digest</span><span data-lang-np>आजको डाइजेस्ट पढ्नुहोस्</span> <span aria-hidden="true">→</span></a>
+    <button type="button" class="btn btn-ghost" data-open-search>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <span data-lang-en>Search every story</span><span data-lang-np>सबै समाचार खोज्नुहोस्</span>
+      <kbd class="search-kbd"><span class="kbd-mod">⌘</span> K</kbd>
+    </button>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><span class="stat-num">10</span><span class="stat-label"><span data-lang-en>outlets read daily</span><span data-lang-np>दैनिक पढिने सञ्चारमाध्यम</span></span></div>
+    <div class="stat"><span class="stat-num" data-stat="stories">—</span><span class="stat-label"><span data-lang-en>stories today</span><span data-lang-np>आजका समाचार</span></span></div>
+    <div class="stat"><span class="stat-num" data-stat="multi">—</span><span class="stat-label"><span data-lang-en>confirmed by 2+ outlets</span><span data-lang-np>२+ स्रोतबाट पुष्टि</span></span></div>
+    <div class="stat"><span class="stat-num">{{ site.posts.size }}</span><span class="stat-label"><span data-lang-en>daily digests archived</span><span data-lang-np>संग्रहित डाइजेस्ट</span></span></div>
+  </div>
+  {% endif %}
 </div>
+
+{% if latest %}
+<section class="home-section" id="top-today" hidden>
+  <div class="home-section-head">
+    <div>
+      <h2 class="home-section-title"><span data-lang-en>Top today</span><span data-lang-np>आजका शीर्ष समाचार</span></h2>
+      <p class="home-section-sub"><span data-lang-en>Ranked by how many newsrooms are covering the same story</span><span data-lang-np>एउटै घटना कति सञ्चारमाध्यमले समेटे भन्ने आधारमा क्रमबद्ध</span></p>
+    </div>
+    <a class="view-all" href="{{ latest.url | relative_url }}"><span data-lang-en>View all</span><span data-lang-np>सबै हेर्नुहोस्</span> →</a>
+  </div>
+  <ol class="rank-list" id="rank-list"></ol>
+</section>
+{% endif %}
 <div class="nepal-today-grid">
   <div class="wordcloud-col">
     {% if latest.wordcloud %}
@@ -168,6 +201,67 @@ layout: default
   </div>
   {% endif %}
 </div>
+
+{% if latest %}
+<section class="home-section" id="browse-topics" hidden>
+  <div class="home-section-head">
+    <div>
+      <h2 class="home-section-title"><span data-lang-en>Browse by topic</span><span data-lang-np>विषयअनुसार हेर्नुहोस्</span></h2>
+      <p class="home-section-sub"><span data-lang-en>Today's digest, grouped the way the news actually broke</span><span data-lang-np>आजको डाइजेस्ट, विषयगत रूपमा</span></p>
+    </div>
+  </div>
+  <div class="topic-chips" id="topic-chips"></div>
+</section>
+<script>
+(function () {
+  var LATEST = '{{ latest.date | date: "%Y-%m-%d" }}';
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function favicons(o, max) {
+    return o.slice(0, max).map(function (d) { return '<img src="https://www.google.com/s2/favicons?sz=32&domain=' + esc(d) + '" alt="" loading="lazy">'; }).join('');
+  }
+  function go() {
+    if (!window.load8848Index) return setTimeout(go, 50);
+    window.load8848Index().then(function (idx) {
+      var today = idx.filter(function (r) { return r.d === LATEST; });
+      if (!today.length) return;
+      var multi = today.filter(function (r) { return r.o.length > 1; }).length;
+      var s = document.querySelector('[data-stat="stories"]'); if (s) s.textContent = today.length;
+      var m = document.querySelector('[data-stat="multi"]'); if (m) m.textContent = multi;
+
+      var ranked = today.map(function (r, i) { return { r: r, i: i }; })
+        .sort(function (a, b) { return (b.r.o.length - a.r.o.length) || (a.i - b.i); })
+        .slice(0, 5);
+      var html = ranked.map(function (x, n) {
+        var r = x.r;
+        return '<li class="rank-card" style="--d:' + (n * 60) + 'ms"><a href="' + esc(window.story8848Href(r)) + '">' +
+          '<span class="rank-num">' + (n + 1) + '</span>' +
+          '<span class="rank-body"><span class="rank-topic"><span data-lang-en>' + esc(r.t) + '</span><span data-lang-np>' + esc(r.tn || r.t) + '</span></span>' +
+          '<span class="rank-title">' + esc(r.h) + '</span></span>' +
+          '<span class="rank-meta"><span class="rank-icons">' + favicons(r.o, 5) + '</span>' +
+          '<span class="rank-count">' + r.o.length + ' <span data-lang-en>' + (r.o.length === 1 ? 'outlet' : 'outlets') + '</span><span data-lang-np>स्रोत</span></span></span>' +
+          '</a></li>';
+      }).join('');
+      var list = document.getElementById('rank-list');
+      if (list) { list.innerHTML = html; document.getElementById('top-today').hidden = false; }
+
+      var topics = [], seen = {};
+      today.forEach(function (r) {
+        if (!seen[r.t]) { seen[r.t] = { r: r, n: 0, o: {} }; topics.push(seen[r.t]); }
+        seen[r.t].n++; r.o.forEach(function (d) { seen[r.t].o[d] = 1; });
+      });
+      var chips = topics.map(function (t, n) {
+        return '<a class="topic-chip" style="--d:' + (n * 40) + 'ms" href="' + esc(t.r.u + '#outlet-' + window.slug8848(t.r.t)) + '">' +
+          '<span class="topic-chip-name"><span data-lang-en>' + esc(t.r.t) + '</span><span data-lang-np>' + esc(t.r.tn || t.r.t) + '</span></span>' +
+          '<span class="topic-chip-count">' + t.n + '</span></a>';
+      }).join('');
+      var box = document.getElementById('topic-chips');
+      if (box) { box.innerHTML = chips; document.getElementById('browse-topics').hidden = false; }
+    });
+  }
+  go();
+})();
+</script>
+{% endif %}
 
 {% include latest-digest-card.html %}
 {% if latest %}

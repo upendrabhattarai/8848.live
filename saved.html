@@ -1,0 +1,45 @@
+---
+layout: default
+title: Saved
+permalink: /saved/
+---
+<article class="card page-card saved-page">
+<div class="saved-head">
+  <h1 class="page-hero-title"><span data-lang-en>Saved stories</span><span data-lang-np>सुरक्षित समाचार</span></h1>
+  <p class="home-section-sub"><span data-lang-en>Stories you bookmark from any digest live here, on this device only.</span><span data-lang-np>कुनै पनि डाइजेस्टबाट सुरक्षित गरिएका समाचार यहाँ देखिन्छन् (यही उपकरणमा मात्र)।</span></p>
+</div>
+<div id="saved-list" class="saved-list"></div>
+<div id="saved-empty" class="saved-empty" hidden>
+  <p><span data-lang-en>Nothing saved yet. Tap <strong>Save</strong> under any story in a digest to keep it here.</span><span data-lang-np>अहिलेसम्म केही सुरक्षित छैन। डाइजेस्टको कुनै समाचारमुनि <strong>सुरक्षित</strong> थिच्नुहोस्।</span></p>
+  <a class="btn btn-primary" href="{{ site.posts.first.url | relative_url }}"><span data-lang-en>Open today's digest</span><span data-lang-np>आजको डाइजेस्ट खोल्नुहोस्</span> →</a>
+</div>
+</article>
+<script>
+(function () {
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function draw() {
+    if (!window.saved8848) return setTimeout(draw, 50);
+    var arr = window.saved8848.all();
+    var list = document.getElementById('saved-list');
+    document.getElementById('saved-empty').hidden = arr.length > 0;
+    list.innerHTML = arr.map(function (s, i) {
+      var icons = (s.o || []).slice(0, 6).map(function (d) { return '<img src="https://www.google.com/s2/favicons?sz=32&domain=' + esc(d) + '" alt="" loading="lazy">'; }).join('');
+      return '<article class="saved-card">' +
+        '<div class="saved-meta"><span class="rank-topic"><span data-lang-en>' + esc(s.t) + '</span><span data-lang-np>' + esc(s.tn || s.t) + '</span></span><span class="saved-date">' + esc(s.d) + '</span></div>' +
+        '<a class="saved-title" href="' + esc(s.u) + '">' + esc(s.h) + '</a>' +
+        (s.s ? '<p class="saved-summary">' + esc(s.s) + (s.s.length >= 220 ? '…' : '') + '</p>' : '') +
+        '<div class="saved-foot"><span class="rank-icons">' + icons + '</span>' +
+        '<button type="button" class="story-act" data-remove="' + i + '"><span data-lang-en>Remove</span><span data-lang-np>हटाउनुहोस्</span></button></div></article>';
+    }).join('');
+  }
+  document.getElementById('saved-list').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-remove]');
+    if (!b) return;
+    var arr = window.saved8848.all();
+    arr.splice(+b.getAttribute('data-remove'), 1);
+    window.saved8848.write(arr);
+    draw();
+  });
+  draw();
+})();
+</script>

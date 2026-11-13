@@ -1,0 +1,176 @@
+<div id="cmdk" class="cmdk" hidden aria-hidden="true">
+  <div class="cmdk-backdrop" data-cmdk-close></div>
+  <div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Search 8848.live">
+    <div class="cmdk-input-row">
+      <svg class="cmdk-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="cmdk-input" class="cmdk-input" type="text" autocomplete="off" spellcheck="false" placeholder="Search headlines, topics, digests…  /  शीर्षक खोज्नुहोस्…">
+      <kbd class="cmdk-esc" data-cmdk-close>Esc</kbd>
+    </div>
+    <div id="cmdk-list" class="cmdk-list" role="listbox"></div>
+    <div class="cmdk-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> <span data-lang-en>navigate</span><span data-lang-np>सार्नुहोस्</span></span>
+      <span><kbd>↵</kbd> <span data-lang-en>open</span><span data-lang-np>खोल्नुहोस्</span></span>
+      <span class="cmdk-foot-brand">8848LIVE</span>
+    </div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(function () {
+  var root = document.getElementById('cmdk');
+  var input = document.getElementById('cmdk-input');
+  var list = document.getElementById('cmdk-list');
+  if (!root || !input || !list) return;
+  var INDEX_URL = '{{ "/search.json" | relative_url }}';
+  var LATEST_URL = '{{ site.posts.first.url | relative_url }}';
+  var index = null, loading = null, items = [], active = 0, lastFocus = null;
+
+  function lang() { return document.documentElement.getAttribute('data-lang') === 'np' ? 'np' : 'en'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var decoder = document.createElement('textarea');
+  function decode(s) { decoder.innerHTML = s || ''; return decoder.value; }
+
+  window.load8848Index = function () {
+    if (index) return Promise.resolve(index);
+    if (!loading) {
+      loading = fetch(INDEX_URL).then(function (r) { return r.json(); }).then(function (rows) {
+        index = rows.filter(Boolean).map(function (r) {
+          r.h = decode(r.h); r.t = decode(r.t); r.tn = decode(r.tn);
+          r.hay = (r.h + ' ' + r.t + ' ' + r.tn + ' ' + r.d).toLowerCase();
+          return r;
+        });
+        return index;
+      }).catch(function () { index = []; return index; });
+    }
+    return loading;
+  };
+
+  function toggleTheme() { var b = document.getElementById('theme-toggle'); if (b) b.click(); }
+  function toggleLang() { var b = document.getElementById('lang-toggle'); if (b) b.click(); }
+  var ACTIONS = [
+    { en: "Read today's digest", np: 'आजको डाइजेस्ट पढ्नुहोस्', href: LATEST_URL, icon: '★' },
+    { en: 'News Portal (archive)', np: 'समाचार पोर्टल', href: '{{ "/archive/" | relative_url }}', icon: '▤' },
+    { en: 'Saved stories', np: 'सुरक्षित समाचार', href: '{{ "/saved/" | relative_url }}', icon: '♥' },
+    { en: 'Visual Nepal', np: 'दृश्य नेपाल', href: '{{ "/visual-nepal/" | relative_url }}', icon: '◎' },
+    { en: 'Date Converter', np: 'मिति परिवर्तक', href: '{{ "/date-converter/" | relative_url }}', icon: '⇄' },
+    { en: 'Toggle dark / light mode', np: 'डार्क / लाइट मोड', run: toggleTheme, icon: '◐' },
+    { en: 'Switch language (EN / नेपाली)', np: 'भाषा परिवर्तन (EN / नेपाली)', run: toggleLang, icon: 'अ' }
+  ];
+
+  function render() {
+    var q = input.value.trim().toLowerCase();
+    var html = '';
+    items = [];
+    if (!q) {
+      html += '<div class="cmdk-group">' + (lang() === 'np' ? 'छिटो कार्य' : 'Quick actions') + '</div>';
+      ACTIONS.forEach(function (a) {
+        items.push(a);
+        html += '<div class="cmdk-item" role="option" data-i="' + (items.length - 1) + '"><span class="cmdk-ico">' + a.icon + '</span><span class="cmdk-main">' + esc(a[lang()]) + '</span></div>';
+      });
+    } else if (!index) {
+      html = '<div class="cmdk-empty">' + (lang() === 'np' ? 'लोड हुँदैछ…' : 'Loading…') + '</div>';
+    } else {
+      var terms = q.split(/\s+/);
+      var hits = index.filter(function (r) { return terms.every(function (t) { return r.hay.indexOf(t) !== -1; }); });
+      var topics = {}, topicList = [];
+      hits.forEach(function (r) { var k = r.d + '|' + r.t; if (!topics[k] && (r.t + ' ' + r.tn).toLowerCase().indexOf(q) !== -1) { topics[k] = 1; topicList.push(r); } });
+      if (topicList.length) {
+        html += '<div class="cmdk-group">' + (lang() === 'np' ? 'विषय' : 'Topics') + '</div>';
+        topicList.slice(0, 4).forEach(function (r) {
+          items.push({ href: r.u + '#outlet-' + slug(r.t) });
+          html += '<div class="cmdk-item" role="option" data-i="' + (items.length - 1) + '"><span class="cmdk-ico">#</span><span class="cmdk-main">' + esc(lang() === 'np' && r.tn ? r.tn : r.t) + '</span><span class="cmdk-meta">' + r.d + '</span></div>';
+        });
+      }
+      html += '<div class="cmdk-group">' + (lang() === 'np' ? 'समाचार' : 'Stories') + ' <span class="cmdk-count">' + hits.length + '</span></div>';
+      if (!hits.length) html += '<div class="cmdk-empty">' + (lang() === 'np' ? 'केही भेटिएन' : 'No stories found') + '</div>';
+      hits.slice(0, 40).forEach(function (r) {
+        items.push({ href: storyHref(r) });
+        var icons = r.o.slice(0, 4).map(function (d) { return '<img src="https://www.google.com/s2/favicons?sz=32&domain=' + esc(d) + '" alt="" loading="lazy">'; }).join('');
+        html += '<div class="cmdk-item" role="option" data-i="' + (items.length - 1) + '"><span class="cmdk-main"><span class="cmdk-title">' + esc(r.h) + '</span><span class="cmdk-sub">' + esc(lang() === 'np' && r.tn ? r.tn : r.t) + ' · ' + r.d + '</span></span><span class="cmdk-icons">' + icons + '</span></div>';
+      });
+    }
+    list.innerHTML = html;
+    active = 0;
+    highlight();
+  }
+
+  function slug(s) { return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+  function storyHref(r) { return r.u + '?hl=' + encodeURIComponent(r.h) + '#outlet-' + slug(r.t); }
+  window.story8848Href = storyHref;
+  window.slug8848 = slug;
+
+  function highlight() {
+    var els = list.querySelectorAll('.cmdk-item');
+    els.forEach(function (el, i) { el.classList.toggle('active', i === active); });
+    if (els[active]) els[active].scrollIntoView({ block: 'nearest' });
+  }
+  function choose(i) {
+    var it = items[i];
+    if (!it) return;
+    if (it.run) { it.run(); close(); return; }
+    window.location.href = it.href;
+  }
+  function open() {
+    lastFocus = document.activeElement;
+    root.hidden = false; root.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('cmdk-open');
+    input.value = '';
+    render();
+    setTimeout(function () { input.focus(); }, 10);
+    window.load8848Index().then(function () { if (input.value) render(); });
+  }
+  function close() {
+    root.hidden = true; root.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('cmdk-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  window.open8848Search = open;
+
+  input.addEventListener('input', render);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); active = Math.min(active + 1, items.length - 1); highlight(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(active - 1, 0); highlight(); }
+    else if (e.key === 'Enter') { e.preventDefault(); choose(active); }
+  });
+  list.addEventListener('click', function (e) { var el = e.target.closest('.cmdk-item'); if (el) choose(+el.getAttribute('data-i')); });
+  list.addEventListener('mousemove', function (e) { var el = e.target.closest('.cmdk-item'); if (el) { var i = +el.getAttribute('data-i'); if (i !== active) { active = i; highlight(); } } });
+  root.addEventListener('click', function (e) { if (e.target.closest('[data-cmdk-close]')) close(); });
+  document.addEventListener('keydown', function (e) {
+    var tag = (e.target && e.target.tagName) || '';
+    var typing = /INPUT|TEXTAREA|SELECT/.test(tag) || (e.target && e.target.isContentEditable);
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); root.hidden ? open() : close(); }
+    else if (e.key === '/' && !typing && root.hidden) { e.preventDefault(); open(); }
+    else if (e.key === 'Escape' && !root.hidden) { close(); }
+  });
+  document.querySelectorAll('[data-open-search]').forEach(function (b) { b.addEventListener('click', open); });
+  if (/Mac|iPhone|iPad/.test(navigator.platform || '')) {} else {
+    document.querySelectorAll('.kbd-mod').forEach(function (k) { k.textContent = 'Ctrl'; });
+  }
+
+  // Shared toast + bookmarks store (used by post, saved and home pages)
+  var toastEl = document.getElementById('toast'), toastTimer;
+  window.toast8848 = function (msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg; toastEl.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 1800);
+  };
+  var KEY = '8848live_saved';
+  window.saved8848 = {
+    all: function () { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } },
+    write: function (arr) { try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch (e) {} window.saved8848.badge(); },
+    has: function (id) { return window.saved8848.all().some(function (s) { return s.id === id; }); },
+    toggle: function (story) {
+      var arr = window.saved8848.all(), i = -1;
+      arr.forEach(function (s, j) { if (s.id === story.id) i = j; });
+      if (i >= 0) arr.splice(i, 1); else arr.unshift(story);
+      window.saved8848.write(arr);
+      return i < 0;
+    },
+    badge: function () {
+      var n = window.saved8848.all().length;
+      document.querySelectorAll('[data-saved-count]').forEach(function (b) { b.textContent = n; b.hidden = n === 0; });
+    }
+  };
+  window.saved8848.badge();
+})();
+</script>

@@ -1,0 +1,36 @@
+---
+layout: null
+permalink: /search.json
+---
+{%- comment -%}
+  Client-side search index used by the ⌘K command palette, the homepage
+  "Top today" ranking and the "Browse by topic" chips. One entry per story,
+  parsed from each topic-grouped (category-box) digest. Fields:
+  d = digest date, u = digest URL, t/tn = topic (EN/NP), h = headline,
+  o = favicon domains of every outlet that covered the story.
+{%- endcomment -%}
+{%- assign digests = site.posts | where_exp: "p", "p.content contains 'category-box'" -%}
+[
+{%- for post in digests limit: 30 -%}
+  {%- assign d = post.date | date: "%Y-%m-%d" -%}
+  {%- assign boxes = post.content | split: 'class="outlet-name"><span data-lang-en>' -%}
+  {%- for box in boxes offset: 1 -%}
+    {%- assign topic = box | split: '</span>' | first -%}
+    {%- assign topic_np = box | split: '<span data-lang-np>' -%}
+    {%- assign topic_np = topic_np[1] | split: '</span>' | first -%}
+    {%- assign items = box | split: '<strong>' -%}
+    {%- for it in items offset: 1 -%}
+      {%- assign headline = it | split: '</strong>' | first | strip -%}
+      {%- assign icons = it | split: 'class="story-icons">' -%}
+      {%- assign icons = icons[1] | split: '</span>' | first -%}
+      {%- assign links = icons | split: 'href="' -%}
+      {"d":{{ d | jsonify }},"u":{{ post.url | relative_url | jsonify }},"t":{{ topic | jsonify }},"tn":{{ topic_np | jsonify }},"h":{{ headline | jsonify }},"o":[
+      {%- for l in links offset: 1 -%}
+        {%- assign parts = l | split: '"' | first | split: '/' -%}
+        {%- assign host = parts[2] | remove_first: 'www.' -%}
+        {{ host | jsonify }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}]},
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endfor -%}
+null]

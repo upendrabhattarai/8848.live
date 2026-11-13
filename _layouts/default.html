@@ -56,12 +56,19 @@
   {% if page.url contains "/visual-nepal/" %}{% assign is_visual = true %}{% endif %}
   {% if page.url == "/date-converter/" %}{% assign is_date_converter = true %}{% endif %}
   {% if page.url == "/contact/" %}{% assign is_contact = true %}{% endif %}
+  {% assign is_saved = false %}
+  {% if page.url == "/saved/" %}{% assign is_saved = true %}{% endif %}
   <header class="site-header">
     <nav class="topnav wrap">
       <a class="brand-block" href="{{ '/' | relative_url }}">
         <span class="brand-logo-badge"><img src="{{ '/assets/img/logo.png' | relative_url }}" alt="8848LIVE home"></span>
         <span class="brand">{{ site.title }}</span>
       </a>
+      <button type="button" class="search-trigger" data-open-search aria-label="Search (Ctrl+K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <span class="search-trigger-label"><span data-lang-en>Search news…</span><span data-lang-np>समाचार खोज्नुहोस्…</span></span>
+        <kbd class="search-kbd"><span class="kbd-mod">⌘</span> K</kbd>
+      </button>
       <div class="nav-right">
         <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Toggle Nepali translation">
           <span data-lang-en>नेपाली</span>
@@ -79,11 +86,15 @@
     <aside class="side-nav">
       <nav class="side-nav-tabs">
         <a class="side-nav-tab{% if is_home %} active{% endif %}" href="{{ '/' | relative_url }}"><span data-lang-en>Home</span><span data-lang-np>गृहपृष्ठ</span></a>
-        <a class="side-nav-tab{% if is_archive %} active{% endif %}" href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Portal</span><span data-lang-np>समाचार पोर्टल</span></a>
+        <a class="side-nav-tab{% if is_archive %} active{% endif %}" href="{{ '/archive/' | relative_url }}"><span data-lang-en>News Portal</span><span data-lang-np>समाचार पोर्टल</span><span class="side-badge side-badge-live"><span data-lang-en>Today</span><span data-lang-np>आज</span></span></a>
+        <a class="side-nav-tab{% if is_saved %} active{% endif %}" href="{{ '/saved/' | relative_url }}"><span data-lang-en>Saved</span><span data-lang-np>सुरक्षित</span><span class="side-badge" data-saved-count hidden>0</span></a>
         <a class="side-nav-tab{% if is_visual %} active{% endif %}" href="{{ '/visual-nepal/' | relative_url }}"><span data-lang-en>Visual Nepal</span><span data-lang-np>दृश्य नेपाल</span></a>
         <a class="side-nav-tab{% if is_date_converter %} active{% endif %}" href="{{ '/date-converter/' | relative_url }}"><span data-lang-en>Date Converter</span><span data-lang-np>मिति परिवर्तक</span></a>
         <a class="side-nav-tab{% if is_contact %} active{% endif %}" href="{{ '/contact/' | relative_url }}"><span data-lang-en>Contact</span><span data-lang-np>सम्पर्क</span></a>
       </nav>
+      <button type="button" class="side-search-hint" data-open-search>
+        <span data-lang-en>Press</span><span data-lang-np>थिच्नुहोस्</span> <kbd>/</kbd> <span data-lang-en>to search</span><span data-lang-np>खोज्न</span>
+      </button>
     </aside>
     <main class="main-panel">
       {{ content }}
@@ -114,6 +125,7 @@
       {% include newsletter_signup.html variant="footer" %}
     </div>
   </footer>
+  {% include command-palette.html %}
   <button id="scroll-top-btn" class="scroll-top-btn" type="button" aria-label="Scroll to top">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
   </button>

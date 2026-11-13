@@ -165,3 +165,105 @@ layout: default
   });
 })();
 </script>
+
+<script>
+(function () {
+  // 21st.dev-style discovery helpers for topic digests:
+  //  1. sticky "jump to topic" chip bar with per-topic story counts
+  //  2. per-story actions: bookmark (saved locally) + copy link
+  //  3. ?hl=<headline> deep links from search / "Top today" scroll to and flash the story
+  var content = document.querySelector('.post-content');
+  if (!content) return;
+  var boxes = content.querySelectorAll('.category-box');
+  var PAGE_URL = '{{ page.url | relative_url }}';
+  var PAGE_DATE = '{{ page.date | date: "%Y-%m-%d" }}';
+  function slug(s) { return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+  function txt(el, sel) { var x = el.querySelector(sel); return x ? x.textContent.trim() : ''; }
+
+  if (boxes.length > 1) {
+    var bar = document.createElement('nav');
+    bar.className = 'topic-jump';
+    bar.setAttribute('aria-label', 'Jump to topic');
+    boxes.forEach(function (box) {
+      var en = txt(box, '.outlet-name [data-lang-en]'), np = txt(box, '.outlet-name [data-lang-np]');
+      if (!box.id) box.id = 'outlet-' + slug(box.querySelector('.outlet-name').textContent);
+      var a = document.createElement('a');
+      a.href = '#' + box.id;
+      a.className = 'topic-chip' + (box.classList.contains('priority-box') ? ' is-priority' : '');
+      var n = box.querySelectorAll('.outlet-items li').length;
+      a.innerHTML = '<span class="topic-chip-name"><span data-lang-en></span><span data-lang-np></span></span><span class="topic-chip-count">' + n + '</span>';
+      a.querySelector('[data-lang-en]').textContent = en;
+      a.querySelector('[data-lang-np]').textContent = np || en;
+      bar.appendChild(a);
+    });
+    content.insertBefore(bar, content.firstChild);
+    var links = bar.querySelectorAll('a');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          links.forEach(function (l) { l.classList.toggle('current', l.getAttribute('href') === '#' + en.target.id); });
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      boxes.forEach(function (b) { io.observe(b); });
+    }
+  }
+
+  var BM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+  var CP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+  content.querySelectorAll('.category-box').forEach(function (box) {
+    var topicEn = txt(box, '.outlet-name [data-lang-en]'), topicNp = txt(box, '.outlet-name [data-lang-np]');
+    box.querySelectorAll('.outlet-items li').forEach(function (li) {
+      var h = txt(li, 'strong');
+      if (!h) return;
+      var href = PAGE_URL + '?hl=' + encodeURIComponent(h) + '#' + box.id;
+      var story = {
+        id: PAGE_DATE + '|' + h, h: h, d: PAGE_DATE, t: topicEn, tn: topicNp, u: href,
+        s: txt(li, '.story-summary').slice(0, 220),
+        o: Array.prototype.map.call(li.querySelectorAll('.story-icons a'), function (a) { return a.hostname.replace(/^www\./, ''); })
+      };
+      var row = document.createElement('div');
+      row.className = 'story-actions';
+      row.innerHTML =
+        '<button type="button" class="story-act" data-act="save" aria-pressed="false">' + BM + '<span data-lang-en>Save</span><span data-lang-np>सुरक्षित</span></button>' +
+        '<button type="button" class="story-act" data-act="copy">' + CP + '<span data-lang-en>Copy link</span><span data-lang-np>लिङ्क कपी</span></button>';
+      li.firstElementChild.appendChild(row);
+      var saveBtn = row.querySelector('[data-act="save"]');
+      function sync() {
+        var on = window.saved8848 && window.saved8848.has(story.id);
+        saveBtn.classList.toggle('on', !!on);
+        saveBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      sync();
+      row.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var b = e.target.closest('.story-act');
+        if (!b || !window.saved8848) return;
+        var np = document.documentElement.getAttribute('data-lang') === 'np';
+        if (b.getAttribute('data-act') === 'save') {
+          var added = window.saved8848.toggle(story);
+          sync();
+          window.toast8848(added ? (np ? 'सुरक्षित गरियो' : 'Saved to your list') : (np ? 'हटाइयो' : 'Removed from saved'));
+        } else {
+          var link = location.origin + href;
+          var done = function () { window.toast8848(np ? 'लिङ्क कपी भयो' : 'Link copied'); };
+          if (navigator.clipboard) navigator.clipboard.writeText(h + ' — ' + link).then(done, done); else done();
+        }
+      });
+    });
+  });
+
+  var hl = new URLSearchParams(location.search).get('hl');
+  if (hl) {
+    var target = null;
+    content.querySelectorAll('.outlet-items li strong').forEach(function (s) { if (!target && s.textContent.trim() === hl) target = s.closest('li'); });
+    if (target) {
+      setTimeout(function () {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('flash');
+        setTimeout(function () { target.classList.remove('flash'); }, 2600);
+      }, 250);
+    }
+  }
+})();
+</script>
